@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * Clase encargada de gestionar la conexión a la base de datos MySQL.
  * Permite abrir y cerrar conexiones desde cualquier parte del sistema.
  *
- * @author Daniel
+ * @author DeathbatO
  */
 public class ConexionMySQL {
 
