@@ -38,9 +38,9 @@ public class UsuarioDAO {
             }
 
         } catch (SQLIntegrityConstraintViolationException e) {
-            System.err.println("⚠️ El email ya está registrado: " + usuario.getEmail());
+            System.err.println(" El email ya está registrado: " + usuario.getEmail());
         } catch (SQLException e) {
-            System.err.println("❌ Error al registrar usuario: " + e.getMessage());
+            System.err.println(" Error al registrar usuario: " + e.getMessage());
         }
         return false;
     }
@@ -69,7 +69,7 @@ public class UsuarioDAO {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("❌ Error al buscar usuario: " + e.getMessage());
+            System.err.println("Error al buscar usuario: " + e.getMessage());
         }
         return null;
     }

@@ -18,7 +18,7 @@ public class SistemaAutenticacion {
     public boolean registrarUsuario(String nombre, String email, String contrasena) {
         // Verificar si el correo ya existe
         if (usuarioDAO.buscarPorEmail(email) != null) {
-            System.out.println("⚠️ El correo ya está registrado.");
+            System.out.println("El correo ya está registrado.");
             return false;
         }
 
@@ -42,16 +42,16 @@ public class SistemaAutenticacion {
         Usuario usuario = usuarioDAO.buscarPorEmail(email);
 
         if (usuario == null) {
-            System.out.println("❌ Usuario no encontrado.");
+            System.out.println("Usuario no encontrado.");
             return false;
         }
 
         // Comparar contraseña ingresada con el hash
         if (BCrypt.checkpw(contrasena, usuario.getContrasenaHash())) {
-            System.out.println("✅ Inicio de sesión exitoso. Bienvenido " + usuario.getNombreUsuario());
+            System.out.println("Inicio de sesión exitoso. Bienvenido " + usuario.getNombreUsuario());
             return true;
         } else {
-            System.out.println("❌ Contraseña incorrecta.");
+            System.out.println("Contraseña incorrecta.");
             return false;
         }
     }

@@ -1,17 +1,21 @@
 package com.sistema;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainApp extends Application {
+
     @Override
-    public void start(Stage stage) {
-        Label label = new Label("¡Sistema Inventario Tienda Iniciado!");
-        Scene scene = new Scene(label, 400, 200);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginVista.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("ElectroStock - Inicio de Sesión");
         stage.setScene(scene);
-        stage.setTitle("Sistema de Inventario");
+        stage.setResizable(false);
         stage.show();
     }
 

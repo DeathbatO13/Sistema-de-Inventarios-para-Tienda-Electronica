@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.LoginController">
+   <children>
+      <Pane minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0">
+         <children>
+            <Label layoutX="569.0" layoutY="115.0" text="ElectroStock">
+               <font>
+                  <Font name="Corbel Bold" size="25.0" />
+               </font>
+            </Label>
+            <Pane layoutX="425.0" layoutY="188.0" prefHeight="360.0" prefWidth="350.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20; -fx-background-color: F0F0F0;">
+               <children>
+                  <TextField fx:id="campoCorreo" layoutX="21.0" layoutY="73.0" prefHeight="36.0" prefWidth="308.0" />
+                  <PasswordField fx:id="passwordField" layoutX="21.0" layoutY="154.0" prefHeight="36.0" prefWidth="308.0" />
+                  <Label layoutX="21.0" layoutY="48.0" text="Correo Electrónico">
+                     <font>
+                        <Font name="Corbel Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="128.0" text="Contraseña">
+                     <font>
+                        <Font name="Corbel Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnIniciarSesion" layoutX="21.0" layoutY="210.0" mnemonicParsing="false" onAction="#iniciarSesionAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 10;" text="Iniciar Sesión" textFill="WHITE">
+                     <font>
+                        <Font name="Corbel Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="72.0" layoutY="260.0" text="Si aun no tienes cuenta, registrate aca:">
+                     <font>
+                        <Font name="Corbel" size="13.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnRegistrarse" layoutX="21.0" layoutY="296.0" mnemonicParsing="false" onAction="#registrarseAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 10;" text="Registrarse" textFill="WHITE">
+                     <font>
+                        <Font name="Corbel Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Label layoutX="470.0" layoutY="160.0" text="Bienvenido, por favor inicia sesión con tu cuenta.">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="509.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</VBox>
