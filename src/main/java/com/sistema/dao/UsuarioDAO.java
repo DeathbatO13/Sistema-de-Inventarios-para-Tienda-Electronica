@@ -73,4 +73,54 @@ public class UsuarioDAO {
         }
         return null;
     }
+
+    /**
+     * Buscar usuario por token para validacion
+     * @param token token unico para validacion
+     * @return objeto usuario con token ingresado
+     */
+    public Usuario buscarPorToken(String token){
+        String sql = "SELECT * FROM usuarios WHERE token_verificacion = ?";
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, token);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNombreUsuario(rs.getString("nombre_usuario"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setContrasenaHash(rs.getString("contrasena_hash"));
+                    usuario.setTokenVerificado(rs.getString("token_verificacion"));
+                    usuario.setVerificado(rs.getBoolean("verificado"));
+                    return usuario;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar usuario: " + e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * Actualiza el esto de la verificacion en la base de datos
+     * @param usuario usuario verificado
+     * @return true si actualiza correctamente, false si ocurre algun error
+     */
+    public boolean actualizarVerificacion(Usuario usuario) {
+        String sql = "UPDATE usuarios SET verificado = ?, token_verificacion = NULL WHERE email = ?";
+        try (Connection conn = ConexionMySQL.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, 1); // marcar como verificado
+            stmt.setString(2, usuario.getEmail());
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar verificación: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

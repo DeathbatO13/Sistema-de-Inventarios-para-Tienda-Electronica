@@ -6,12 +6,22 @@ import jakarta.mail.internet.MimeMessage;
 
 import java.util.Properties;
 
+/**
+ * Clase para conectar al email remitente y configuracion del servicio
+ */
 public class ServicioEmail {
 
+    //Credenciales del correo remitente
     private static final String REMITENTE = "electrostock.contacto@gmail.com";
     private static final String CONTRASENA = "ohpl zlca dkln ctop";
     private static final String HOST = "smtp.gmail.com";
 
+    /**
+     * Funcion que se encarga de enviar el correo de verificacion al destinatario
+     * @param destinatario correo del usuario a verificar
+     * @param asunto asunto del correo (verificacion de cuenta)
+     * @param cuerpo texto del correo donde se adjunta el codigo de verificacion.
+     */
     public static void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

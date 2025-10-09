@@ -33,12 +33,12 @@
                         <Font name="Corbel Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnIniciarSesion" layoutX="21.0" layoutY="210.0" mnemonicParsing="false" onAction="#iniciarSesionAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20;" text="Iniciar Sesión" textFill="WHITE">
+                  <Button fx:id="btnIniciarSesion" layoutX="21.0" layoutY="222.0" mnemonicParsing="false" onAction="#iniciarSesionAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20;" text="Iniciar Sesión" textFill="WHITE">
                      <font>
                         <Font name="Corbel Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Label layoutX="70.0" layoutY="259.0" text="Si aun no tienes cuenta, registrate aqui:">
+                  <Label layoutX="70.0" layoutY="265.0" text="Si aun no tienes cuenta, registrate aqui:">
                      <font>
                         <Font name="Corbel" size="13.0" />
                      </font>
@@ -48,6 +48,11 @@
                         <Font name="Corbel Bold" size="16.0" />
                      </font>
                   </Button>
+                  <Label fx:id="errorLabel" layoutX="21.0" layoutY="196.0" text="Usuario no encontrado o credenciales erroneas!" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Corbel" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Label layoutX="470.0" layoutY="160.0" text="Bienvenido, por favor inicia sesión con tu cuenta.">
