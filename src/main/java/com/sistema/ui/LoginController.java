@@ -45,10 +45,9 @@ public class LoginController {
             if (contadorInicio < 5) {
                 errorLabel.setText("Credenciales incorrectas. Intento " + contadorInicio + " de 5");
             } else {
-                bloquearCamposPorUnMinuto();
+                bloqueoIntentos();
             }
         }
-
     }
 
     @FXML
@@ -59,9 +58,8 @@ public class LoginController {
 
     /**
      * Funcion para bloquear campos por limite de intentos
-     *
      */
-    private void bloquearCamposPorUnMinuto() {
+    private void bloqueoIntentos() {
         campoCorreo.setEditable(false);
         passwordField.setEditable(false);
         btnIniciarSesion.setDisable(true);
