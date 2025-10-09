@@ -14,7 +14,7 @@
    <children>
       <Pane minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0">
          <children>
-            <Label layoutX="569.0" layoutY="115.0" text="ElectroStock">
+            <Label layoutX="559.0" layoutY="116.0" text="ElectroStock">
                <font>
                   <Font name="Corbel Bold" size="25.0" />
                </font>
@@ -33,19 +33,19 @@
                         <Font name="Corbel Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnIniciarSesion" layoutX="21.0" layoutY="210.0" mnemonicParsing="false" onAction="#iniciarSesionAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 10;" text="Iniciar Sesión" textFill="WHITE">
+                  <Button fx:id="btnIniciarSesion" layoutX="21.0" layoutY="210.0" mnemonicParsing="false" onAction="#iniciarSesionAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20;" text="Iniciar Sesión" textFill="WHITE">
                      <font>
-                        <Font name="Corbel Bold" size="15.0" />
+                        <Font name="Corbel Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Label layoutX="72.0" layoutY="260.0" text="Si aun no tienes cuenta, registrate aca:">
+                  <Label layoutX="70.0" layoutY="259.0" text="Si aun no tienes cuenta, registrate aqui:">
                      <font>
                         <Font name="Corbel" size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnRegistrarse" layoutX="21.0" layoutY="296.0" mnemonicParsing="false" onAction="#registrarseAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 10;" text="Registrarse" textFill="WHITE">
+                  <Button fx:id="btnRegistrarse" layoutX="21.0" layoutY="296.0" mnemonicParsing="false" onAction="#registrarseAction" prefHeight="27.0" prefWidth="308.0" style="-fx-border-radius: 20; -fx-background-color: #5882E8;" text="Registrarse" textFill="WHITE">
                      <font>
-                        <Font name="Corbel Bold" size="15.0" />
+                        <Font name="Corbel Bold" size="16.0" />
                      </font>
                   </Button>
                </children>
@@ -55,7 +55,7 @@
                   <Font name="Corbel" size="13.0" />
                </font>
             </Label>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="509.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="499.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/Icon.png" />
                </image>
