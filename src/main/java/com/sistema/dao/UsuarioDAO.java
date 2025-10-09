@@ -17,8 +17,8 @@ public class UsuarioDAO {
      * @return true si se insertó correctamente, false si hubo error o el email ya existe
      */
     public boolean registrarUsuario(Usuario usuario) {
-        String sql = "INSERT INTO usuarios (nombre_usuario, email, contrasena_hash, token_verificacion, verificado) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nombre_usuario, email, contrasena_hash, token_verificacion, verificado) "
+                + "VALUES (?, ?, ?, ?, ?)";
         try (Connection con = ConexionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 

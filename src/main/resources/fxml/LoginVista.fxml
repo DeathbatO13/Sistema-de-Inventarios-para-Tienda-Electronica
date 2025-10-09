@@ -12,14 +12,14 @@
 
 <VBox minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.LoginController">
    <children>
-      <Pane minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0">
+      <Pane minHeight="700.0" minWidth="1200.0" style="-fx-background-color: #DDDDDD;">
          <children>
             <Label layoutX="559.0" layoutY="116.0" text="ElectroStock">
                <font>
                   <Font name="Corbel Bold" size="25.0" />
                </font>
             </Label>
-            <Pane layoutX="425.0" layoutY="188.0" prefHeight="360.0" prefWidth="350.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20; -fx-background-color: F0F0F0;">
+            <Pane layoutX="425.0" layoutY="188.0" prefHeight="360.0" prefWidth="350.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20; -fx-background-color: white; -fx-background-radius: 20;">
                <children>
                   <TextField fx:id="campoCorreo" layoutX="21.0" layoutY="73.0" prefHeight="36.0" prefWidth="308.0" />
                   <PasswordField fx:id="passwordField" layoutX="21.0" layoutY="154.0" prefHeight="36.0" prefWidth="308.0" />
@@ -55,16 +55,16 @@
                   </Label>
                </children>
             </Pane>
-            <Label layoutX="470.0" layoutY="160.0" text="Bienvenido, por favor inicia sesión con tu cuenta.">
-               <font>
-                  <Font name="Corbel" size="13.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="499.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/Icon.png" />
                </image>
             </ImageView>
+            <Label layoutX="470.0" layoutY="160.0" text="Bienvenido, por favor inicia sesión con tu cuenta.">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
