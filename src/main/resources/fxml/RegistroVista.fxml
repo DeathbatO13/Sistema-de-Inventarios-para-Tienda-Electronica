@@ -71,9 +71,9 @@
                </font>
             </Label>
             <Label layoutX="462.0" layoutY="122.0" text="y comienza a administrar tu inventario como un pro." />
-            <Label fx:id="registroLabel" layoutX="212.0" layoutY="511.0" prefHeight="19.0" prefWidth="777.0" text="Usuario registrado! Para poder inicar sesión por favor verifica tu cuenta ingresando el codigo que fue enviado al correo que proporcionaste." textFill="#5882e8" visible="false">
+            <Label fx:id="registroLabel" alignment="CENTER" layoutX="212.0" layoutY="511.0" prefHeight="19.0" prefWidth="843.0" text="Usuario registrado! Para poder inicar sesión por favor verifica tu cuenta ingresando el codigo que fue enviado al correo que proporcionaste." textAlignment="CENTER" textFill="#5882e8">
                <font>
-                  <Font name="Corbel Bold" size="13.0" />
+                  <Font name="Corbel Bold" size="14.0" />
                </font>
             </Label>
          </children>

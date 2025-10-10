@@ -4,6 +4,7 @@ import com.sistema.servicios.SistemaAutenticacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 
@@ -30,9 +32,6 @@ public class RegistroController {
 
     @FXML
     private Button btnRegistrarse, btnVerificar, btnVolverInicio;
-
-    public void btnVerificarAction(ActionEvent actionEvent) {
-    }
 
     /**
      * Control de evento de registro para el boton con el mismo nombre
@@ -74,7 +73,24 @@ public class RegistroController {
     }
 
     /**
-     * Funcion para volver a la ventana de inicio de sesion en caso de entrar a la de registro
+     * Control de evento para verificar el codigo enviado por correo
+     * @param actionEvent evento del boton verificar
+     */
+    public void btnVerificarAction(ActionEvent actionEvent) {
+        String tokenDigitado = tokenTextField.getText();
+        SistemaAutenticacion auth = new SistemaAutenticacion();
+        boolean estadoVerificacion = auth.verificarCuenta(tokenDigitado);
+
+        if(estadoVerificacion){
+            registroLabel.setText("Verificación exitosa! Ya puedes iniciar sesion y acceder al inventario");
+
+        }else{
+            registroLabel.setText("Codigo invalido, verifica que este correcto por favor o intentalo de nuevo");
+        }
+    }
+
+    /**
+     * Control de evento para volver a la ventana de inicio de sesion en caso de entrar a la de registro
      * por error
      * @param actionEvent evento del voton de volver.
      */

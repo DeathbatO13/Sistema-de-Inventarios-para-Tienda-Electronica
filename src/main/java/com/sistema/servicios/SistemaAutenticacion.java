@@ -59,7 +59,7 @@ public class SistemaAutenticacion {
      * @param token token o codigo que el usuario digita en el campo
      * @return true si se verifica con exito, y false si el codigo es invalido
      */
-    public boolean cuentaVerificada(String token){
+    public boolean verificarCuenta(String token){
         UsuarioDAO userDAO = new UsuarioDAO();
         Usuario user = usuarioDAO.buscarPorToken(token);
 
@@ -86,8 +86,8 @@ public class SistemaAutenticacion {
             return false;
         }
 
-        // Comparar contraseña ingresada con el hash
-        if (BCrypt.checkpw(contrasena, usuario.getContrasenaHash())) {
+        // Comparar contraseña ingresada con el hash y que este verificado
+        if (BCrypt.checkpw(contrasena, usuario.getContrasenaHash()) && usuario.isVerificado()) {
             System.out.println("Inicio de sesión exitoso. Bienvenido " + usuario.getNombreUsuario());
             return true;
         } else {
