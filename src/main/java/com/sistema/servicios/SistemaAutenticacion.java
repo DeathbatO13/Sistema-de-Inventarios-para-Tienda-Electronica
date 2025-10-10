@@ -4,7 +4,7 @@ import com.sistema.dao.UsuarioDAO;
 import com.sistema.modelo.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.UUID;
+import java.security.SecureRandom;
 
 /**
  * Clase encargada de manejar el registro y autenticación de usuarios.
@@ -13,6 +13,17 @@ import java.util.UUID;
 public class SistemaAutenticacion {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+    public static String generarCodigo() {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        SecureRandom random = new SecureRandom();
+        StringBuilder codigo = new StringBuilder(8);
+        for (int i = 0; i < 8; i++) {
+            int index = random.nextInt(caracteres.length());
+            codigo.append(caracteres.charAt(index));
+        }
+        return codigo.toString();
+    }
 
     /**
      * Registra un nuevo usuario con contraseña encriptada y envia el codigo de verificacion por correo.
@@ -23,11 +34,9 @@ public class SistemaAutenticacion {
             System.out.println("El correo ya está registrado.");
             return false;
         }
-
-        // Encriptar la contraseña y generar el codigo de verificacion
+        // Encriptar la contraseña y generar codigo
         String contrasenaHash = BCrypt.hashpw(contrasena, BCrypt.gensalt());
-        String codigoVerificacion = UUID.randomUUID().toString();
-
+        String codigoVerificacion = generarCodigo();
         // Crear el usuario
         Usuario usuario = new Usuario();
         usuario.setNombreUsuario(nombre);
@@ -35,14 +44,12 @@ public class SistemaAutenticacion {
         usuario.setContrasenaHash(contrasenaHash);
         usuario.setTokenVerificado(codigoVerificacion);
         usuario.setVerificado(false);
-
         //Envia correo para verificacion
         ServicioEmail.enviarCorreo(usuario.getEmail(),
                 "Verificación de cuenta",
-                "Tu cuanta ha sido registrada en el sistema de inventario de ElectroStock. /n" +
-                        "Para poder acceder al sistema necesitamos que estes verificado /n" +
-                        "Tu codigo de verificaacion es el siguiente: /n" + codigoVerificacion);
-
+                "Tu cuenta ha sido registrada en el sistema de inventario de ElectroStock.\n" +
+                        "Para poder acceder al sistema necesitamos que estés verificado.\n" +
+                        "Tu código de verificación es el siguiente:\n" + codigoVerificacion);
         //Guarda el usuario en DB
         return usuarioDAO.registrarUsuario(usuario);
     }

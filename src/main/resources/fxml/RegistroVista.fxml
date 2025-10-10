@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.RegistroController">
    <children>
       <Pane minHeight="75.0" prefHeight="75.0" prefWidth="1200.0" style="-fx-background-color: white;">
@@ -54,9 +53,14 @@
                      </font>
                   </TextField>
                   <Label layoutX="65.0" layoutY="323.0" text="Si ya tienes cuenta, inicia sesión" />
-                  <Label fx:id="volverIniciarS" layoutX="233.0" layoutY="325.0" text=" aqui" textFill="#5882e8">
+                  <Button fx:id="btnVolverInicio" layoutX="240.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnVolverInicioAction" style="-fx-background-color: #5882E8;" text="aqui" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" underline="true">
                      <font>
                         <Font name="Corbel" size="12.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="errorRegistroLabel" layoutX="54.0" layoutY="228.0" text="Existe cuenta asociada a ese correo electrónico" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Corbel Bold" size="12.0" />
                      </font>
                   </Label>
                </children>
@@ -67,6 +71,11 @@
                </font>
             </Label>
             <Label layoutX="462.0" layoutY="122.0" text="y comienza a administrar tu inventario como un pro." />
+            <Label fx:id="registroLabel" layoutX="212.0" layoutY="511.0" prefHeight="19.0" prefWidth="777.0" text="Usuario registrado! Para poder inicar sesión por favor verifica tu cuenta ingresando el codigo que fue enviado al correo que proporcionaste." textFill="#5882e8" visible="false">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
