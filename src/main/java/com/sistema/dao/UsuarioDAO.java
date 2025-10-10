@@ -104,7 +104,7 @@ public class UsuarioDAO {
     }
 
     /**
-     * Actualiza el esto de la verificacion en la base de datos
+     * Actualiza el estado de la verificacion en la base de datos
      * @param usuario usuario verificado
      * @return true si actualiza correctamente, false si ocurre algun error
      */

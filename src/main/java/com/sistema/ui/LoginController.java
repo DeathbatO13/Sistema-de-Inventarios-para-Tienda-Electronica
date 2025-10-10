@@ -49,7 +49,28 @@ public class LoginController {
         if (estadoInicioSesion) {
             System.out.println("Inicio de sesión correcto");
             errorLabel.setVisible(false);
-            // Aquí se puede cargar la vista principal
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PanelPrincipalVista.fxml"));
+                Parent root = loader.load();
+                // Crear una nueva ventana (Stage)
+                Stage stage = new Stage();
+                Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+                stage.getIcons().add(icono);
+                stage.setTitle("Panel Principal");
+                stage.setScene(new Scene(root));
+                stage.setResizable(false);
+                stage.show();
+
+                // Cerrar la ventana actual
+                Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                currentStage.close();
+            }
+            catch (IOException e) {
+                System.err.println("Error al lanzar pantalla de registro" + e.getMessage());
+                e.printStackTrace();
+            }
+
         } else {
             contadorInicio++;
             errorLabel.setVisible(true);

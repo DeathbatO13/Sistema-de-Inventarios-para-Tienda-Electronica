@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.PanelPrincipalController">
+   <children>
+      <SplitPane fx:id="splitPane" dividerPositions="0.21118530884808012" prefHeight="700.0" prefWidth="1200.0">
+        <items>
+          <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="250.0" prefHeight="698.0" prefWidth="250.0">
+               <children>
+                  <Pane prefHeight="75.0" prefWidth="238.0">
+                     <children>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/Icon.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="68.0" layoutY="22.0" text="ElectroStock">
+                           <font>
+                              <Font name="Corbel Bold" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutY="75.0" maxWidth="250.0" minHeight="700.0" minWidth="250.0" prefHeight="700.0" prefWidth="250.0">
+                     <children>
+                        <Button fx:id="btnMenuReportes" layoutX="8.0" layoutY="214.0" mnemonicParsing="false" onAction="#btnReportesMenu" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #34495E; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Reportes" textAlignment="CENTER" textOverrun="CLIP">
+                           <font>
+                              <Font name="Corbel Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnMenuDashboard" layoutX="8.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnDashboardMenu" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #34495E; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Dashboard" textAlignment="CENTER" textOverrun="CLIP">
+                           <font>
+                              <Font name="Corbel Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnMenuProductos" layoutX="8.0" layoutY="82.0" mnemonicParsing="false" onAction="#btnProductosMenu" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #34495E; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Productos" textAlignment="CENTER" textOverrun="CLIP">
+                           <font>
+                              <Font name="Corbel Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnMenuProveedores" layoutX="8.0" layoutY="126.0" mnemonicParsing="false" onAction="#btnProveedoresMenu" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #34495E; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Proveedores" textAlignment="CENTER" textOverrun="CLIP">
+                           <font>
+                              <Font name="Corbel Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnMenuVentas" layoutX="8.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnVentasMenu" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #34495E; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Ventas" textAlignment="CENTER" textOverrun="CLIP">
+                           <font>
+                              <Font name="Corbel Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+          <AnchorPane fx:id="panelDinamico" minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="950.0" />
+        </items>
+      </SplitPane>
+   </children>
+</VBox>

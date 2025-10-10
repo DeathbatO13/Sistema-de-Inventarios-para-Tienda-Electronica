@@ -29,9 +29,9 @@ public class ConexionMySQL {
         if (conexion == null || conexion.isClosed()) {
             try {
                 conexion = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("✅ Conexión establecida con MySQL");
+                System.out.println("Conexión establecida con MySQL");
             } catch (SQLException e) {
-                System.err.println("❌ Error al conectar con MySQL: " + e.getMessage());
+                System.err.println("Error al conectar con MySQL: " + e.getMessage());
                 throw e;
             }
         }
@@ -45,10 +45,10 @@ public class ConexionMySQL {
         try {
             if (conexion != null && !conexion.isClosed()) {
                 conexion.close();
-                System.out.println("🔒 Conexión cerrada correctamente");
+                System.out.println("Conexión cerrada correctamente");
             }
         } catch (SQLException e) {
-            System.err.println("⚠️ Error al cerrar la conexión: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }
