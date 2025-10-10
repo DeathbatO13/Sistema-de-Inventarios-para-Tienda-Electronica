@@ -7,7 +7,7 @@ import java.sql.*;
 
 /**
  * DAO para operaciones CRUD sobre la tabla 'usuarios'.
- * Permite registrar y buscar usuarios por email.
+ *
  */
 public class UsuarioDAO {
 

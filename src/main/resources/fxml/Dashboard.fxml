@@ -63,9 +63,9 @@
       </Label>
       <TableView fx:id="tablaExistencias" layoutX="39.0" layoutY="287.0" prefHeight="255.0" prefWidth="876.0" style="-fx-background-color: transparent; -fx-background-radius: 10; -fx-border-radius: 10;">
         <columns>
-          <TableColumn fx:id="productoColumn" editable="false" prefWidth="230.0" resizable="false" text="Producto" />
-          <TableColumn fx:id="unidadesColumn" editable="false" prefWidth="203.0" text="Unidades disponibles" />
-            <TableColumn fx:id="proveedorColumn" editable="false" prefWidth="311.0" text="Proveedor" />
+          <TableColumn fx:id="codigoColumn" editable="false" prefWidth="138.0" resizable="false" text="Codigo" />
+          <TableColumn fx:id="nombreColumn" editable="false" prefWidth="407.0" text="Nombre" />
+            <TableColumn fx:id="unidadesColumn" editable="false" prefWidth="199.0" text="Unidades Disponibles" />
             <TableColumn fx:id="accionColumn" editable="false" prefWidth="131.0" text="Acción" />
         </columns>
       </TableView>
