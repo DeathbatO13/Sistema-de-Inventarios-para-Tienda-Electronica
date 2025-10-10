@@ -34,10 +34,30 @@ public class RegistroController {
     public void btnVerificarAction(ActionEvent actionEvent) {
     }
 
+    /**
+     * Control de evento de registro para el boton con el mismo nombre
+     * @param actionEvent evento de boton
+     */
     public void btnRegistrarseAction(ActionEvent actionEvent) {
         String nombre = nombreTextField.getText();
         String contrasena = passwordFieldRegistro.getText();
         String correo = correoTextField.getText();
+
+        if (nombre.isEmpty() || correo.isEmpty() || contrasena.isEmpty()) {
+            errorRegistroLabel.setVisible(true);
+            errorRegistroLabel.setText("Todos los campos son obligatorios");
+            return;
+        }
+
+        if(!contrasenaSegura(contrasena)){
+            errorRegistroLabel.setVisible(true);
+            errorRegistroLabel.setText("La contraseña debe tener por lo menos \n"+
+                    "una letra mayuscula, minuscula, un numero\n" +
+                    "y un caracter especial");
+            passwordFieldRegistro.setText("");
+            return;
+        }
+
         SistemaAutenticacion auth = new SistemaAutenticacion();
         boolean estadoRegistro = auth.registrarUsuario(nombre, correo, contrasena);
 
@@ -79,5 +99,27 @@ public class RegistroController {
             System.err.println("Error al lanzar pantalla de registro" + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Funcion para verificar que la contraseña tenga minumo 8 carcateres, una mayuscula, minuscula,
+     * numero y caracter especial
+     * @param contrasena contraseña a verificar
+     * @return true si es segura, false si falta algun parametro
+     */
+    public boolean contrasenaSegura(String contrasena){
+        boolean mayus = false;
+        boolean minus = false;
+        boolean numero = false;
+        boolean especial = false;
+
+        for(char c : contrasena.toCharArray()){
+            if(Character.isUpperCase(c)) mayus = true;
+            if(Character.isLowerCase(c)) minus = true;
+            if(Character.isDigit(c)) numero = true;
+            if(!Character.isLetterOrDigit(c)) especial = true;
+        }
+
+        return (mayus && minus && numero && especial && (contrasena.length() >= 8));
     }
 }
