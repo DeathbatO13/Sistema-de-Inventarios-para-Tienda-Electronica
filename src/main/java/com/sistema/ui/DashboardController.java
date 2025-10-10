@@ -56,12 +56,12 @@ public class DashboardController {
         codigoColumn.setCellValueFactory(new PropertyValueFactory<>("codigoSku"));
         nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         unidadesColumn.setCellValueFactory(new PropertyValueFactory<>("stockActual"));
-
         // Cargar datos
         cargarProductosBajoStock();
-
         // Añadir columna de acción
         agregarColumnaAccion();
+        // Actualizar numero de productos
+        productosTotalesLabel.setText(String.valueOf(new ProductoDAO().cantidadProductos()));
     }
 
     /**

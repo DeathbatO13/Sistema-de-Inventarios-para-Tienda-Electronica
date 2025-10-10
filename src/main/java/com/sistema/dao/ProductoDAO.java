@@ -17,6 +17,10 @@ import java.util.List;
  */
 public class ProductoDAO {
 
+    /**
+     * Consulta entre los productos cuales tienen un stock bajo
+     * @return Lista de productos con bajo stock
+     */
     public List<Producto> stockBajo() {
         List<Producto> productosBajoStock = new ArrayList<>();
         String sql = "SELECT * FROM productos WHERE stock_actual <= stock_minimo";
@@ -45,6 +49,25 @@ public class ProductoDAO {
         }
 
         return productosBajoStock;
+    }
+
+    /**
+     * Busca la cantidad de productos en la base de datos
+     * @return entero con la cantidad de productos
+     */
+    public int cantidadProductos(){
+        String sql = "SELECT COUNT(*) AS total_productos FROM productos;";
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()){
+
+            if(rs.next()){
+                return rs.getInt("total_productos");
+            }
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return 0;
     }
 
 }
