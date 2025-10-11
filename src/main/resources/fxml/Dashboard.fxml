@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: #DDDDDD;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.DashboardController">
+<AnchorPane prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: #DDDDDD;" stylesheets="@../styles/tableStyles.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.DashboardController">
    <children>
       <Pane layoutX="39.0" layoutY="105.0" prefHeight="109.0" prefWidth="264.0" style="-fx-background-color: white; -fx-background-radius: 20;">
          <children>
@@ -51,7 +51,7 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="39.0" layoutY="42.0" text="Dashboard">
+      <Label layoutX="40.0" layoutY="45.0" text="Dashboard">
          <font>
             <Font name="Corbel Bold" size="30.0" />
          </font>
@@ -61,12 +61,12 @@
             <Font name="Corbel Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaExistencias" layoutX="39.0" layoutY="287.0" prefHeight="255.0" prefWidth="876.0" style="-fx-background-color: transparent; -fx-background-radius: 10; -fx-border-radius: 10;">
+      <TableView fx:id="tablaExistencias" layoutX="39.0" layoutY="287.0" prefHeight="255.0" prefWidth="876.0">
         <columns>
-          <TableColumn fx:id="codigoColumn" editable="false" prefWidth="138.0" resizable="false" text="Codigo"/>
-          <TableColumn fx:id="nombreColumn" editable="false" prefWidth="407.0" text="Nombre" />
-            <TableColumn fx:id="unidadesColumn" editable="false" prefWidth="199.0" text="Unidades Disponibles" />
-            <TableColumn fx:id="accionColumn" editable="false" prefWidth="131.0" text="Acción" />
+          <TableColumn fx:id="codigoColumn" editable="false" prefWidth="138.0" resizable="false" text="Codigo" />
+          <TableColumn fx:id="nombreColumn" editable="false" prefWidth="410.0" resizable="false" text="Nombre" />
+            <TableColumn fx:id="unidadesColumn" editable="false" prefWidth="163.0" resizable="false" text="Unidades Disponibles" />
+            <TableColumn fx:id="accionColumn" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Acción" />
         </columns>
       </TableView>
    </children>

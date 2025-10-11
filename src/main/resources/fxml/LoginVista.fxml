@@ -21,8 +21,8 @@
             </Label>
             <Pane layoutX="425.0" layoutY="188.0" prefHeight="360.0" prefWidth="350.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20; -fx-background-color: white; -fx-background-radius: 20;">
                <children>
-                  <TextField fx:id="campoCorreo" layoutX="21.0" layoutY="73.0" prefHeight="36.0" prefWidth="308.0" />
-                  <PasswordField fx:id="passwordField" layoutX="21.0" layoutY="154.0" prefHeight="36.0" prefWidth="308.0" />
+                  <TextField fx:id="campoCorreo" layoutX="21.0" layoutY="73.0" prefHeight="36.0" prefWidth="308.0" style="-fx-background-radius: 10;" />
+                  <PasswordField fx:id="passwordField" layoutX="21.0" layoutY="154.0" prefHeight="36.0" prefWidth="308.0" style="-fx-background-radius: 10;" />
                   <Label layoutX="21.0" layoutY="48.0" text="Correo Electrónico">
                      <font>
                         <Font name="Corbel Bold" size="14.0" />
@@ -33,7 +33,7 @@
                         <Font name="Corbel Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnIniciarSesion" layoutX="21.0" layoutY="222.0" mnemonicParsing="false" onAction="#iniciarSesionAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20;" text="Iniciar Sesión" textFill="WHITE">
+                  <Button fx:id="btnIniciarSesion" layoutX="21.0" layoutY="222.0" mnemonicParsing="false" onAction="#iniciarSesionAction" prefHeight="27.0" prefWidth="308.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20; -fx-background-radius: 20;" text="Iniciar Sesión" textFill="WHITE">
                      <font>
                         <Font name="Corbel Bold" size="16.0" />
                      </font>
@@ -43,7 +43,7 @@
                         <Font name="Corbel" size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnRegistrarse" layoutX="21.0" layoutY="296.0" mnemonicParsing="false" onAction="#registrarseAction" prefHeight="27.0" prefWidth="308.0" style="-fx-border-radius: 20; -fx-background-color: #5882E8;" text="Registrarse" textFill="WHITE">
+                  <Button fx:id="btnRegistrarse" layoutX="21.0" layoutY="296.0" mnemonicParsing="false" onAction="#registrarseAction" prefHeight="27.0" prefWidth="308.0" style="-fx-border-radius: 20; -fx-background-color: #5882E8; -fx-background-radius: 20;" text="Registrarse" textFill="WHITE">
                      <font>
                         <Font name="Corbel Bold" size="16.0" />
                      </font>
