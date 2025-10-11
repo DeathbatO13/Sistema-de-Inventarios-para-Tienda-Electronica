@@ -40,13 +40,22 @@ public class RegistroController {
         String nombre = nombreTextField.getText();
         String contrasena = passwordFieldRegistro.getText();
         String correo = correoTextField.getText();
-
+        //Verificacion de que todos los campos esten diligenciados
         if (nombre.isEmpty() || correo.isEmpty() || contrasena.isEmpty()) {
             errorRegistroLabel.setVisible(true);
             errorRegistroLabel.setText("Todos los campos son obligatorios");
             return;
         }
-
+        //Verificacion de formato de correo valido
+        if(!correoCorrecto(correo)){
+            errorRegistroLabel.setVisible(true);
+            errorRegistroLabel.setText("Error en el formato de correo \n"
+                    + "Debe ser como: 'user@dominio.com'");
+            correoTextField.setText("");
+            passwordFieldRegistro.setText("");
+            return;
+        }
+        //Verificacion de contraseña segura
         if(!contrasenaSegura(contrasena)){
             errorRegistroLabel.setVisible(true);
             errorRegistroLabel.setText("La contraseña debe tener por lo menos \n"+
@@ -55,7 +64,7 @@ public class RegistroController {
             passwordFieldRegistro.setText("");
             return;
         }
-
+        //Registro del Usuario
         SistemaAutenticacion auth = new SistemaAutenticacion();
         boolean estadoRegistro = auth.registrarUsuario(nombre, correo, contrasena);
 
@@ -117,6 +126,19 @@ public class RegistroController {
     }
 
     /**
+     * Funcion implementada para verificar que el campo del correo tenga un formato valido
+     *
+     * @param correo correo digitado en el registro
+     * @return true si el correo tiene un formato valido, false si no
+     */
+    public boolean correoCorrecto(String correo){
+        String patron = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@"+
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z]{2,7}$";
+
+        return correo.matches(patron);
+    }
+
+    /**
      * Funcion para verificar que la contraseña tenga minumo 8 carcateres, una mayuscula, minuscula,
      * numero y caracter especial
      * @param contrasena contraseña a verificar
@@ -134,7 +156,7 @@ public class RegistroController {
             if(Character.isDigit(c)) numero = true;
             if(!Character.isLetterOrDigit(c)) especial = true;
         }
-
         return (mayus && minus && numero && especial && (contrasena.length() >= 8));
     }
+
 }
