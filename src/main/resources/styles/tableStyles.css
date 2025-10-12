@@ -1,91 +1,92 @@
+/* Definición de la variable para el color primario azul */
+.root {
+    -primary-blue: #5882E8;
+    -background-grey: #DDDDDD; /* Color del fondo de tu vista general */
+}
+
 /* Contenedor principal de la tabla para el redondeado exterior */
 .table-view {
-    -fx-background-color: #f7f9fc; /* Fondo claro para el área total de la tabla */
-    -fx-background-radius: 12px; /* Esquinas redondeadas para el contenedor general */
+    /* Usamos el color gris de tu vista general como fondo del contenedor de la tabla */
+    -fx-background-color: -background-grey;
+    -fx-background-radius: 12px;
     -fx-border-radius: 12px;
-    -fx-border-color: #e0e6ed; /* Borde sutil alrededor de la tabla */
+    -fx-border-color: #c9c9c9; /* Borde más sutil, derivado del gris de fondo */
     -fx-border-width: 1px;
 }
 
 /* Fondo de la barra de la cabecera */
 .table-view .column-header-background {
-    -fx-background-color: #eef2f7; /* Fondo azul claro de la cabecera */
-    -fx-background-radius: 12px 12px 0 0; /* Solo esquinas superiores redondeadas */
+    -fx-background-color: #e0e4e9; /* Un tono de gris/azul muy claro, menos intenso que el actual */
+    -fx-background-radius: 12px 12px 0 0;
     -fx-padding: 0;
-    -fx-border-width: 0 0 1px 0; /* Borde inferior de la cabecera */
-    -fx-border-color: #e0e6ed; /* Color del borde de la cabecera */
+    /* Borde inferior más claro */
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #c9c9c9;
 }
 
-/* Estilo para cada celda individual de la cabecera */
+/* Estilo para cada celda individual de la cabecera (sin cambios mayores) */
 .table-view .column-header {
-    -fx-background-color: transparent; /* Cada celda de cabecera es transparente */
+    -fx-background-color: transparent;
     -fx-font-family: "Corbel", "Segoe UI", sans-serif;
-    -fx-font-size: 13px; /* Tamaño de fuente ligeramente menor */
-    -fx-font-weight: bold; /* Texto en negrita para los títulos de columna */
-    -fx-text-fill: white; /* Color de texto gris/azul para los títulos */
-    -fx-alignment: CENTER_LEFT; /* Alinear texto a la izquierda en la cabecera */
-    -fx-padding: 12px 15px; /* Relleno para espacio */
-}
-
-/* Alineación de las columnas de la cabecera */
-/* Puedes ajustar esto por columna si usas un ID o StyleClass para la columna */
-.table-view .column-header .label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4c5a6d; /* Color de texto un poco más oscuro */
     -fx-alignment: CENTER;
-}
-
-/* Quitar los bordes de separación entre columnas de la cabecera */
-.table-view .column-header-background .filler {
-    -fx-background-color: #5882e8;
-}
-.table-view .column-resize-line {
-    -fx-stroke: transparent; /* Oculta las líneas de redimensionamiento */
+    -fx-padding: 12px 15px;
 }
 
 /* Estilos para las filas y celdas de datos */
 .table-view .table-row-cell {
-    -fx-background-color: #ffffff; /* Fondo blanco para las filas de datos */
-    -fx-background-insets: 0, 0 0 1px 0; /* Pequeña línea divisoria inferior */
+    -fx-background-color: #ffffff;
+    -fx-background-insets: 0, 0 0 1px 0;
     -fx-background-radius: 0;
-    -fx-border-color: #eef2f7; /* Color de la línea divisoria */
+    /* La línea divisoria ahora usa el color gris sutil */
+    -fx-border-color: #e8e8e8;
     -fx-border-width: 0 0 1px 0;
     -fx-padding: 0;
 }
 
-/* Quitar el borde inferior de la última fila */
-.table-view .table-row-cell:last-visible-row {
-     -fx-border-width: 0;
-}
-
 /* Estilo al pasar el ratón por encima de una fila */
 .table-view .table-row-cell:hover {
-    -fx-background-color: #f7f9fc; /* Cambia el color al pasar el ratón */
+    /* Tono muy sutil para el hover, casi blanco */
+    -fx-background-color: #fcfcfc;
     -fx-cursor: hand;
 }
 
-/* Estilo de las celdas de datos individuales */
+/* Estilo para fila seleccionada */
+.table-view .table-row-cell:selected {
+    /* Usa tu color primario azul con una transparencia suave */
+    -fx-background-color: derive(-primary-blue, 75%); /* Más claro que el azul base */
+    -fx-background-insets: 0, 0 0 1px 0;
+    -fx-border-color: #e8e8e8; /* Mantener borde divisor sutil */
+    -fx-border-width: 0 0 1px 0;
+}
+
+/* Estilo de las celdas de datos individuales (sin cambios mayores) */
 .table-view .table-cell {
-    -fx-background-color: transparent; /* Celda transparente para que se vea el fondo de la fila */
+    -fx-background-color: transparent;
     -fx-font-family: "Corbel", "Segoe UI", sans-serif;
     -fx-font-size: 14px;
-    -fx-text-fill: #5a667b; /* Color de texto más oscuro para los datos */
-    -fx-alignment: CENTER_LEFT; /* **Esto centrará los ítems a la izquierda, como en tu imagen** */
-    -fx-padding: 12px 15px; /* Relleno para las celdas */
-    -fx-border-color: transparent; /* No queremos bordes entre celdas */
+    -fx-text-fill: #5a667b;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 15px;
+    -fx-border-color: transparent;
     -fx-border-width: 0;
 }
 
-/* Centrado de los ítems */
-.table-view .table-cell {
-    -fx-alignment: CENTER;
+/* Texto de la fila seleccionada: para que contraste con el fondo azul claro */
+.table-view .table-row-cell:selected .table-cell {
+    -fx-text-fill: #333333; /* Color de texto oscuro para mayor legibilidad */
 }
 
 /* Eliminar el foco visual predeterminado en celdas y filas */
+/* Aseguramos que la selección se vea como queremos, incluso al perder el foco */
 .table-view:focused .table-row-cell:filled:focused,
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: #f7f9fc; /* Mantén el fondo al seleccionar */
+    -fx-background-color: derive(-primary-blue, 70%); /* Color de selección más visible cuando está enfocado */
     -fx-border-color: transparent;
     -fx-background-insets: 0, 0 0 1px 0;
 }
 .table-view:focused .table-row-cell:filled:focused:selected .table-cell {
-    -fx-text-fill: #5a667b; /* Mantiene el color del texto al seleccionar */
+    -fx-text-fill: white; /* Texto blanco en selección enfocada para mejor contraste */
 }

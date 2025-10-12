@@ -61,12 +61,12 @@
             <Font name="Corbel Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaExistencias" layoutX="39.0" layoutY="287.0" prefHeight="255.0" prefWidth="876.0">
+      <TableView fx:id="tablaExistencias" layoutX="41.0" layoutY="287.0" prefHeight="370.0" prefWidth="874.0">
         <columns>
           <TableColumn fx:id="codigoColumn" editable="false" prefWidth="138.0" resizable="false" text="Codigo" />
-          <TableColumn fx:id="nombreColumn" editable="false" prefWidth="410.0" resizable="false" text="Nombre" />
-            <TableColumn fx:id="unidadesColumn" editable="false" prefWidth="163.0" resizable="false" text="Unidades Disponibles" />
-            <TableColumn fx:id="accionColumn" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Acción" />
+          <TableColumn fx:id="nombreColumn" editable="false" prefWidth="393.0" resizable="false" text="Nombre" />
+            <TableColumn fx:id="unidadesColumn" editable="false" prefWidth="169.0" resizable="false" text="Unidades Disponibles" />
+            <TableColumn fx:id="accionColumn" editable="false" prefWidth="167.0" resizable="false" sortable="false" text="Acción" />
         </columns>
       </TableView>
    </children>
