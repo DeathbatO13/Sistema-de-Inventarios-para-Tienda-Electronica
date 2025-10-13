@@ -58,7 +58,7 @@
                         <Font name="Corbel" size="12.0" />
                      </font>
                   </Button>
-                  <Label fx:id="errorRegistroLabel" layoutX="54.0" layoutY="228.0" text="Existe cuenta asociada a ese correo electrónico" textFill="RED" visible="false">
+                  <Label fx:id="errorRegistroLabel" layoutX="54.0" layoutY="228.0" text="Existe cuenta asociada a ese correo electrónico" textAlignment="CENTER" textFill="RED" visible="false">
                      <font>
                         <Font name="Corbel Bold" size="12.0" />
                      </font>

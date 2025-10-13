@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -127,6 +128,8 @@ public class ProductosController {
             Parent root = loader.load();
 
             Stage stage = new Stage();
+            Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+            stage.getIcons().add(icono);
             stage.setTitle("Nuevo Producto");
             stage.setScene(new Scene(root));
 

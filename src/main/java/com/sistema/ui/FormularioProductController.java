@@ -3,6 +3,7 @@ package com.sistema.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -11,10 +12,20 @@ public class FormularioProductController {
     @FXML
     private TextField codigoNuevo, nombreNuevo, descripcionNuevo,
             preCompraNuevo, preVentaNuevo,
-            stockActNuevo, stockMinNuevo, proveedorNuevo;
+            stockActNuevo, stockMinNuevo;
 
     @FXML
     private Button btnCancelar, btnGuardar;
+
+    @FXML
+    private Label errorLabel, infoLabel;
+
+    @FXML
+    private void initialize(){
+        infoLabel.setText("Si no encuantras el proveedor, tienes que \n"
+                + "agregarlo en el panel correspondiente.");
+        infoLabel.setVisible(true);
+    }
 
 
     @FXML
@@ -31,7 +42,9 @@ public class FormularioProductController {
 
     public void guardarProducto() {
         // Validaciones básicas
-        if (nombreNuevo.getText().isEmpty() || codigoNuevo.getText().isEmpty()) {
+        if (nombreNuevo.getText().isEmpty() || codigoNuevo.getText().isEmpty() || descripcionNuevo.getText().isEmpty()
+            || preCompraNuevo.getText().isEmpty() || preVentaNuevo.getText().isEmpty() || stockActNuevo.getText().isEmpty()
+            || stockMinNuevo.getText().isEmpty()) {
             System.out.println("Faltan campos obligatorios.");
             return;
         }
