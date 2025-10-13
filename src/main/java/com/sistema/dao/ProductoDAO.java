@@ -49,6 +49,38 @@ public class ProductoDAO {
     }
 
     /**
+     * Funcion para buscar los porductos por el nombre
+     * @param nombreBuscado nombre digitado en el campo
+     * @return lista de productos buscados
+     */
+    public List<Producto> buscarPorNombre(String nombreBuscado) {
+        List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT * FROM productos WHERE nombre LIKE ?";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            //Agregar los comodines para buscar coincidencias parciales
+            ps.setString(1, "%" + nombreBuscado + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Producto p = new Producto();
+                    p.setId(rs.getInt("id"));
+                    p.setCodigoSku(rs.getString("codigo_sku"));
+                    p.setNombre(rs.getString("nombre"));
+                    p.setPrecioVenta(rs.getDouble("precio_venta"));
+                    p.setStockActual(rs.getInt("stock_actual"));
+
+                    productos.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar productos: " + e.getMessage());
+        }
+        return productos;
+    }
+
+    /**
      * Consulta entre los productos cuales tienen un stock bajo
      * @return Lista de productos con bajo stock
      */

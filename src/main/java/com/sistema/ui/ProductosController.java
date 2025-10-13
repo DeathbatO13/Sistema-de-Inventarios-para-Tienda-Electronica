@@ -11,7 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductosController {
 
@@ -31,7 +33,7 @@ public class ProductosController {
     private TableColumn<Producto, String> nombreProducto;
 
     @FXML
-    private TableColumn<Producto, String> precioProducto;
+    private TableColumn<Producto, Double> precioProducto;
 
     @FXML
     private TableColumn<Producto, Integer> stockDisponible;
@@ -46,8 +48,22 @@ public class ProductosController {
         precioProducto.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
         stockDisponible.setCellValueFactory(new PropertyValueFactory<>("stockActual"));
 
+        // Formato de moneda para la columna de precios
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+        precioProducto.setCellFactory(column -> new TableCell<Producto, Double>() {
+            @Override
+            protected void updateItem(Double valor, boolean empty) {
+                super.updateItem(valor, empty);
+                if (empty || valor == null) {
+                    setText(null);
+                } else {
+                    setText(formatoMoneda.format(valor));
+                }
+            }
+        });
+        // Cargar elementos a la tabla
         cargarListaProductos();
-
+        // Agregar columnas a la tabla
         agregarColumnaAccion();
     }
 
@@ -55,7 +71,16 @@ public class ProductosController {
 
     }
 
+    @FXML
     public void buscarNombreProducto(ActionEvent actionEvent) {
+        String producto = buscarProducto.getText().trim();
+        ProductoDAO dao = new ProductoDAO();
+
+        List<Producto> results = dao.buscarPorNombre(producto);
+        ObservableList<Producto> datos = FXCollections.observableArrayList(results);
+        tablaProductos.setItems(datos);
+
+        agregarColumnaAccion();
     }
 
     /**

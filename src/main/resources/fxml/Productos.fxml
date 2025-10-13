@@ -27,11 +27,11 @@
       </TextField>
       <TableView fx:id="tablaProductos" layoutX="45.0" layoutY="188.0" prefHeight="455.0" prefWidth="861.0">
         <columns>
-          <TableColumn fx:id="codigoProducto" editable="false" prefWidth="84.0" text="Código" />
-          <TableColumn fx:id="nombreProducto" editable="false" prefWidth="310.0" text="Producto" />
-            <TableColumn fx:id="precioProducto" editable="false" minWidth="0.0" prefWidth="112.0" text="Precio" />
-            <TableColumn fx:id="stockDisponible" editable="false" prefWidth="147.0" text="Cantidad disponible " />
-            <TableColumn fx:id="accionesProducto" editable="false" prefWidth="204.0" sortable="false" text="Acciones" />
+          <TableColumn fx:id="codigoProducto" editable="false" prefWidth="104.0" text="Código" />
+          <TableColumn fx:id="nombreProducto" editable="false" prefWidth="303.0" text="Producto" />
+            <TableColumn fx:id="precioProducto" editable="false" minWidth="0.0" prefWidth="132.0" text="Precio" />
+            <TableColumn fx:id="stockDisponible" editable="false" prefWidth="100.0" text="Unidades" />
+            <TableColumn fx:id="accionesProducto" editable="false" prefWidth="214.0" sortable="false" text="Acciones" />
         </columns>
       </TableView>
    </children>
