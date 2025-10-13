@@ -6,11 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -41,6 +47,11 @@ public class ProductosController {
     @FXML
     private TableColumn<Producto, Void> accionesProducto;
 
+    /**
+     * Inicializa los valores de los componentes por defecto
+     * de la vista y caracteristicas de los mismos
+     *
+     */
     @FXML
     public void initialize(){
         codigoProducto.setCellValueFactory(new PropertyValueFactory<>("codigoSku"));
@@ -61,16 +72,86 @@ public class ProductosController {
                 }
             }
         });
+        //Tooltip para mostrar descripcion
+        nombreProducto.setCellFactory(columna -> new TableCell<Producto, String>() {
+            private final Tooltip tooltip = new Tooltip();
+
+            {
+                tooltip.setStyle(
+                        "-fx-font-size: 13px; -fx-font-family: 'Corbel'; " +
+                                "-fx-background-color: #f9f9f9; -fx-text-fill: black; -fx-padding: 8px;"
+                );
+                tooltip.setShowDelay(javafx.util.Duration.millis(0)); // delay
+                tooltip.setWrapText(true); // que haga wrap si es largo
+                tooltip.setMaxWidth(300);  // ancho máximo del tooltip
+            }
+
+            @Override
+            protected void updateItem(String nombre, boolean empty) {
+                super.updateItem(nombre, empty);
+
+                if (empty || nombre == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    setText(nombre);
+
+                    // Obtener el producto de forma segura desde la fila
+                    Producto producto = getTableRow() != null ? (Producto) getTableRow().getItem() : null;
+
+                    if (producto != null && producto.getDescripcion() != null && !producto.getDescripcion().isBlank()) {
+                        tooltip.setText(producto.getDescripcion());
+                        setTooltip(tooltip);
+                    } else {
+                        setTooltip(null);
+                    }
+                }
+            }
+        });
+
         // Cargar elementos a la tabla
         cargarListaProductos();
         // Agregar columnas a la tabla
         agregarColumnaAccion();
     }
 
-    public void agregarProductoEvent(ActionEvent actionEvent) {
 
+    /**
+     * Evento del boton de agregar producto, despliega una ventana para agregar producto
+     * @param actionEvent evento del boton
+     */
+    @FXML
+    public void agregarProductoEvent(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FormularioProducto.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Nuevo Producto");
+            stage.setScene(new Scene(root));
+
+            // --- Configurar como ventana modal ---
+            stage.initModality(Modality.APPLICATION_MODAL); // bloquea la ventana principal
+            stage.initOwner(tablaProductos.getScene().getWindow()); // la asocia a la ventana principal
+
+            // Mostrar y esperar a que se cierre
+            stage.showAndWait();
+
+            // Al cerrarse, verificar si se guardó un producto nuevo
+            FormularioProductController controller = loader.getController();
+            if (controller.isProductoGuardado()) {
+                cargarListaProductos(); // refrescar tabla si se agregó algo
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Control del evento al buscar un producto por su nombre
+     * @param actionEvent evento del campo de busqueda
+     */
     @FXML
     public void buscarNombreProducto(ActionEvent actionEvent) {
         String producto = buscarProducto.getText().trim();

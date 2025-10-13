@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #DDDDDD;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.FormularioProductController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Detalles del producto">
+         <font>
+            <Font name="Corbel Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="45.0" text="Por favor diligencia todos los campos con la informacion correspondiente." />
+      <Pane layoutX="38.0" layoutY="76.0" prefHeight="357.0" prefWidth="624.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Código">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="327.0" layoutY="14.0" text="Nombre">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="codigoNuevo" layoutX="14.0" layoutY="31.0" prefHeight="31.0" prefWidth="265.0" promptText="MIC-0058">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="nombreNuevo" layoutX="327.0" layoutY="31.0" prefHeight="31.0" prefWidth="274.0" promptText="PIC 16F877A">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="68.0" text="Descripción">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="descripcionNuevo" layoutX="14.0" layoutY="85.0" prefHeight="31.0" prefWidth="588.0" promptText="Microcontrolador de 8 bits popular con arquitectura RISC, 35 instrucciones y 33 pines de E/S">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="123.0" text="Precio de Compra">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="327.0" layoutY="123.0" text="Precio de Venta">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="preCompraNuevo" layoutX="14.0" layoutY="140.0" prefHeight="31.0" prefWidth="265.0" promptText="10000">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="preVentaNuevo" layoutX="327.0" layoutY="140.0" prefHeight="31.0" prefWidth="274.0" promptText="16000">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="180.0" text="Cantiad ingresada">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="stockActNuevo" layoutX="14.0" layoutY="197.0" prefHeight="31.0" prefWidth="265.0" promptText="20">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="327.0" layoutY="180.0" text="Cantiad minima">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="stockMinNuevo" layoutX="327.0" layoutY="197.0" prefHeight="31.0" prefWidth="265.0" promptText="5">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="234.0" text="Proveedor">
+               <font>
+                  <Font name="Corbel Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="proveedorNuevo" layoutX="14.0" layoutY="251.0" prefHeight="31.0" prefWidth="265.0" promptText="MakerLab Technologies">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btnGuardar" layoutX="519.0" layoutY="307.0" mnemonicParsing="false" onAction="#btnGuardarEvent" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Guardar" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCancelar" layoutX="427.0" layoutY="307.0" mnemonicParsing="false" onAction="#btnCancelarEvent" style="-fx-background-color: #DDDDDD; -fx-background-radius: 15;" text="Cancelar">
+               <font>
+                  <Font name="Corbel Bold" size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

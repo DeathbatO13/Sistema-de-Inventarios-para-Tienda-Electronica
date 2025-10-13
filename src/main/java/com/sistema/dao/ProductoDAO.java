@@ -35,6 +35,7 @@ public class ProductoDAO {
                 Producto producto = new Producto();
                 producto.setCodigoSku(rs.getString("codigo_sku"));
                 producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
                 producto.setPrecioVenta(rs.getDouble("precio_venta"));
                 producto.setStockActual(rs.getInt("stock_actual"));
 
@@ -68,6 +69,7 @@ public class ProductoDAO {
                     p.setId(rs.getInt("id"));
                     p.setCodigoSku(rs.getString("codigo_sku"));
                     p.setNombre(rs.getString("nombre"));
+                    p.setDescripcion(rs.getString("descripcion"));
                     p.setPrecioVenta(rs.getDouble("precio_venta"));
                     p.setStockActual(rs.getInt("stock_actual"));
 
