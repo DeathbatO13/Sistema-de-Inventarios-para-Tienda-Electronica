@@ -4,6 +4,7 @@ package com.sistema.dao;
 import com.sistema.modelo.Producto;
 import com.sistema.util.ConexionMySQL;
 
+import javax.crypto.CipherInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,36 @@ import java.util.List;
  *
  */
 public class ProductoDAO {
+
+    /**
+     * Funcion para consultar todos los productos disponibles,
+     * mostrados en el panel de productos
+     * @return lista con todos los productos
+     */
+    public List<Producto> listaProductos(){
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM productos";
+
+        try(Connection con = ConexionMySQL.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()){
+
+            if(rs.next()) {
+                Producto producto = new Producto();
+                producto.setCodigoSku(rs.getString("codigo_sku"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecioVenta(rs.getDouble("precio_venta"));
+                producto.setStockActual(rs.getInt("stock_actual"));
+
+                lista.add(producto);
+            }
+
+        }catch (SQLException e){
+            System.err.println("Error al consultar productos con bajo stock: " + e.getMessage());
+        }
+
+        return lista;
+    }
 
     /**
      * Consulta entre los productos cuales tienen un stock bajo
@@ -31,15 +62,9 @@ public class ProductoDAO {
 
             while (rs.next()) {
                 Producto producto = new Producto();
-                producto.setId(rs.getInt("id"));
                 producto.setCodigoSku(rs.getString("codigo_sku"));
                 producto.setNombre(rs.getString("nombre"));
-                producto.setDescripcion(rs.getString("descripcion"));
-                producto.setPrecioCompra(rs.getDouble("precio_compra"));
-                producto.setPrecioVenta(rs.getDouble("precio_venta"));
                 producto.setStockActual(rs.getInt("stock_actual"));
-                producto.setStockMinimo(rs.getInt("stock_minimo"));
-                producto.setIdProveedor(rs.getInt("id_proveedor"));
 
                 productosBajoStock.add(producto);
             }

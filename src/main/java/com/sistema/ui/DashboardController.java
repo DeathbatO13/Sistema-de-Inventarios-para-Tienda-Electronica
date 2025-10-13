@@ -22,10 +22,10 @@ public class DashboardController {
     private TableColumn<Producto, String> codigoColumn;
 
     @FXML
-    private TableColumn<Producto, Integer> nombreColumn;
+    private TableColumn<Producto, String> nombreColumn;
 
     @FXML
-    private TableColumn<Producto, String> unidadesColumn;
+    private TableColumn<Producto, Integer> unidadesColumn;
 
     @FXML
     private TableColumn<Producto, Void> accionColumn;
@@ -35,7 +35,6 @@ public class DashboardController {
      */
     @FXML
     public void initialize() {
-
         // ====== Configurar columnas ======
         codigoColumn.setCellValueFactory(new PropertyValueFactory<>("codigoSku"));
         nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -68,7 +67,8 @@ public class DashboardController {
             private final Button btn = new Button("Reordenar");
 
             {
-                btn.setStyle("-fx-background-color: #5882E8; -fx-text-fill: white; -fx-font-size: 13px; -fx-background-radius: 5;");
+                btn.setStyle("-fx-background-color: #5882E8; -fx-text-fill: white; -fx-font-size: 14px; " +
+                        "-fx-font-family: \"Corbel\", \"Segoe UI\", sans-serif; -fx-font-weight: bold; -fx-background-radius: 7;");
                 btn.setOnAction(event -> {
                     Producto producto = getTableView().getItems().get(getIndex());
                     System.out.println("Reordenar producto: " + producto.getNombre());

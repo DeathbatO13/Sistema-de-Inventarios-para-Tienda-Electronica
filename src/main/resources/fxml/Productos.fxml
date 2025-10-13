@@ -15,23 +15,23 @@
             <Font name="Corbel Bold" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="806.0" layoutY="123.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20; -fx-background-radius: 20;" text="+ Agregar" textFill="WHITE">
+      <Button fx:id="btnAgregarProducto" layoutX="806.0" layoutY="123.0" mnemonicParsing="false" onAction="#agregarProductoEvent" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20; -fx-background-radius: 20;" text="+ Agregar" textFill="WHITE">
          <font>
             <Font name="Corbel Bold" size="18.0" />
          </font>
       </Button>
-      <TextField layoutX="540.0" layoutY="123.0" prefHeight="36.0" prefWidth="256.0" promptText="🔍 Buscar Productos" style="-fx-background-radius: 15; -fx-border-radius: 15;">
+      <TextField fx:id="buscarProducto" layoutX="489.0" layoutY="123.0" onAction="#buscarNombreProducto" prefHeight="36.0" prefWidth="307.0" promptText="🔍 Buscar Productos" style="-fx-background-radius: 15; -fx-border-radius: 15;">
          <font>
             <Font name="Corbel Bold" size="18.0" />
          </font>
       </TextField>
-      <TableView layoutX="45.0" layoutY="188.0" prefHeight="455.0" prefWidth="861.0">
+      <TableView fx:id="tablaProductos" layoutX="45.0" layoutY="188.0" prefHeight="455.0" prefWidth="861.0">
         <columns>
-          <TableColumn editable="false" prefWidth="90.0" text="Código" />
-          <TableColumn editable="false" prefWidth="319.0" text="Producto" />
-            <TableColumn editable="false" minWidth="0.0" prefWidth="133.0" text="Precio" />
-            <TableColumn editable="false" prefWidth="145.0" text="Cantidad disponible " />
-            <TableColumn editable="false" prefWidth="170.0" sortable="false" text="Acciones" />
+          <TableColumn fx:id="codigoProducto" editable="false" prefWidth="84.0" text="Código" />
+          <TableColumn fx:id="nombreProducto" editable="false" prefWidth="310.0" text="Producto" />
+            <TableColumn fx:id="precioProducto" editable="false" minWidth="0.0" prefWidth="112.0" text="Precio" />
+            <TableColumn fx:id="stockDisponible" editable="false" prefWidth="147.0" text="Cantidad disponible " />
+            <TableColumn fx:id="accionesProducto" editable="false" prefWidth="204.0" sortable="false" text="Acciones" />
         </columns>
       </TableView>
    </children>
