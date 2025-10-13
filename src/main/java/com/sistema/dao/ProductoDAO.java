@@ -31,7 +31,7 @@ public class ProductoDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery()){
 
-            if(rs.next()) {
+            while(rs.next()) {
                 Producto producto = new Producto();
                 producto.setCodigoSku(rs.getString("codigo_sku"));
                 producto.setNombre(rs.getString("nombre"));
