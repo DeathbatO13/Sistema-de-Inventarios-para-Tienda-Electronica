@@ -1,6 +1,11 @@
 package com.sistema.ui;
 
+import com.sistema.dao.ProductoDAO;
+import com.sistema.dao.ProveedorDAO;
 import com.sistema.modelo.Producto;
+import com.sistema.modelo.Proveedor;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +13,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FormularioProductController {
 
@@ -17,7 +25,7 @@ public class FormularioProductController {
             stockActNuevo, stockMinNuevo;
 
     @FXML
-    private ComboBox<Producto> comboProveedor;
+    private ComboBox<String> comboProveedor;
 
     @FXML
     private Button btnCancelar, btnGuardar;
@@ -30,6 +38,9 @@ public class FormularioProductController {
         infoLabel.setText("Si no encuantras el proveedor, tienes que \n"
                 + "agregarlo en el panel correspondiente.");
         infoLabel.setVisible(true);
+
+        cargarProveedoresAccion();
+
     }
 
 
@@ -40,6 +51,20 @@ public class FormularioProductController {
     @FXML
     public void btnCancelarEvent(ActionEvent actionEvent){
 
+    }
+
+    @FXML
+    public void cargarProveedoresAccion(){
+        ProveedorDAO proveedor = new ProveedorDAO();
+        List<Proveedor> listaPro = proveedor.listaProveedores();
+        List<String> listaProveedores = new ArrayList<>();
+
+        for(Proveedor pro: listaPro){
+            String nombrePro = pro.getNombre();
+            listaProveedores.add(nombrePro);
+        }
+        ObservableList<String> datos = FXCollections.observableArrayList(listaProveedores);
+        comboProveedor.setItems(datos);
     }
 
 
@@ -65,5 +90,6 @@ public class FormularioProductController {
     public boolean isProductoGuardado() {
         return productoGuardado;
     }
+
 
 }
