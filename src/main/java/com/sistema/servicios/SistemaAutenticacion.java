@@ -14,17 +14,6 @@ public class SistemaAutenticacion {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    public static String generarCodigo() {
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        SecureRandom random = new SecureRandom();
-        StringBuilder codigo = new StringBuilder(8);
-        for (int i = 0; i < 8; i++) {
-            int index = random.nextInt(caracteres.length());
-            codigo.append(caracteres.charAt(index));
-        }
-        return codigo.toString();
-    }
-
     /**
      * Registra un nuevo usuario con contraseña encriptada y envia el codigo de verificacion por correo.
      */
@@ -94,6 +83,38 @@ public class SistemaAutenticacion {
             System.out.println("Contraseña incorrecta.");
             return false;
         }
+    }
+
+
+    /**
+     * Funcion que genera codigo alfanumerico de 8 caracteres para verificacion de correo
+     * @return String del codigo
+     */
+    public static String generarCodigo() {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        SecureRandom random = new SecureRandom();
+        StringBuilder codigo = new StringBuilder(8);
+        for (int i = 0; i < 8; i++) {
+            int index = random.nextInt(caracteres.length());
+            codigo.append(caracteres.charAt(index));
+        }
+        return codigo.toString();
+    }
+
+    /**
+     * Funcion para generar codigo numerico de recuperacion de contraseña
+     * @return string con el codigo
+     */
+    public String codigoRecuperacion(){
+        String carac = "1234567890";
+        SecureRandom rd = new SecureRandom();
+        StringBuilder cod = new StringBuilder(6);
+
+        for(int i = 0; i < 6; i++){
+            int index = rd.nextInt(carac.length());
+            cod.append(index);
+        }
+        return cod.toString();
     }
 }
 

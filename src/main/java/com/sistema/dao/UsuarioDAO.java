@@ -123,4 +123,25 @@ public class UsuarioDAO {
         }
     }
 
+    /**
+     * Funcion para consultar en la base de datos si el usuario esta registrado
+     * @param usuario usuario a verificar
+     * @return true si esta registrado y false si no lo esta
+     */
+    public boolean estaRegistrado(Usuario usuario){
+        String sql = "SELECT 1 FROM usuarios WHERE email = ? LIMIT 1";
+
+        try(Connection con = ConexionMySQL.getConexion();
+            PreparedStatement stm = con.prepareStatement(sql)){
+
+            stm.setString(1, usuario.getEmail());
+            ResultSet rs = stm.executeQuery();
+
+            return rs.next();
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
 }
