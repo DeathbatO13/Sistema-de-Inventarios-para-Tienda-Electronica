@@ -4,11 +4,7 @@ package com.sistema.dao;
 import com.sistema.modelo.Producto;
 import com.sistema.util.ConexionMySQL;
 
-import javax.crypto.CipherInputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +43,42 @@ public class ProductoDAO {
         }
 
         return lista;
+    }
+
+    /**
+     * Funcion para agregar un nuevo producto a la base de datos
+     * @param producto produco para agregar
+     * @return true si se agrega correctamente, false si ocurre un error
+     */
+    public boolean agregarNuevoProducto(Producto producto){
+        String sql = "INSERT INTO productos (codigo_sku, nombre, descripcion, precio_compra, precio_venta, stock_actual" +
+                "stock_minimo, id_proveedor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try(Connection con = ConexionMySQL.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+            ps.setString(1, producto.getCodigoSku());
+            ps.setString(2, producto.getNombre());
+            ps.setString(3, producto.getDescripcion());
+            ps.setDouble(4, producto.getPrecioCompra());
+            ps.setDouble(5, producto.getPrecioVenta());
+            ps.setInt(6, producto.getStockActual());
+            ps.setInt(7, producto.getStockMinimo());
+            ps.setInt(8, producto.getIdProveedor());
+
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) producto.setId(rs.getInt(1));
+                }
+                return true;
+            }
+
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return false;
     }
 
     /**

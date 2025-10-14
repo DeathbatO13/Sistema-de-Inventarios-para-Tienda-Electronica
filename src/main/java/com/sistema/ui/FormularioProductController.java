@@ -1,8 +1,10 @@
 package com.sistema.ui;
 
+import com.sistema.modelo.Producto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -13,6 +15,9 @@ public class FormularioProductController {
     private TextField codigoNuevo, nombreNuevo, descripcionNuevo,
             preCompraNuevo, preVentaNuevo,
             stockActNuevo, stockMinNuevo;
+
+    @FXML
+    private ComboBox<Producto> comboProveedor;
 
     @FXML
     private Button btnCancelar, btnGuardar;

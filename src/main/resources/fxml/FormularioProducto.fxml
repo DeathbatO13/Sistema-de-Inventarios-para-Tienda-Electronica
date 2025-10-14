@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #DDDDDD;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.FormularioProductController">
+<AnchorPane maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #DDDDDD;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.FormularioProductController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Detalles del producto">
          <font>
@@ -28,12 +28,12 @@
                   <Font name="Corbel Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="codigoNuevo" layoutX="14.0" layoutY="31.0" prefHeight="31.0" prefWidth="265.0" promptText="MIC-0058">
+            <TextField fx:id="codigoNuevo" layoutX="14.0" layoutY="31.0" prefHeight="31.0" prefWidth="265.0" promptText="MIC-0058" style="-fx-background-radius: 15;">
                <font>
                   <Font name="Corbel" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="nombreNuevo" layoutX="327.0" layoutY="31.0" prefHeight="31.0" prefWidth="274.0" promptText="PIC 16F877A">
+            <TextField fx:id="nombreNuevo" layoutX="327.0" layoutY="31.0" prefHeight="31.0" prefWidth="274.0" promptText="PIC 16F877A" style="-fx-background-radius: 15;">
                <font>
                   <Font name="Corbel" size="13.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Font name="Corbel Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="descripcionNuevo" layoutX="14.0" layoutY="85.0" prefHeight="31.0" prefWidth="588.0" promptText="Microcontrolador de 8 bits popular con arquitectura RISC, 35 instrucciones y 33 pines de E/S">
+            <TextField fx:id="descripcionNuevo" layoutX="14.0" layoutY="85.0" prefHeight="31.0" prefWidth="588.0" promptText="Microcontrolador de 8 bits popular con arquitectura RISC, 35 instrucciones y 33 pines de E/S" style="-fx-background-radius: 15;">
                <font>
                   <Font name="Corbel" size="13.0" />
                </font>
@@ -58,12 +58,12 @@
                   <Font name="Corbel Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="preCompraNuevo" layoutX="14.0" layoutY="140.0" prefHeight="31.0" prefWidth="265.0" promptText="10000">
+            <TextField fx:id="preCompraNuevo" layoutX="14.0" layoutY="140.0" prefHeight="31.0" prefWidth="265.0" promptText="10000" style="-fx-background-radius: 15;">
                <font>
                   <Font name="Corbel" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="preVentaNuevo" layoutX="327.0" layoutY="140.0" prefHeight="31.0" prefWidth="274.0" promptText="16000">
+            <TextField fx:id="preVentaNuevo" layoutX="327.0" layoutY="140.0" prefHeight="31.0" prefWidth="274.0" promptText="16000" style="-fx-background-radius: 15;">
                <font>
                   <Font name="Corbel" size="13.0" />
                </font>
@@ -73,7 +73,7 @@
                   <Font name="Corbel Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="stockActNuevo" layoutX="14.0" layoutY="197.0" prefHeight="31.0" prefWidth="265.0" promptText="20">
+            <TextField fx:id="stockActNuevo" layoutX="14.0" layoutY="197.0" prefHeight="31.0" prefWidth="265.0" promptText="20" style="-fx-background-radius: 15;">
                <font>
                   <Font name="Corbel" size="13.0" />
                </font>
@@ -83,7 +83,7 @@
                   <Font name="Corbel Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="stockMinNuevo" layoutX="327.0" layoutY="197.0" prefHeight="31.0" prefWidth="265.0" promptText="5">
+            <TextField fx:id="stockMinNuevo" layoutX="327.0" layoutY="197.0" prefHeight="31.0" prefWidth="265.0" promptText="5" style="-fx-background-radius: 15;">
                <font>
                   <Font name="Corbel" size="13.0" />
                </font>
