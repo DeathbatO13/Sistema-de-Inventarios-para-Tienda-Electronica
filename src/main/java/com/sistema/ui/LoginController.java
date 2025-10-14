@@ -9,11 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -31,6 +29,9 @@ public class LoginController {
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private Hyperlink linkRecContra;
 
     private int contadorInicio = 0;
 
@@ -74,6 +75,7 @@ public class LoginController {
         } else {
             contadorInicio++;
             errorLabel.setVisible(true);
+            linkRecContra.setVisible(true);
             System.out.println("Credenciales incorrectas");
 
             if (contadorInicio < 5) {
@@ -140,4 +142,26 @@ public class LoginController {
         temporizador.play();
     }
 
+
+    public void recuperarContraAction(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RecuperacionPassword.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+            stage.getIcons().add(icono);
+            stage.setTitle("Recuperar Contraseña");
+            stage.setScene(new Scene(root));
+
+            // --- Configurar como ventana modal ---
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            // Mostrar y esperar a que se cierre
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

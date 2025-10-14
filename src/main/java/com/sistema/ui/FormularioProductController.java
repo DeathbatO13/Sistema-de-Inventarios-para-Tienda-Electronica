@@ -1,8 +1,7 @@
 package com.sistema.ui;
 
-import com.sistema.dao.ProductoDAO;
+
 import com.sistema.dao.ProveedorDAO;
-import com.sistema.modelo.Producto;
 import com.sistema.modelo.Proveedor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +32,9 @@ public class FormularioProductController {
     @FXML
     private Label errorLabel, infoLabel;
 
+    /**
+     * Funcion para inicializar la vista del formuario
+     */
     @FXML
     private void initialize(){
         infoLabel.setText("Si no encuantras el proveedor, tienes que \n"
@@ -53,6 +55,9 @@ public class FormularioProductController {
 
     }
 
+    /**
+     * Funcion para buscar lista de proveedores y cargarlos al combobox
+     */
     @FXML
     public void cargarProveedoresAccion(){
         ProveedorDAO proveedor = new ProveedorDAO();
@@ -75,7 +80,7 @@ public class FormularioProductController {
         if (nombreNuevo.getText().isEmpty() || codigoNuevo.getText().isEmpty() || descripcionNuevo.getText().isEmpty()
             || preCompraNuevo.getText().isEmpty() || preVentaNuevo.getText().isEmpty() || stockActNuevo.getText().isEmpty()
             || stockMinNuevo.getText().isEmpty()) {
-            System.out.println("Faltan campos obligatorios.");
+            errorLabel.setText("Faltan campos obligatorios.");
             return;
         }
 
