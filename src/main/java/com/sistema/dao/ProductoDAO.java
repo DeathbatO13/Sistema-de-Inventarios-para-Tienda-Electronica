@@ -51,8 +51,8 @@ public class ProductoDAO {
      * @return true si se agrega correctamente, false si ocurre un error
      */
     public boolean agregarNuevoProducto(Producto producto){
-        String sql = "INSERT INTO productos (codigo_sku, nombre, descripcion, precio_compra, precio_venta, stock_actual" +
-                "stock_minimo, id_proveedor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO productos (codigo_sku, nombre, descripcion, precio_compra, precio_venta, " +
+                "stock_actual, stock_minimo, id_proveedor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection con = ConexionMySQL.getConexion();
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){

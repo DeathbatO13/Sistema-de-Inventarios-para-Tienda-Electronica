@@ -62,6 +62,10 @@ public class RecuperacionController {
         }
     }
 
+    /**
+     * Gestion del evento del boton verificar codigo
+     * @param actionEvent evento del boton
+     */
     @FXML
     public void btnVerificarAction(ActionEvent actionEvent){
         String codDigitado = codigoVerificacion.getText();
@@ -81,6 +85,10 @@ public class RecuperacionController {
         }
     }
 
+    /**
+     * Gestor de eventos para confirmar cambio de contraseña
+     * @param actionEvent Evento del boton
+     */
     @FXML
     public void btnConfirmarAction(ActionEvent actionEvent) {
 
@@ -122,7 +130,6 @@ public class RecuperacionController {
                 cambioExistoso.setTextFill(Color.rgb(232, 11, 11));
             }
         }
-
 
     }
 }

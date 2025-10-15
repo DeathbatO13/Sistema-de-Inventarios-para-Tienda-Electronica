@@ -40,4 +40,30 @@ public class ProveedorDAO {
 
         return lista;
     }
+
+    public Proveedor buscarPorNombre(String nombreBus){
+
+        String sql = "SELECT * FROM proveedores WHERE nombre = ?";
+        Proveedor pro = new Proveedor();
+
+        try(Connection con = ConexionMySQL.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setString(1, nombreBus);
+
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    pro.setId(rs.getInt("id"));
+                    pro.setNombre(rs.getString("nombre"));
+                    pro.setContacto(rs.getString("contacto"));
+                    pro.setTelefono(rs.getString("telefono"));
+                    pro.setEmail(rs.getString("email"));
+                }
+            }
+
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return pro;
+    }
 }
