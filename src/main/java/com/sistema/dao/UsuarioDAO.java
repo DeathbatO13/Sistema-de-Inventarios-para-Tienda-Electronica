@@ -144,4 +144,23 @@ public class UsuarioDAO {
         }
     }
 
+    /**
+     * Funcion encargada de cambiar la contraseña en caso de recuperacion
+     * @param user usuario con el correo y contraseña a cambiar
+     * @return true si el cambio fue exitoso y false si no
+     */
+    public boolean cambiarPassword(Usuario user){
+        String sql = "UPDATE usuarios SET contrasena_hash = ? WHERE email = ?";
+        try (Connection conn = ConexionMySQL.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getContrasenaHash());
+            stmt.setString(2, user.getEmail());
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar verificación: " + e.getMessage());
+            return false;
+        }
+    }
 }

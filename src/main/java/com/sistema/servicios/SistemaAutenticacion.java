@@ -102,6 +102,40 @@ public class SistemaAutenticacion {
     }
 
     /**
+     * Funcion implementada para verificar que el campo del correo tenga un formato valido
+     *
+     * @param correo correo digitado en el registro
+     * @return true si el correo tiene un formato valido, false si no
+     */
+    public boolean correoCorrecto(String correo){
+        String patron = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@"+
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z]{2,7}$";
+
+        return correo.matches(patron);
+    }
+
+    /**
+     * Funcion para verificar que la contraseña tenga minumo 8 carcateres, una mayuscula, minuscula,
+     * numero y caracter especial
+     * @param contrasena contraseña a verificar
+     * @return true si es segura, false si falta algun parametro
+     */
+    public boolean contrasenaSegura(String contrasena){
+        boolean mayus = false;
+        boolean minus = false;
+        boolean numero = false;
+        boolean especial = false;
+
+        for(char c : contrasena.toCharArray()){
+            if(Character.isUpperCase(c)) mayus = true;
+            if(Character.isLowerCase(c)) minus = true;
+            if(Character.isDigit(c)) numero = true;
+            if(!Character.isLetterOrDigit(c)) especial = true;
+        }
+        return (mayus && minus && numero && especial && (contrasena.length() >= 8));
+    }
+
+    /**
      * Funcion para generar codigo numerico de recuperacion de contraseña
      * @return string con el codigo
      */

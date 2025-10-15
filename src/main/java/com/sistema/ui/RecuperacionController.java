@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class RecuperacionController {
 
@@ -43,6 +44,7 @@ public class RecuperacionController {
             btnVerificarCodigo.setDisable(false);
             btnEnviarCorreo.setDisable(true);
             correoTextField.setDisable(true);
+            System.out.println("Codigo " + codigo);
             ServicioEmail.enviarCorreo(correo,
                     "Cambio de contraseña",
                     "Estas intentando iniciar sesion al sistema de ElectroStock.\n" +
@@ -65,8 +67,6 @@ public class RecuperacionController {
         String codDigitado = codigoVerificacion.getText();
 
         if(codDigitado.equals(codigo)){
-            /*btnEnviarCorreo.setDisable(true);
-            correoTextField.setDisable(true);*/
             codigoVerificacion.setDisable(true);
             btnVerificarCodigo.setDisable(true);
             primeraContra.setDisable(false);
@@ -83,5 +83,46 @@ public class RecuperacionController {
 
     @FXML
     public void btnConfirmarAction(ActionEvent actionEvent) {
+
+        String correo = correoTextField.getText();
+        SistemaAutenticacion auth = new SistemaAutenticacion();
+
+        if(primeraContra.getText().isEmpty() || segundaContra.getText().isEmpty()){
+            primeraContra.setText("");
+            segundaContra.setText("");
+            estadoContra.setText("Los dos campos son requeridos");
+            estadoContra.setTextFill(Color.rgb(232, 11, 11));
+            estadoContra.setVisible(true);
+
+        }else if(!(primeraContra.getText().equals(segundaContra.getText()))){
+            primeraContra.setText("");
+            segundaContra.setText("");
+            estadoContra.setText("Las contraseñas no coinciden");
+            estadoContra.setTextFill(Color.rgb(232, 11, 11));
+            estadoContra.setVisible(true);
+
+        } else if (!auth.contrasenaSegura(segundaContra.getText())) {
+            primeraContra.setText("");
+            segundaContra.setText("");
+            estadoContra.setText("La contraseña debe tener mayuscula, minuscula, numeros y caracter especial");
+            estadoContra.setTextFill(Color.rgb(232, 11, 11));
+            estadoContra.setVisible(true);
+
+        }else{
+            estadoContra.setVisible(false);
+            String contraHash = BCrypt.hashpw(segundaContra.getText(), BCrypt.gensalt());
+            Usuario user = new Usuario();
+            user.setEmail(correo);
+            user.setContrasenaHash(contraHash);
+            if(new UsuarioDAO().cambiarPassword(user)){
+                cambioExistoso.setVisible(true);
+            }else{
+                cambioExistoso.setVisible(true);
+                cambioExistoso.setText("Error al conectar a la base de datos");
+                cambioExistoso.setTextFill(Color.rgb(232, 11, 11));
+            }
+        }
+
+
     }
 }
