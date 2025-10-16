@@ -4,10 +4,16 @@ import java.time.LocalDateTime;
 
 public class Movimiento {
 
+    public enum TipoMovimiento {
+        ENTRADA,
+        VENTA,
+        AJUSTE
+    }
+
     private int id;
     private int idProducto;
     private LocalDateTime fecha;
-    private String tipoMovimiento; // "entrada", "venta" o "ajuste"
+    private TipoMovimiento tipoMovimiento; // "entrada", "venta" o "ajuste"
     private int cantidad;
     private String descripcion;
 
@@ -19,7 +25,7 @@ public class Movimiento {
     /**
      *Constructor completo
      */
-    public Movimiento(int id, int idProducto, LocalDateTime fecha, String tipoMovimiento, int cantidad, String descripcion) {
+    public Movimiento(int id, int idProducto, LocalDateTime fecha, TipoMovimiento tipoMovimiento, int cantidad, String descripcion) {
         this.id = id;
         this.idProducto = idProducto;
         this.fecha = fecha;
@@ -54,11 +60,11 @@ public class Movimiento {
         this.fecha = fecha;
     }
 
-    public String getTipoMovimiento() {
+    public TipoMovimiento getTipoMovimiento() {
         return tipoMovimiento;
     }
 
-    public void setTipoMovimiento(String tipoMovimiento) {
+    public void setTipoMovimiento(TipoMovimiento tipoMovimiento) {
         this.tipoMovimiento = tipoMovimiento;
     }
 
