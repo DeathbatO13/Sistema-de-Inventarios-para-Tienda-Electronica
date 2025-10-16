@@ -52,6 +52,7 @@ public class PanelPrincipalController {
 
     public void btnProveedoresMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuProveedores);
+        cargarVista("Proveedores.fxml");
     }
 
     public void btnVentasMenu(ActionEvent actionEvent) {

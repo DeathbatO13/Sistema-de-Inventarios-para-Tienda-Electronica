@@ -82,9 +82,9 @@ public class ProductosController {
                         "-fx-font-size: 13px; -fx-font-family: 'Corbel'; " +
                                 "-fx-background-color: #f9f9f9; -fx-text-fill: black; -fx-padding: 8px;"
                 );
-                tooltip.setShowDelay(javafx.util.Duration.millis(0)); // delay
-                tooltip.setWrapText(true); // que haga wrap si es largo
-                tooltip.setMaxWidth(300);  // ancho máximo del tooltip
+                tooltip.setShowDelay(javafx.util.Duration.millis(0));
+                tooltip.setWrapText(true);
+                tooltip.setMaxWidth(300);
             }
 
             @Override
@@ -134,16 +134,14 @@ public class ProductosController {
             stage.setScene(new Scene(root));
 
             // --- Configurar como ventana modal ---
-            stage.initModality(Modality.APPLICATION_MODAL); // bloquea la ventana principal
-            stage.initOwner(tablaProductos.getScene().getWindow()); // la asocia a la ventana principal
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(tablaProductos.getScene().getWindow());
 
-            // Mostrar y esperar a que se cierre
             stage.showAndWait();
 
-            // Al cerrarse, verificar si se guardó un producto nuevo
             FormularioProductController controller = loader.getController();
             if (controller.isProductoGuardado()) {
-                cargarListaProductos(); // refrescar tabla si se agregó algo
+                cargarListaProductos();
             }
 
         } catch (IOException e) {
@@ -192,7 +190,6 @@ public class ProductosController {
                 btnEditar.setStyle("-fx-background-color: #5882E8; -fx-text-fill: white; -fx-font-size: 13px; " +
                         "-fx-font-weight: bold; -fx-background-radius: 7;");
 
-                // Margen interno y alineación
                 contenedorBotones.setAlignment(Pos.CENTER);
                 contenedorBotones.getChildren().addAll(btnEditar, btnEliminar);
 
