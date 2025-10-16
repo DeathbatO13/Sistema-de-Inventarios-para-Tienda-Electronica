@@ -92,7 +92,7 @@ public class ProductoDAO {
 
         try (Connection con = ConexionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
-            //Agregar los comodines para buscar coincidencias parciales
+
             ps.setString(1, "%" + nombreBuscado + "%");
 
             try (ResultSet rs = ps.executeQuery()) {
