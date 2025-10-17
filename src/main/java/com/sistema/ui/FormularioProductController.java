@@ -76,6 +76,9 @@ public class FormularioProductController {
 
     private boolean productoGuardado = false;
 
+    /**
+     * Funcion encargada de hacer las validaciones necesarias para guardar un producto
+     */
     public void guardarProducto() {
         // Validaciones básicas
         if (nombreNuevo.getText().isEmpty() || codigoNuevo.getText().isEmpty() || descripcionNuevo.getText().isEmpty()

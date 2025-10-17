@@ -42,6 +42,11 @@ public class ProveedorDAO {
         return lista;
     }
 
+    /**
+     * Funcion para buscar unico proveedor por nombre
+     * @param nombreBus nombre a buscar
+     * @return objero proveedor encontrado
+     */
     public Proveedor buscarPorNombre(String nombreBus){
 
         String sql = "SELECT * FROM proveedores WHERE nombre = ?";
@@ -66,6 +71,41 @@ public class ProveedorDAO {
             System.err.println(e.getMessage());
         }
         return pro;
+    }
+
+
+    /**
+     * Funcion para buscar proveedores por nombre
+     * @param nombreBus nombre buscado
+     * @return lista de productos que coincidan con el nombre buscado
+     */
+    public List<Proveedor> buscarListaPorNombre(String nombreBus){
+
+        List<Proveedor> lista = new ArrayList<>();
+        String sql = "SELECT * FROM proveedores WHERE nombre LIKE ?";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombreBus + "%");
+
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    Proveedor pro = new Proveedor();
+                    pro.setId(rs.getInt("id"));
+                    pro.setNombre(rs.getString("nombre"));
+                    pro.setContacto(rs.getString("contacto"));
+                    pro.setTelefono(rs.getString("telefono"));
+                    pro.setEmail(rs.getString("email"));
+
+                    lista.add(pro);
+                }
+            }
+
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return lista;
     }
 
     /**

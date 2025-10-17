@@ -50,7 +50,9 @@ public class ProveedoresController {
     @FXML
     private TableColumn<Producto, Double> prodPrecio;
 
-
+    /**
+     * Funcion para inicializar la vista
+     */
     @FXML
     public void initialize() {
 
@@ -72,8 +74,18 @@ public class ProveedoresController {
 
     }
 
+    /**
+     * Control del evento del TextField para buscar proveedores por nombre
+     * @param actionEvent Evento del TextField
+     */
     @FXML
     public void buscarProvAction(ActionEvent actionEvent) {
+
+        ProveedorDAO dao = new ProveedorDAO();
+        List<Proveedor> lista = dao.buscarListaPorNombre(buscarTextfield.getText());
+        ObservableList<Proveedor> datos = FXCollections.observableArrayList(lista);
+        listaView.setItems(datos);
+
     }
 
     @FXML
