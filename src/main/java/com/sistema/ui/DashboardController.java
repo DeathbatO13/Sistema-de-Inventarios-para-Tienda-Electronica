@@ -1,6 +1,7 @@
 package com.sistema.ui;
 
 import com.sistema.dao.ProductoDAO;
+import com.sistema.dao.ProveedorDAO;
 import com.sistema.modelo.Producto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,8 +44,9 @@ public class DashboardController {
         cargarProductosBajoStock();
         // Añadir columna de acción
         agregarColumnaAccion();
-        // Actualizar numero de productos
+        // Actualizar cantidades resumen
         productosTotalesLabel.setText(String.valueOf(new ProductoDAO().cantidadProductos()));
+        proveedoresTotalesLabel.setText(String.valueOf(new ProveedorDAO().cantidadProveedores()));
     }
 
     /**

@@ -66,4 +66,24 @@ public class ProveedorDAO {
         }
         return pro;
     }
+
+    /**
+     * Busca la cantidad de proveedores en la base de datos
+     * @return entero con la cantidad de proveedores
+     */
+    public int cantidadProveedores(){
+        String sql = "SELECT COUNT(*) AS total_proveedores FROM proveedores;";
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()){
+
+            if(rs.next()){
+                return rs.getInt("total_proveedores");
+            }
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return 0;
+    }
+
 }

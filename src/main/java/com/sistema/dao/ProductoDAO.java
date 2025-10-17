@@ -161,4 +161,58 @@ public class ProductoDAO {
         return 0;
     }
 
+    /**
+     * Funcion para buscar un producto a partir de su id
+     * @param id id del producto
+     * @return producto encontrado
+     */
+    public Producto buscarPorId(int id){
+        String sql = "SELECT * FROM productos WHERE id = ?";
+        Producto p = new Producto();
+
+        try(Connection con = ConexionMySQL.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, String.valueOf(id));
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    p.setId(rs.getInt("id"));
+                    p.setCodigoSku(rs.getString("codigo_sku"));
+                    p.setNombre(rs.getString("nombre"));
+                    p.setDescripcion(rs.getString("descripcion"));
+                    p.setPrecioVenta(rs.getDouble("precio_venta"));
+                    p.setStockActual(rs.getInt("stock_actual"));
+                }
+            }catch(SQLException e){
+                System.err.println("No existe ese producto" + e.getMessage());
+            }
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return p;
+    }
+
+    /**
+     * Funcion para actualizar la cantidad de productos en caso de algun movimiento
+     * @param idProducto id del producto a actualizar
+     * @param cantidadNueva cantidad nueva despues del movimieto
+     * @return true si se realiza el update y false si no
+     */
+    public boolean actualizarCantidadProducto(int idProducto, int cantidadNueva){
+        String sql = "UPDATE productos SET stock_actual = ? WHERE id = ?";
+        try(Connection conn = ConexionMySQL.getConexion();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, cantidadNueva); // marcar como verificado
+            stmt.setInt(2, idProducto);
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
 }
