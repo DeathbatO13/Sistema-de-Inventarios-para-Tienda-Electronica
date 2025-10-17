@@ -26,6 +26,7 @@ public class ProveedorDAO {
 
             while(rs.next()){
                 Proveedor proveedor = new Proveedor();
+                proveedor.setId(rs.getInt("id"));
                 proveedor.setNombre(rs.getString("nombre"));
                 proveedor.setContacto(rs.getString("contacto"));
                 proveedor.setTelefono(rs.getString("telefono"));

@@ -1,257 +1,220 @@
-/* Definición de la variable para el color primario azul */
+/* DEFINICIÓN DE VARIABLES (Necesario para el TabPane y otros componentes) */
 .root {
     -primary-blue: #5882E8;
-    -background-grey: #DDDDDD; /* Color del fondo de tu vista general */
+    -background-grey: #DDDDDD;
 }
 
-/* Contenedor principal de la tabla para el redondeado exterior */
+/* Aplicar la fuente base a todos los elementos */
+* {
+    -fx-font-family: "Corbel", "Segoe UI", sans-serif;
+}
+
+/* ---------------------------------------------------- */
+/* ESTILOS PARA TABLEVIEW */
+/* ---------------------------------------------------- */
+
 .table-view {
-    /* Usamos el color gris de tu vista general como fondo del contenedor de la tabla */
     -fx-background-color: -background-grey;
     -fx-background-radius: 12px;
     -fx-border-radius: 12px;
-    -fx-border-color: #c9c9c9; /* Borde más sutil, derivado del gris de fondo */
+    -fx-border-color: #c9c9c9;
     -fx-border-width: 1px;
 }
 
-/* Fondo de la barra de la cabecera */
 .table-view .column-header-background {
-    -fx-background-color: #e0e4e9; /* Un tono de gris/azul muy claro, menos intenso que el actual */
+    -fx-background-color: #e0e4e9;
     -fx-background-radius: 12px 12px 0 0;
     -fx-padding: 0;
-    /* Borde inferior más claro */
     -fx-border-width: 0 0 1px 0;
     -fx-border-color: #c9c9c9;
 }
 
-/* Estilo para cada celda individual de la cabecera (sin cambios mayores) */
 .table-view .column-header {
     -fx-background-color: transparent;
-    -fx-font-family: "Corbel", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-text-fill: #4c5a6d; /* Color de texto un poco más oscuro */
+    -fx-text-fill: #4c5a6d;
     -fx-alignment: CENTER;
     -fx-padding: 12px 15px;
 }
 
-/* Estilos para las filas y celdas de datos */
 .table-view .table-row-cell {
     -fx-background-color: #ffffff;
     -fx-background-insets: 0, 0 0 1px 0;
     -fx-background-radius: 0;
-    /* La línea divisoria ahora usa el color gris sutil */
     -fx-border-color: #e8e8e8;
     -fx-border-width: 0 0 1px 0;
     -fx-padding: 0;
 }
 
-/* Estilo al pasar el ratón por encima de una fila */
 .table-view .table-row-cell:hover {
-    /* Tono muy sutil para el hover, casi blanco */
     -fx-background-color: #fcfcfc;
     -fx-cursor: hand;
 }
 
-/* Estilo para fila seleccionada */
 .table-view .table-row-cell:selected {
-    /* Usa tu color primario azul con una transparencia suave */
-    -fx-background-color: derive(-primary-blue, 75%); /* Más claro que el azul base */
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 75%);
     -fx-background-insets: 0, 0 0 1px 0;
-    -fx-border-color: #e8e8e8; /* Mantener borde divisor sutil */
+    -fx-border-color: #e8e8e8;
     -fx-border-width: 0 0 1px 0;
 }
 
-/* Estilo de las celdas de datos individuales (sin cambios mayores) */
 .table-view .table-cell {
     -fx-background-color: transparent;
-    -fx-font-family: "Corbel", "Segoe UI", sans-serif;
     -fx-font-size: 14px;
     -fx-text-fill: #5a667b;
-    -fx-alignment: CENTER_LEFT;
-    -fx-padding: 12px 15px;
+    -fx-alignment: TOP_LEFT; /* Para celdas multilínea */
+    -fx-padding: 5px 15px;
     -fx-border-color: transparent;
     -fx-border-width: 0;
 }
 
-/* Texto de la fila seleccionada: para que contraste con el fondo azul claro */
 .table-view .table-row-cell:selected .table-cell {
-    -fx-text-fill: #333333; /* Color de texto oscuro para mayor legibilidad */
+    /* CORRECCIÓN: Se define el color del texto para que sea visible */
+    -fx-text-fill: #333333;
 }
 
-/* Eliminar el foco visual predeterminado en celdas y filas */
-/* Aseguramos que la selección se vea como queremos, incluso al perder el foco */
 .table-view:focused .table-row-cell:filled:focused,
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: derive(-primary-blue, 70%); /* Color de selección más visible cuando está enfocado */
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 70%);
     -fx-border-color: transparent;
     -fx-background-insets: 0, 0 0 1px 0;
 }
+
 .table-view:focused .table-row-cell:filled:focused:selected .table-cell {
-    -fx-text-fill: white; /* Texto blanco en selección enfocada para mejor contraste */
-}
-
-/* Estilos para el ListView para replicar la apariencia general de la TableView */
-
-/* Contenedor principal del ListView para el redondeado exterior */
-.list-view {
-    /* Usamos el color gris de tu vista general como fondo del contenedor */
-    -fx-background-color: -background-grey;
-    -fx-background-radius: 12px;
-    -fx-border-radius: 12px;
-    -fx-border-color: #c9c9c9; /* Borde más sutil */
-    -fx-border-width: 1px;
-    -fx-padding: 0; /* Eliminar el padding predeterminado */
-}
-
-/* El ScrollPane dentro del ListView (v-bar) */
-.list-view .scroll-bar:vertical {
-    -fx-padding: 0 0 0 0;
-}
-
-/* ---------------------------------------------------- */
-/* Estilos para cada Celda (ListItem) */
-/* ---------------------------------------------------- */
-
-.list-view .list-cell {
-    /* Fondo de cada celda individual (la fila) */
-    -fx-background-color: #ffffff;
-
-    /* Simular el separador de línea que tienes en table-row-cell */
-    -fx-border-color: #e8e8e8;
-    -fx-border-width: 0 0 1px 0; /* Borde inferior sutil */
-
-    /* Padding para replicar el espaciado de las celdas de la tabla */
-    -fx-padding: 12px 15px;
-
-    /* Configuración de fuente base (puedes personalizar esto si la celda es simple) */
-    -fx-font-family: "Corbel", "Segoe UI", sans-serif;
-    -fx-font-size: 14px;
-    -fx-text-fill: #5a667b;
-    -fx-alignment: CENTER_LEFT;
-}
-
-/* Última celda para eliminar el borde inferior extra */
-.list-view .list-cell:last-visible-cell {
-    -fx-border-width: 0;
-}
-
-/* Estilo al pasar el ratón por encima de una celda */
-.list-view .list-cell:hover:filled {
-    /* Tono muy sutil para el hover, casi blanco */
-    -fx-background-color: #fcfcfc;
-    -fx-cursor: hand;
-}
-
-/* Estilo para celda seleccionada */
-.list-view .list-cell:selected {
-    /* Usa tu color primario azul con una transparencia suave */
-    -fx-background-color: derive(-primary-blue, 75%); /* Más claro que el azul base */
-    -fx-border-color: #e8e8e8; /* Mantener borde divisor sutil */
-    -fx-border-width: 0 0 1px 0;
-}
-
-/* Estilo de texto para la celda seleccionada: para que contraste con el fondo azul claro */
-.list-view .list-cell:selected {
-    -fx-text-fill: #333333; /* Color de texto oscuro para mayor legibilidad */
-}
-
-/* Estilo de texto y fondo para la celda seleccionada y enfocada (foco) */
-.list-view:focused .list-cell:filled:selected {
-    -fx-background-color: derive(-primary-blue, 70%); /* Color de selección más visible cuando está enfocado */
-    -fx-border-color: transparent;
-    -fx-border-width: 0 0 1px 0;
-}
-.list-view:focused .list-cell:filled:selected {
-    -fx-text-fill: white; /* Texto blanco en selección enfocada para mejor contraste */
-}
-
-.list-cell .supplier-name { /* Aplica esta clase al Label del nombre del proveedor */
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-}
-
-.list-cell .supplier-category { /* Aplica esta clase al Label de la categoría */
-    -fx-font-size: 12px;
-    -fx-text-fill: #999999;
-}
-
-/* Asegurar que el texto dentro de la celda seleccionada tenga el color de contraste */
-.list-cell:selected .supplier-name,
-.list-cell:selected .supplier-category {
-    /* Para el fondo azul claro */
-    -fx-text-fill: #333333;
-}
-.list-cell:focused:selected .supplier-name,
-.list-cell:focused:selected .supplier-category {
-    /* Para el fondo azul oscuro enfocado */
+    /* CORRECCIÓN: Se define el color del texto para que contraste */
     -fx-text-fill: white;
 }
 
 /* ---------------------------------------------------- */
-/* ESTILO PRINCIPAL DEL TAB PANE (Contenedor de Pestañas) */
+/* ESTILOS PARA LISTVIEW */
+/* ---------------------------------------------------- */
+
+.list-view {
+    -fx-background-color: -background-grey;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #c9c9c9;
+    -fx-border-width: 1px;
+    -fx-padding: 0;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-padding: 0;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e8e8e8;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #5a667b;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.list-view .list-cell:last-visible-cell {
+    -fx-border-width: 0;
+}
+
+.list-view .list-cell:hover:filled {
+    -fx-background-color: #fcfcfc;
+    -fx-cursor: hand;
+}
+
+.list-view .list-cell:selected {
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 75%);
+    -fx-border-color: #e8e8e8;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.list-view .list-cell:selected {
+    /* CORRECCIÓN: Se define el color del texto para que sea visible */
+    -fx-text-fill: #333333;
+}
+
+.list-view:focused .list-cell:filled:selected {
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 70%);
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.list-view:focused .list-cell:filled:selected {
+    /* CORRECCIÓN: Se define el color del texto para que contraste */
+    -fx-text-fill: white;
+}
+
+/* Estilos de nodos internos (CellFactory) */
+.list-cell .supplier-name {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.list-cell .supplier-category {
+    -fx-font-size: 12px;
+    -fx-text-fill: #999999;
+}
+
+.list-cell:selected .supplier-name,
+.list-cell:selected .supplier-category {
+    -fx-text-fill: #333333;
+}
+.list-cell:focused:selected .supplier-name,
+.list-cell:focused:selected .supplier-category {
+    -fx-text-fill: white;
+}
+/* ---------------------------------------------------- */
+/* ESTILOS PARA TABPANE
+
 /* ---------------------------------------------------- */
 
 .tab-pane {
-    /* Fondo del contenido de la pestaña */
     -fx-background-color: transparent;
     -fx-border-width: 0;
 }
 
-/* Ocultar el área de encabezado (la barra gris por defecto) */
 .tab-pane .tab-header-area {
-    /* Fondo transparente para el área completa del encabezado */
     -fx-background-color: transparent;
-
-    /* Separador sutil (la línea gris horizontal debajo de las pestañas) */
     -fx-border-width: 0 0 1px 0;
     -fx-border-color: #e0e0e0;
     -fx-padding: 0;
 }
 
-
 .tab-pane .tab {
-    /* Fondo de la pestaña completamente transparente */
     -fx-background-color: transparent;
     -fx-border-width: 0;
-    /* Espacio inferior para la línea azul de enfoque */
     -fx-padding: 10px 15px 8px 0;
 }
 
-/* ESTILO DEL TEXTO DE LA PESTAÑA */
 .tab-pane .tab .tab-label {
-    /* Aplicación de la fuente Corbel que estás usando */
-    -fx-font-family: "Corbel", "Segoe UI", sans-serif;
     -fx-font-size: 16px;
-    -fx-text-fill: #555555; /* Texto gris por defecto */
+    -fx-text-fill: #555555; /* Color para pestañas no seleccionadas */
 }
 
-
-/* Estilo para el color del texto cuando la pestaña está seleccionada */
+/* Estilo para el texto de la pestaña SELECCIONADA */
 .tab-pane .tab:selected .tab-label {
-    -fx-text-fill: -primary-blue; /* Texto azul de tu variable primaria */
+    -fx-text-fill: -primary-blue; /* Usa la variable azul */
 }
 
-/* El fondo que se convierte en la línea azul debajo del texto */
-.tab-pane:focused .tab:selected .tab-header-background {
-    /* Color de tu variable primaria */
-    -fx-background-color: -primary-blue;
-    /* Altura de la línea azul */
+/* * 💡 CORRECCIÓN CLAVE: Se eliminó ":focused"
+ * Ahora la línea azul se mostrará siempre que la pestaña esté seleccionada.
+ */
+.tab-pane .tab:selected .tab-header-background {
+    -fx-background-color: -primary-blue; /* Usa la variable azul */
     -fx-max-height: 2px;
-    /* Asegurarse de que no haya bordes no deseados */
     -fx-border-width: 0;
 }
 
-
-/* Asegurar que el área de contenido de la pestaña esté limpia */
 .tab-pane .tab-content-area {
     -fx-background-color: transparent;
     -fx-border-width: 0;
     -fx-padding: 20px 0 0 0;
 }
 
-/* Quitar el foco visual predeterminado alrededor de la pestaña */
 .tab-pane .tab:selected .focus-indicator {
     -fx-border-width: 0;
 }
-

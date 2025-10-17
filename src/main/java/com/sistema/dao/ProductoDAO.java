@@ -215,4 +215,37 @@ public class ProductoDAO {
             return false;
         }
     }
+
+    /**
+     * Funcion para buscar los productos con mismo proveedor
+     * @param idProveedor id del proveedor
+     * @return lista de productos
+     */
+    public List<Producto> buscarPorProveedor(int idProveedor) {
+        List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT * FROM productos WHERE id_proveedor = ?";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idProveedor);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Producto p = new Producto();
+                    p.setId(rs.getInt("id"));
+                    p.setCodigoSku(rs.getString("codigo_sku"));
+                    p.setNombre(rs.getString("nombre"));
+                    p.setDescripcion(rs.getString("descripcion"));
+                    p.setPrecioVenta(rs.getDouble("precio_venta"));
+                    p.setStockActual(rs.getInt("stock_actual"));
+
+                    productos.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar productos: " + e.getMessage());
+        }
+        return productos;
+    }
 }
