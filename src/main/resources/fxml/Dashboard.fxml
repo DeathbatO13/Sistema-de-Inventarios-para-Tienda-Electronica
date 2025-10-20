@@ -46,7 +46,7 @@
             </Label>
             <Label fx:id="totalVentasLabel" layoutX="14.0" layoutY="47.0" text="\$50.000">
                <font>
-                  <Font name="Corbel Bold" size="40.0" />
+                  <Font name="Corbel Bold" size="35.0" />
                </font>
             </Label>
          </children>

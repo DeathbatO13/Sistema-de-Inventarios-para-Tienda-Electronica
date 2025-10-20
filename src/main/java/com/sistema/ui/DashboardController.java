@@ -2,6 +2,7 @@ package com.sistema.ui;
 
 import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.ProveedorDAO;
+import com.sistema.dao.VentasDAO;
 import com.sistema.modelo.Producto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class DashboardController {
 
@@ -47,6 +50,9 @@ public class DashboardController {
         // Actualizar cantidades resumen
         productosTotalesLabel.setText(String.valueOf(new ProductoDAO().cantidadProductos()));
         proveedoresTotalesLabel.setText(String.valueOf(new ProveedorDAO().cantidadProveedores()));
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+        totalVentasLabel.setText(String.valueOf(formatoMoneda.format(new VentasDAO().totalVentasMes())));
+
     }
 
     /**

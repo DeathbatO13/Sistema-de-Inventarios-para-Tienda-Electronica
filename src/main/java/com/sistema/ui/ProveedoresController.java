@@ -140,7 +140,7 @@ public class ProveedoresController {
      * Funcion que define caracteristicas de la tabla de productos en el tab pane
      */
     private void inicializarTablaProductos() {
-
+    
         prodName.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         prodDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         prodPrecio.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
