@@ -10,6 +10,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 
+/**
+ * Factory para actualizar estilos de la vista proveedor
+ */
 public class ProveedorCellFactory implements Callback<ListView<Proveedor>, ListCell<Proveedor>> {
     @Override
     public ListCell<Proveedor> call(ListView<Proveedor> param) {

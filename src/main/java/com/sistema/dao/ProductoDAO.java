@@ -131,6 +131,7 @@ public class ProductoDAO {
                 producto.setCodigoSku(rs.getString("codigo_sku"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setStockActual(rs.getInt("stock_actual"));
+                producto.setIdProveedor(rs.getInt("id_proveedor"));
 
                 productosBajoStock.add(producto);
             }

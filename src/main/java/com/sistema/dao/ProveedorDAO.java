@@ -127,4 +127,34 @@ public class ProveedorDAO {
         return 0;
     }
 
+    /**
+     * Buscar proveedor unico proporcionando la id
+     * @param idProveedor id buscada
+     * @return objeto proveedor encontrado
+     */
+    public Proveedor buscarPorId(int idProveedor){
+
+        String sql = "SELECT * FROM proveedores WHERE id = ?";
+        Proveedor pro = new Proveedor();
+
+        try(Connection con = ConexionMySQL.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1, idProveedor);
+
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    pro.setId(rs.getInt("id"));
+                    pro.setNombre(rs.getString("nombre"));
+                    pro.setContacto(rs.getString("contacto"));
+                    pro.setTelefono(rs.getString("telefono"));
+                    pro.setEmail(rs.getString("email"));
+                }
+            }
+
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return pro;
+    }
 }

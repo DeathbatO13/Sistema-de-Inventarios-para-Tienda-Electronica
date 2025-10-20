@@ -142,7 +142,10 @@ public class LoginController {
         temporizador.play();
     }
 
-
+    /**
+     * Funcion para lanzar la ventana de recuperacion de contraseña
+     * @param actionEvent event del link
+     */
     public void recuperarContraAction(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RecuperacionPassword.fxml"));
