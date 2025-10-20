@@ -249,4 +249,24 @@ public class ProductoDAO {
         }
         return productos;
     }
+
+    /**
+     * Funcion para eliminar producto
+     * @param id id del producto a eliminar
+     * @return true si elimina correctamente, y false si no
+     */
+    public boolean eliminarProducto(int id) {
+        String sql = "DELETE FROM productos WHERE id = ?";
+        try (Connection conn = ConexionMySQL.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar producto: " + e.getMessage());
+            return false;
+        }
+    }
 }

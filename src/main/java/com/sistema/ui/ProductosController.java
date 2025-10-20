@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
@@ -26,9 +27,6 @@ public class ProductosController {
 
     @FXML
     private TextField buscarProducto;
-
-    @FXML
-    private Button btnAgregarProducto;
 
     @FXML
     private TableView<Producto> tablaProductos;
@@ -201,7 +199,30 @@ public class ProductosController {
 
                 btnEliminar.setOnAction(event -> {
                     Producto producto = getTableView().getItems().get(getIndex());
-                    System.out.println("Eliminar producto: " + producto.getNombre());
+
+                    if(new ProductoDAO().eliminarProducto(producto.getId())){
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Eliminación");
+                        alert.setHeaderText(null); // Opcional: elimina el encabezado
+                        alert.setContentText(producto.getNombre() + " Eliminado");
+
+                        //Asociar el Alert con el Stage actual
+                        alert.initOwner(contenedorBotones.getScene().getWindow());
+                        alert.showAndWait();
+
+                    }else{
+
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("No se pudo eliminar");
+                        alert.setHeaderText(null); // Opcional: elimina el encabezado
+                        alert.setContentText(producto.getNombre() + " no eliminado");
+
+                        //Asociar el Alert con el Stage actual
+                        alert.initOwner(contenedorBotones.getScene().getWindow());
+                        alert.showAndWait();
+                    }
+
                 });
             }
 
