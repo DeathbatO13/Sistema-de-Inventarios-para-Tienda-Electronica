@@ -167,3 +167,41 @@
 .list-cell:focused:selected .supplier-category {
     -fx-text-fill: white;
 }
+.tab-pane {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}
+
+/* Tab styling */
+.tab-pane .tab-header-area {
+    -fx-background-color: white;
+}
+
+.tab-pane .tab {
+    -fx-background-color: white;
+    -fx-text-fill: #1DA1F2; /* Blue for active tab text */
+    -fx-font-size: 16px;
+    -fx-font-family: "Corbel Bold";
+    -fx-padding: 5px 15px;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: #1DA1F2;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.tab-pane .tab:disabled {
+    -fx-opacity: 1.0;
+}
+
+.tab-pane .tab-header-area .headers-region {
+    -fx-background-color: white;
+    -fx-padding: 0 0 0 10px;
+}
+
+/* Content area styling */
+.tab-pane .tab-content-area {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}

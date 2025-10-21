@@ -29,6 +29,7 @@ public class ProductoDAO {
 
             while(rs.next()) {
                 Producto producto = new Producto();
+                producto.setId(rs.getInt("id"));
                 producto.setCodigoSku(rs.getString("codigo_sku"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setDescripcion(rs.getString("descripcion"));
@@ -260,8 +261,10 @@ public class ProductoDAO {
         try (Connection conn = ConexionMySQL.getConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            System.out.println("id: " + id);
             stmt.setInt(1, id);
             int filas = stmt.executeUpdate();
+            System.out.println(filas);
             return filas > 0;
 
         } catch (SQLException e) {

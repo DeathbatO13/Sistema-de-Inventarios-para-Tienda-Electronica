@@ -200,6 +200,8 @@ public class ProductosController {
                 btnEliminar.setOnAction(event -> {
                     Producto producto = getTableView().getItems().get(getIndex());
 
+                    System.out.println("Id tomado: " + producto.getId());
+
                     if(new ProductoDAO().eliminarProducto(producto.getId())){
 
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
