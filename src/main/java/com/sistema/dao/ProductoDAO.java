@@ -28,13 +28,17 @@ public class ProductoDAO {
             ResultSet rs = ps.executeQuery()){
 
             while(rs.next()) {
+
                 Producto producto = new Producto();
                 producto.setId(rs.getInt("id"));
                 producto.setCodigoSku(rs.getString("codigo_sku"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioCompra(rs.getDouble("precio_compra"));
                 producto.setPrecioVenta(rs.getDouble("precio_venta"));
                 producto.setStockActual(rs.getInt("stock_actual"));
+                producto.setStockMinimo(rs.getInt("stock_minimo"));
+                producto.setIdProveedor(rs.getInt("id_proveedor"));
 
                 lista.add(producto);
             }
@@ -178,13 +182,17 @@ public class ProductoDAO {
             ps.setString(1, String.valueOf(id));
 
             try (ResultSet rs = ps.executeQuery()) {
+
                 while (rs.next()) {
                     p.setId(rs.getInt("id"));
                     p.setCodigoSku(rs.getString("codigo_sku"));
                     p.setNombre(rs.getString("nombre"));
                     p.setDescripcion(rs.getString("descripcion"));
+                    p.setPrecioCompra(rs.getDouble("precio_compra"));
                     p.setPrecioVenta(rs.getDouble("precio_venta"));
                     p.setStockActual(rs.getInt("stock_actual"));
+                    p.setStockMinimo(rs.getInt("stock_minimo"));
+                    p.setIdProveedor(rs.getInt("id_proveedor"));
                 }
             }catch(SQLException e){
                 System.err.println("No existe ese producto" + e.getMessage());

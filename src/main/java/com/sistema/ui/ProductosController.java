@@ -174,6 +174,11 @@ public class ProductosController {
         tablaProductos.setItems(datos);
     }
 
+    /**
+     * Funcion para agregar la columna de acciones (botones por producto)
+     * además de incluir los botones y darles estilos, gestiona las acciones
+     * de los mismos.
+     */
     private void agregarColumnaAccion() {
         accionesProducto.setCellFactory(param -> new TableCell<Producto, Void>() {
 
@@ -194,7 +199,36 @@ public class ProductosController {
                 // Acciones
                 btnEditar.setOnAction(event -> {
                     Producto producto = getTableView().getItems().get(getIndex());
-                    System.out.println("Editar producto: " + producto.getNombre());
+
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EditarProducto.fxml"));
+                        Parent root = loader.load();
+
+                        ProductoEditorController control = loader.getController();
+                        control.setProductoData(producto.getId());
+
+                        Stage stage = new Stage();
+                        Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+                        stage.getIcons().add(icono);
+                        stage.setTitle("Editar Producto");
+                        stage.setScene(new Scene(root));
+
+                        // --- Configurar como ventana modal ---
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.initOwner(tablaProductos.getScene().getWindow());
+
+                        stage.showAndWait();
+
+                        FormularioProductController controller = loader.getController();
+                        if (controller.isProductoGuardado()) {
+                            cargarListaProductos();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
                 });
 
                 btnEliminar.setOnAction(event -> {
