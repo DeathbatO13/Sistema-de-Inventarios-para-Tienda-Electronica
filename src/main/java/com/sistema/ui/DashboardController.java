@@ -97,28 +97,13 @@ public class DashboardController {
                             "Reorden de producto",
                             "Envio este correo para reordenar 20 unidades de " + producto.getNombre());
                      *****************/
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReordenarConfirm.fxml"));
-                        Parent root = loader.load();
-
-                        ReordenarController controller = loader.getController();
-                        controller.nombreALabel(new ProveedorDAO().buscarPorId(producto.getIdProveedor()).getNombre());
-
-                        Stage stage = new Stage();
-                        Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
-                        stage.getIcons().add(icono);
-                        stage.setTitle("Orden Realizada");
-                        stage.setScene(new Scene(root));
-
-                        // --- Configurar como ventana modal ---
-                        stage.initModality(Modality.APPLICATION_MODAL);
-
-                        // Mostrar y esperar a que se cierre
-                        stage.showAndWait();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Producto Reordenado");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Orden creada, correo enviado a proveedor: " + new ProveedorDAO()
+                            .buscarPorId(producto.getIdProveedor()).getNombre());
+                    alert.initOwner(tablaExistencias.getScene().getWindow());
+                    alert.showAndWait();
 
                 });
             }

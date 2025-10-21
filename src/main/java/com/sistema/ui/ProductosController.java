@@ -204,10 +204,8 @@ public class ProductosController {
 
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Eliminación");
-                        alert.setHeaderText(null); // Opcional: elimina el encabezado
+                        alert.setHeaderText(null);
                         alert.setContentText(producto.getNombre() + " Eliminado");
-
-                        //Asociar el Alert con el Stage actual
                         alert.initOwner(contenedorBotones.getScene().getWindow());
                         alert.showAndWait();
 
@@ -215,10 +213,8 @@ public class ProductosController {
 
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("No se pudo eliminar");
-                        alert.setHeaderText(null); // Opcional: elimina el encabezado
+                        alert.setHeaderText(null);
                         alert.setContentText(producto.getNombre() + " no eliminado");
-
-                        //Asociar el Alert con el Stage actual
                         alert.initOwner(contenedorBotones.getScene().getWindow());
                         alert.showAndWait();
                     }
