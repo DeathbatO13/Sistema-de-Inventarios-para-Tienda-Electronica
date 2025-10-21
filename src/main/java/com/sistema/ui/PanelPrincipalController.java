@@ -81,6 +81,7 @@ public class PanelPrincipalController {
      */
     public void btnVentasMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuVentas);
+        cargarVista("Ventas.fxml");
     }
 
     /**
