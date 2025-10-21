@@ -11,6 +11,12 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
+/**
+ * Controlador para la vista principal del panel de la aplicación.
+ * Gestiona la navegación entre diferentes vistas (Dashboard, Productos, Proveedores, Ventas, Reportes)
+ * mediante un menú, actualiza los estilos de los botones de navegación y carga dinámicamente las vistas
+ * en un panel.
+ */
 public class PanelPrincipalController {
 
     @FXML
@@ -25,7 +31,9 @@ public class PanelPrincipalController {
     private Button botonActivo = null;
 
     /**
-     * Inicializa el boton de Dashboard como seleccionado
+     * Inicializa el controlador, configurando el botón de Dashboard como seleccionado por defecto
+     * y cargando la vista correspondiente. También ajusta propiedades del SplitPane para evitar
+     * interacciones no deseadas con el divisor.
      */
     @FXML
     public void initialize() {
@@ -37,37 +45,58 @@ public class PanelPrincipalController {
     }
 
     /**
-     *
-     * @param actionEvent evento del boton
+     * Maneja el evento del botón de menú para la vista de Dashboard.
+     * Actualiza el estilo del botón seleccionado y carga la vista de Dashboard.
+     * @param actionEvent El evento de acción generado por el botón.
      */
     public void btnDashboardMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuDashboard);
         cargarVista("Dashboard.fxml");
     }
 
+    /**
+     * Maneja el evento del botón de menú para la vista de Productos.
+     * Actualiza el estilo del botón seleccionado y carga la vista de Productos.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     public void btnProductosMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuProductos);
         cargarVista("Productos.fxml");
     }
 
+    /**
+     * Maneja el evento del botón de menú para la vista de Proveedores.
+     * Actualiza el estilo del botón seleccionado y carga la vista de Proveedores.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     public void btnProveedoresMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuProveedores);
         cargarVista("Proveedores.fxml");
     }
 
+    /**
+     * Maneja el evento del botón de menú para la vista de Ventas.
+     * Actualiza el estilo del botón seleccionado.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     public void btnVentasMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuVentas);
     }
 
+    /**
+     * Maneja el evento del botón de menú para la vista de Reportes.
+     * Actualiza el estilo del botón seleccionado.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     public void btnReportesMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuReportes);
     }
 
 
     /**
-     * Funcion que actualiza el estilo del boton del menu del dashboard
-     * para mostrar mas claro en que pantalla se encuentra
-     * @param botonSeleccionado botn del menu seleccionado
+     * Actualiza el estilo visual de los botones del menú para resaltar el botón seleccionado.
+     * Restaura el estilo del botón previamente activo y aplica un estilo distintivo al nuevo botón activo.
+     * @param botonSeleccionado El botón del menú seleccionado.
      */
     private void actualizarEstiloBotones(Button botonSeleccionado) {
         // Restaurar el estilo del botón previamente activo
@@ -87,9 +116,8 @@ public class PanelPrincipalController {
     }
 
     /**
-     * Funcion para buscar las vistas de cada una de las opciones del menu
-     * y cambiarlas en el panel dinamico
-     * @param ruta
+     * Carga dinámicamente una vista FXML en el panel dinámico de la interfaz.
+     * @param ruta La ruta relativa del archivo FXML a cargar (por ejemplo, "Dashboard.fxml").
      */
     private void cargarVista(String ruta){
         try {

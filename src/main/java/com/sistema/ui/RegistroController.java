@@ -17,7 +17,12 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 
-
+/**
+ * Controlador para la vista de registro de usuarios.
+ * Gestiona el proceso de registro de nuevos usuarios, incluyendo la validación de datos,
+ * el envío de códigos de verificación por correo y la verificación de dichos códigos.
+ * También permite volver a la ventana de inicio de sesión.
+ */
 public class RegistroController {
 
     @FXML
@@ -35,8 +40,11 @@ public class RegistroController {
     SistemaAutenticacion auth = new SistemaAutenticacion();
 
     /**
-     * Control de evento de registro para el boton con el mismo nombre
-     * @param actionEvent evento de boton
+     * Maneja el evento del botón de registro.
+     * Valida que los campos de nombre, correo y contraseña estén completos, que el correo tenga un formato válido
+     * y que la contraseña cumpla con los requisitos de seguridad. Registra al usuario y muestra los campos
+     * para verificar el código enviado por correo.
+     * @param actionEvent El evento de acción generado por el botón de registrarse.
      */
     public void btnRegistrarseAction(ActionEvent actionEvent) {
         String nombre = nombreTextField.getText();
@@ -83,8 +91,10 @@ public class RegistroController {
     }
 
     /**
-     * Control de evento para verificar el codigo enviado por correo
-     * @param actionEvent evento del boton verificar
+     * Maneja el evento del botón para verificar el código de verificación.
+     * Comprueba si el código ingresado es válido y actualiza el estado de la verificación del usuario.
+     * Muestra un mensaje de éxito o error según el resultado.
+     * @param actionEvent El evento de acción generado por el botón de verificar.
      */
     public void btnVerificarAction(ActionEvent actionEvent) {
         String tokenDigitado = tokenTextField.getText();
@@ -100,9 +110,9 @@ public class RegistroController {
     }
 
     /**
-     * Control de evento para volver a la ventana de inicio de sesion en caso de entrar a la de registro
-     * por error
-     * @param actionEvent evento del voton de volver.
+     * Maneja el evento del botón para volver a la ventana de inicio de sesión.
+     * Cierra la ventana de registro y abre la ventana de inicio de sesión.
+     * @param actionEvent El evento de acción generado por el botón de volver.
      */
     public void btnVolverInicioAction(ActionEvent actionEvent) {
         try {

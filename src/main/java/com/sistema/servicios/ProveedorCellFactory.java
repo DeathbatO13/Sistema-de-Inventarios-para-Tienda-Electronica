@@ -11,9 +11,19 @@ import javafx.util.Callback;
 
 
 /**
- * Factory para actualizar estilos de la vista proveedor
+ * Fábrica para personalizar la visualización de celdas en una ListView de proveedores.
+ * Implementa la interfaz Callback para generar celdas que muestran el nombre del proveedor
+ * junto con un ícono, aplicando estilos personalizados para una presentación visual coherente.
  */
+
 public class ProveedorCellFactory implements Callback<ListView<Proveedor>, ListCell<Proveedor>> {
+
+    /**
+     * Crea y configura una celda personalizada para mostrar proveedores en una ListView.
+     * Genera un diseño con el nombre del proveedor y un ícono, aplicando estilos personalizados.
+     * @param param La ListView que contiene los proveedores.
+     * @return Una ListCell configurada para mostrar la información del proveedor.
+     */
     @Override
     public ListCell<Proveedor> call(ListView<Proveedor> param) {
         return new ListCell<Proveedor>() {

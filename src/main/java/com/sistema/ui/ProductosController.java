@@ -47,9 +47,10 @@ public class ProductosController {
     private TableColumn<Producto, Void> accionesProducto;
 
     /**
-     * Inicializa los valores de los componentes por defecto
-     * de la vista y caracteristicas de los mismos
-     *
+     * Inicializa los valores y configuraciones de los componentes de la vista.
+     * Configura las columnas de la tabla de productos, aplica formato de moneda a la columna de precios,
+     * agrega tooltips con descripciones en la columna de nombres y carga la lista inicial de productos.
+     * También agrega la columna de acciones con botones para editar y eliminar productos.
      */
     @FXML
     public void initialize(){
@@ -116,8 +117,11 @@ public class ProductosController {
 
 
     /**
-     * Evento del boton de agregar producto, despliega una ventana para agregar producto
-     * @param actionEvent evento del boton
+     * Maneja el evento del botón para agregar un nuevo producto.
+     * Abre una ventana modal para ingresar los datos de un nuevo producto y recarga la lista
+     * de productos en la tabla si el producto se guarda correctamente.
+     *
+     * @param actionEvent El evento de acción generado por el botón.
      */
     @FXML
     public void agregarProductoEvent(ActionEvent actionEvent) {
@@ -164,7 +168,8 @@ public class ProductosController {
     }
 
     /**
-     * Funcion para cargar los datos de los productos a la tabla
+     * Carga la lista de productos desde la base de datos y la muestra en la tabla.
+     * Obtiene todos los productos disponibles y los asigna como datos de la tabla.
      */
     private void cargarListaProductos(){
         ProductoDAO dao = new ProductoDAO();
@@ -175,9 +180,9 @@ public class ProductosController {
     }
 
     /**
-     * Funcion para agregar la columna de acciones (botones por producto)
-     * además de incluir los botones y darles estilos, gestiona las acciones
-     * de los mismos.
+     * Agrega una columna de acciones a la tabla de productos.
+     * Crea botones de "Editar" y "Eliminar" para cada fila, configura sus estilos y define
+     * las acciones para abrir la ventana de edición o eliminar un producto de la base de datos.
      */
     private void agregarColumnaAccion() {
         accionesProducto.setCellFactory(param -> new TableCell<Producto, Void>() {

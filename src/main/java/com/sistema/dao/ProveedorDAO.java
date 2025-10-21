@@ -13,8 +13,8 @@ import java.util.List;
 public class ProveedorDAO {
 
     /**
-     * Funcion para consultar a la base de datos todos los proveedores registrados
-     * @return lista de proveedores registrados
+     * Consulta todos los proveedores registrados en la base de datos.
+     * @return Una lista con todos los proveedores.
      */
     public List<Proveedor> listaProveedores(){
         List<Proveedor> lista = new ArrayList<>();
@@ -43,9 +43,9 @@ public class ProveedorDAO {
     }
 
     /**
-     * Funcion para buscar unico proveedor por nombre
-     * @param nombreBus nombre a buscar
-     * @return objero proveedor encontrado
+     * Busca un único proveedor por su nombre exacto en la base de datos.
+     * @param nombreBus El nombre exacto del proveedor a buscar.
+     * @return El objeto Proveedor encontrado o un objeto Proveedor vacío si no se encuentra.
      */
     public Proveedor buscarPorNombre(String nombreBus){
 
@@ -75,9 +75,9 @@ public class ProveedorDAO {
 
 
     /**
-     * Funcion para buscar proveedores por nombre
-     * @param nombreBus nombre buscado
-     * @return lista de productos que coincidan con el nombre buscado
+     * Busca proveedores cuyo nombre coincida parcial o totalmente con el texto proporcionado.
+     * @param nombreBus El nombre o parte del nombre del proveedor a buscar.
+     * @return Una lista de proveedores que coinciden con el criterio de búsqueda.
      */
     public List<Proveedor> buscarListaPorNombre(String nombreBus){
 
@@ -109,8 +109,8 @@ public class ProveedorDAO {
     }
 
     /**
-     * Busca la cantidad de proveedores en la base de datos
-     * @return entero con la cantidad de proveedores
+     * Obtiene la cantidad total de proveedores registrados en la base de datos.
+     * @return Un entero que representa la cantidad de proveedores.
      */
     public int cantidadProveedores(){
         String sql = "SELECT COUNT(*) AS total_proveedores FROM proveedores;";
@@ -128,9 +128,9 @@ public class ProveedorDAO {
     }
 
     /**
-     * Buscar proveedor unico proporcionando la id
-     * @param idProveedor id buscada
-     * @return objeto proveedor encontrado
+     * Busca un único proveedor por su identificador único en la base de datos.
+     * @param idProveedor El ID del proveedor a buscar.
+     * @return El objeto Proveedor encontrado o un objeto Proveedor vacío si no se encuentra.
      */
     public Proveedor buscarPorId(int idProveedor){
 

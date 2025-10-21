@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 /**
  * Clase encargada de gestionar la conexión a la base de datos MySQL.
- * Permite abrir y cerrar conexiones desde cualquier parte del sistema.
+ * Proporciona métodos para abrir y cerrar conexiones de forma centralizada,
+ * reutilizando una conexión existente si está activa.
  *
- * @author DeathbatO
  */
 public class ConexionMySQL {
 
@@ -20,10 +20,10 @@ public class ConexionMySQL {
 
     /**
      * Obtiene una conexión activa a la base de datos MySQL.
-     * Si ya existe una conexión abierta, la reutiliza.
+     * Reutiliza la conexión existente si está abierta, o establece una nueva si está cerrada o no existe.
      *
-     * @return objeto Connection activo
-     * @throws SQLException si ocurre un error de conexión
+     * @return Un objeto Connection activo.
+     * @throws SQLException Si ocurre un error al intentar conectar con la base de datos.
      */
     public static Connection getConexion() throws SQLException {
         if (conexion == null || conexion.isClosed()) {
@@ -39,7 +39,7 @@ public class ConexionMySQL {
     }
 
     /**
-     * Cierra la conexión actual si está abierta.
+     * Cierra la conexión activa a la base de datos MySQL si está abierta.
      */
     public static void cerrarConexion() {
         try {

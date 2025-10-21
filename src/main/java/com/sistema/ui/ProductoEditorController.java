@@ -17,6 +17,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controlador para la ventana de edición de productos en la aplicación.
+ * Gestiona la interfaz de usuario para modificar los datos de un producto y actualizarlos en la base de datos.
+ */
 public class ProductoEditorController {
 
     @FXML
@@ -28,12 +32,23 @@ public class ProductoEditorController {
     @FXML
     private ComboBox<String> proveedorCB;
 
+    /**
+     * Inicializa el controlador al cargar la ventana.
+     * Carga la lista de proveedores en el ComboBox para que esté disponible al abrir la ventana.
+     */
     @FXML
     public void initialize(){
         cargarProveedoresAccion();
     }
 
 
+    /**
+     * Maneja la acción del botón "Confirmar" para actualizar un producto.
+     * Recoge los datos ingresados en los campos de la interfaz, crea un objeto Producto
+     * y lo actualiza en la base de datos. Muestra una alerta de éxito o error según el resultado.
+     *
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     @FXML
     public void btnConfirmarAction(ActionEvent actionEvent){
         Producto pro = new Producto();
@@ -70,12 +85,25 @@ public class ProductoEditorController {
 
     }
 
+    /**
+     * Maneja la acción del botón "Cancelar" para cerrar la ventana de edición.
+     * Cierra la ventana actual sin guardar cambios.
+     *
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     @FXML
     public void btnCancelarAction(ActionEvent actionEvent){
         Stage stage = (Stage) nombreLabel.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Carga los datos de un producto en los campos de la interfaz para su edición.
+     * Busca el producto por su ID en la base de datos y llena los campos de texto
+     * y el ComboBox con los valores correspondientes.
+     *
+     * @param id El identificador del producto a cargar.
+     */
     public void setProductoData(int id) {
         Producto p = new ProductoDAO().buscarPorId(id);
         if (p != null) {
@@ -91,6 +119,11 @@ public class ProductoEditorController {
         }
     }
 
+    /**
+     * Carga la lista de proveedores en el ComboBox de la interfaz.
+     * Obtiene los nombres de los proveedores desde la base de datos y los establece
+     * como opciones seleccionables en el ComboBox.
+     */
     public void cargarProveedoresAccion(){
         ProveedorDAO proveedor = new ProveedorDAO();
         List<Proveedor> listaPro = proveedor.listaProveedores();

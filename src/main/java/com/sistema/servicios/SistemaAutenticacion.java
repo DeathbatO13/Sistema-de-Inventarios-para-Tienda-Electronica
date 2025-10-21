@@ -7,15 +7,19 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.security.SecureRandom;
 
 /**
- * Clase encargada de manejar el registro y autenticación de usuarios.
- * Incluye hashing de contraseñas con BCrypt.
+ * Clase encargada de gestionar el registro, autenticación y verificación de usuarios.
+ * Utiliza BCrypt para el hashing de contraseñas y maneja el envío de códigos de verificación por correo.
  */
 public class SistemaAutenticacion {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     /**
-     * Registra un nuevo usuario con contraseña encriptada y envia el codigo de verificacion por correo.
+     * Registra un nuevo usuario en la base de datos con una contraseña encriptada y envía un código de verificación por correo.
+     * @param nombre El nombre del usuario.
+     * @param email El correo electrónico del usuario.
+     * @param contrasena La contraseña del usuario.
+     * @return true si el usuario se registra correctamente, false si el correo ya está registrado o ocurre un error.
      */
     public boolean registrarUsuario(String nombre, String email, String contrasena) {
         // Verificar si el correo ya existe
@@ -44,9 +48,9 @@ public class SistemaAutenticacion {
     }
 
     /**
-     * Funcion para validar la verificacion de una cuanta registrada
-     * @param token token o codigo que el usuario digita en el campo
-     * @return true si se verifica con exito, y false si el codigo es invalido
+     * Verifica una cuenta de usuario mediante un código de verificación.
+     * @param token El código de verificación proporcionado por el usuario.
+     * @return true si la verificación es exitosa, false si el código es inválido.
      */
     public boolean verificarCuenta(String token){
         UsuarioDAO userDAO = new UsuarioDAO();
@@ -65,7 +69,10 @@ public class SistemaAutenticacion {
     }
 
     /**
-     * Verifica las credenciales de inicio de sesión.
+     * Verifica las credenciales de inicio de sesión de un usuario.
+     * @param email El correo electrónico del usuario.
+     * @param contrasena La contraseña proporcionada por el usuario.
+     * @return true si las credenciales son correctas y el usuario está verificado, false en caso contrario.
      */
     public boolean iniciarSesion(String email, String contrasena) {
         Usuario usuario = usuarioDAO.buscarPorEmail(email);
@@ -87,8 +94,8 @@ public class SistemaAutenticacion {
 
 
     /**
-     * Funcion que genera codigo alfanumerico de 8 caracteres para verificacion de correo
-     * @return String del codigo
+     * Genera un código alfanumérico de 8 caracteres para la verificación de correo.
+     * @return El código de verificación generado.
      */
     public static String generarCodigo() {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -102,10 +109,9 @@ public class SistemaAutenticacion {
     }
 
     /**
-     * Funcion implementada para verificar que el campo del correo tenga un formato valido
-     *
-     * @param correo correo digitado en el registro
-     * @return true si el correo tiene un formato valido, false si no
+     * Verifica si un correo electrónico tiene un formato válido.
+     * @param correo El correo electrónico a validar.
+     * @return true si el correo tiene un formato válido, false si no.
      */
     public boolean correoCorrecto(String correo){
         String patron = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@"+
@@ -115,10 +121,9 @@ public class SistemaAutenticacion {
     }
 
     /**
-     * Funcion para verificar que la contraseña tenga minumo 8 carcateres, una mayuscula, minuscula,
-     * numero y caracter especial
-     * @param contrasena contraseña a verificar
-     * @return true si es segura, false si falta algun parametro
+     * Verifica si una contraseña cumple con los requisitos de seguridad (mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial).
+     * @param contrasena La contraseña a verificar.
+     * @return true si la contraseña es segura, false si no cumple con los requisitos.
      */
     public boolean contrasenaSegura(String contrasena){
         boolean mayus = false;
@@ -136,8 +141,8 @@ public class SistemaAutenticacion {
     }
 
     /**
-     * Funcion para generar codigo numerico de recuperacion de contraseña
-     * @return string con el codigo
+     * Genera un código numérico de 6 dígitos para la recuperación de contraseña.
+     * @return El código de recuperación generado.
      */
     public String codigoRecuperacion(){
         String carac = "1234567890";

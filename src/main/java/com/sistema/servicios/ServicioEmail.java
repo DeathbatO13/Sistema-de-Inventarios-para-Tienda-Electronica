@@ -7,7 +7,8 @@ import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
- * Clase para conectar al email remitente y configuracion del servicio
+ * Clase para gestionar la conexión y el envío de correos electrónicos desde una cuenta remitente.
+ * Configura el servicio de correo utilizando SMTP de Gmail para enviar mensajes, como correos de verificación.
  */
 public class ServicioEmail {
 
@@ -17,10 +18,11 @@ public class ServicioEmail {
     private static final String HOST = "smtp.gmail.com";
 
     /**
-     * Funcion que se encarga de enviar el correo de verificacion al destinatario
-     * @param destinatario correo del usuario a verificar
-     * @param asunto asunto del correo (verificacion de cuenta)
-     * @param cuerpo texto del correo donde se adjunta el codigo de verificacion.
+     * Envía un correo electrónico al destinatario especificado con el asunto y cuerpo proporcionados.
+     * Utiliza las credenciales y configuración del servidor SMTP de Gmail para enviar el mensaje.
+     * @param destinatario El correo electrónico del usuario destinatario.
+     * @param asunto El asunto del correo, como verificación de cuenta.
+     * @param cuerpo El contenido del correo, que puede incluir un código de verificación.
      */
     public static void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         Properties props = new Properties();

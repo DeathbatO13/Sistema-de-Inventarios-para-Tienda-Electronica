@@ -13,6 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.mindrot.jbcrypt.BCrypt;
 
+/**
+ * Controlador para la vista de recuperación de contraseña.
+ * Gestiona el proceso de recuperación de contraseña, incluyendo el envío de códigos de verificación
+ * por correo, la validación del código ingresado y el cambio de contraseña en la base de datos.
+ */
 public class RecuperacionController {
 
     @FXML
@@ -31,8 +36,10 @@ public class RecuperacionController {
     String codigo = auth.codigoRecuperacion();
 
     /**
-     * Gestion de eventos del boton de enviar correo
-     * @param actionEvent evento del boton
+     * Maneja el evento del botón para enviar un correo con el código de verificación.
+     * Verifica si el correo ingresado está registrado, envía el código de recuperación
+     * y habilita los campos para ingresar el código de verificación.
+     * @param actionEvent El evento de acción generado por el botón.
      */
     @FXML
     public void btnEnviarCorreoAction(ActionEvent actionEvent){
@@ -63,8 +70,10 @@ public class RecuperacionController {
     }
 
     /**
-     * Gestion del evento del boton verificar codigo
-     * @param actionEvent evento del boton
+     * Maneja el evento del botón para verificar el código de recuperación.
+     * Compara el código ingresado con el enviado y, si es correcto, habilita los campos
+     * para ingresar la nueva contraseña.
+     * @param actionEvent El evento de acción generado por el botón.
      */
     @FXML
     public void btnVerificarAction(ActionEvent actionEvent){
@@ -86,8 +95,10 @@ public class RecuperacionController {
     }
 
     /**
-     * Gestor de eventos para confirmar cambio de contraseña
-     * @param actionEvent Evento del boton
+     * Maneja el evento del botón para confirmar el cambio de contraseña.
+     * Valida que las contraseñas ingresadas coincidan y cumplan con los requisitos de seguridad,
+     * actualiza la contraseña en la base de datos y muestra un mensaje de éxito o error.
+     * @param actionEvent El evento de acción generado por el botón.
      */
     @FXML
     public void btnConfirmarAction(ActionEvent actionEvent) {

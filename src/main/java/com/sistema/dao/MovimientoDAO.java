@@ -11,9 +11,9 @@ import java.util.List;
 public class MovimientoDAO {
 
     /**
-     * Funcion para registrar un mvimiento de preductos en el inventario
-     * @param mv Movimiento registrado
-     * @return true si registra correctamente, false si no
+     * Registra un nuevo movimiento de inventario en la base de datos.
+     * @param mv El movimiento a registrar.
+     * @return true si el movimiento se registra correctamente, false si ocurre un error.
      */
     public boolean registrarMovimiento(Movimiento mv){
         String sql = "INSERT INTO movimientos_inventario (id_producto, fecha, tipo_movimiento, " +
@@ -45,8 +45,8 @@ public class MovimientoDAO {
     }
 
     /**
-     * Funcion para pedir a la db una lista con todos los movimientos
-     * @return lista de moviminetos
+     * Obtiene una lista con todos los movimientos de inventario registrados en la base de datos.
+     * @return Una lista de movimientos.
      */
     public List<Movimiento> listaMovimientos(){
         List<Movimiento> lista = new ArrayList<>();
@@ -74,9 +74,9 @@ public class MovimientoDAO {
     }
 
     /**
-     * Consulta a la db por lista de movimientos de un solo producto
-     * @param idProd id del producto para buscar movimientos
-     * @return lista de movimientos del producto
+     * Obtiene una lista de movimientos de inventario asociados a un producto específico.
+     * @param idProd El ID del producto para buscar movimientos.
+     * @return Una lista de movimientos correspondientes al producto.
      */
     public List<Movimiento> listaMovimientosPorProducto(int idProd){
         List<Movimiento> lista = new ArrayList<>();
@@ -107,10 +107,10 @@ public class MovimientoDAO {
     }
 
     /**
-     * Funcion para buscar movimientos en un rango de fechas indicado
-     * @param desde fecha de inicio
-     * @param hasta fecha fin
-     * @return lista con mivimientos entre fechas
+     * Busca movimientos de inventario registrados en un rango de fechas específico.
+     * @param desde La fecha de inicio del rango.
+     * @param hasta La fecha de fin del rango.
+     * @return Una lista de movimientos dentro del rango de fechas especificado.
      */
     public List<Movimiento> listarMovimientosPorRangoFecha(LocalDateTime desde, LocalDateTime hasta) {
         String sql = "SELECT * FROM movimientos_inventario WHERE fecha BETWEEN ? AND ?";
@@ -143,9 +143,9 @@ public class MovimientoDAO {
     }
 
     /**
-     * Funcion para buscar los ultimos N movimientos registrados.
-     * @param limite el numero maximo de movimientos a retornar.
-     * @return lista con los N movimientos mas recientes.
+     * Obtiene los últimos movimientos de inventario registrados, hasta un límite especificado.
+     * @param limite El número máximo de movimientos a retornar.
+     * @return Una lista con los movimientos más recientes, ordenados por fecha descendente.
      */
     public List<Movimiento> obtenerUltimosMovimientos(int limite) {
         String sql = "SELECT * FROM movimientos_inventario ORDER BY fecha DESC LIMIT ?";
@@ -177,8 +177,8 @@ public class MovimientoDAO {
     }
 
     /**
-     * Funcion para contar el numero total de movimientos de inventario registrados.
-     * @return La cantidad total de filas en la tabla movimientos_inventario.
+     * Cuenta el número total de movimientos de inventario registrados en la base de datos.
+     * @return La cantidad total de movimientos.
      */
     public int contarMovimientos() {
         String sql = "SELECT COUNT(*) FROM movimientos_inventario";
@@ -199,9 +199,9 @@ public class MovimientoDAO {
     }
 
     /**
-     * Funcion para buscar movimientos filtrando por el tipo de movimiento.
-     * @param tipoMovimiento el tipo de movimiento a buscar ("ENTRADA", "VENTA" o "AJUSTE").
-     * @return lista de movimientos que coinciden con el tipo especificado.
+     * Busca movimientos de inventario filtrados por tipo de movimiento.
+     * @param tipoMovimiento El tipo de movimiento a buscar (por ejemplo, "ENTRADA", "VENTA", "AJUSTE").
+     * @return Una lista de movimientos que coinciden con el tipo especificado.
      */
     public List<Movimiento> buscarPorTipo(String tipoMovimiento) {
         String sql = "SELECT * FROM movimientos_inventario WHERE tipo_movimiento = ?";

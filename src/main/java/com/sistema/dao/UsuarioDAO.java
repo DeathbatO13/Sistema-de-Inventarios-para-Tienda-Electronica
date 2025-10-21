@@ -12,9 +12,9 @@ import java.sql.*;
 public class UsuarioDAO {
 
     /**
-     * Inserta un nuevo usuario en la base de datos.
-     * @param usuario objeto Usuario con los datos a registrar
-     * @return true si se insertó correctamente, false si hubo error o el email ya existe
+     * Registra un nuevo usuario en la base de datos.
+     * @param usuario El objeto Usuario con los datos a registrar.
+     * @return true si el usuario se inserta correctamente, false si ocurre un error o el email ya está registrado.
      */
     public boolean registrarUsuario(Usuario usuario) {
         String sql = "INSERT INTO usuarios (nombre_usuario, email, contrasena_hash, token_verificacion, verificado) "
@@ -46,9 +46,9 @@ public class UsuarioDAO {
     }
 
     /**
-     * Busca un usuario por su email.
-     * @param email correo del usuario
-     * @return objeto Usuario si se encuentra, null si no
+     * Busca un usuario en la base de datos por su correo electrónico.
+     * @param email El correo electrónico del usuario a buscar.
+     * @return El objeto Usuario si se encuentra, null si no.
      */
     public Usuario buscarPorEmail(String email) {
         String sql = "SELECT * FROM usuarios WHERE email = ?";
@@ -75,9 +75,9 @@ public class UsuarioDAO {
     }
 
     /**
-     * Buscar usuario por token para validacion
-     * @param token token unico para validacion
-     * @return objeto usuario con token ingresado
+     * Busca un usuario en la base de datos por su token de verificación.
+     * @param token El token único de verificación.
+     * @return El objeto Usuario con el token proporcionado, o null si no se encuentra.
      */
     public Usuario buscarPorToken(String token){
         String sql = "SELECT * FROM usuarios WHERE token_verificacion = ?";
@@ -104,9 +104,9 @@ public class UsuarioDAO {
     }
 
     /**
-     * Actualiza el estado de la verificacion en la base de datos
-     * @param usuario usuario verificado
-     * @return true si actualiza correctamente, false si ocurre algun error
+     * Actualiza el estado de verificación de un usuario en la base de datos, marcándolo como verificado y eliminando el token.
+     * @param usuario El usuario cuya verificación se actualizará.
+     * @return true si la actualización es exitosa, false si ocurre un error.
      */
     public boolean actualizarVerificacion(Usuario usuario) {
         String sql = "UPDATE usuarios SET verificado = ?, token_verificacion = NULL WHERE email = ?";
@@ -124,9 +124,9 @@ public class UsuarioDAO {
     }
 
     /**
-     * Funcion para consultar en la base de datos si el usuario esta registrado
-     * @param usuario usuario a verificar
-     * @return true si esta registrado y false si no lo esta
+     * Verifica si un usuario está registrado en la base de datos según su correo electrónico.
+     * @param usuario El usuario cuyo correo se verificará.
+     * @return true si el usuario está registrado, false si no lo está o si ocurre un error.
      */
     public boolean estaRegistrado(Usuario usuario){
         String sql = "SELECT 1 FROM usuarios WHERE email = ? LIMIT 1";
@@ -145,9 +145,9 @@ public class UsuarioDAO {
     }
 
     /**
-     * Funcion encargada de cambiar la contraseña en caso de recuperacion
-     * @param user usuario con el correo y contraseña a cambiar
-     * @return true si el cambio fue exitoso y false si no
+     * Cambia la contraseña de un usuario en la base de datos.
+     * @param user El usuario con el correo y la nueva contraseña hash.
+     * @return true si el cambio de contraseña es exitoso, false si ocurre un error.
      */
     public boolean cambiarPassword(Usuario user){
         String sql = "UPDATE usuarios SET contrasena_hash = ? WHERE email = ?";

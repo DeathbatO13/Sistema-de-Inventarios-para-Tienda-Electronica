@@ -14,9 +14,14 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
 
+
+/**
+ * Controlador para la vista de inicio de sesión.
+ * Gestiona la autenticación de usuarios, el acceso al formulario de registro, la recuperación de contraseñas
+ * y el bloqueo temporal de intentos fallidos de inicio de sesión.
+ */
 public class LoginController {
     @FXML
     private Button btnIniciarSesion, btnRegistrarse;
@@ -36,9 +41,10 @@ public class LoginController {
     private int contadorInicio = 0;
 
     /**
-     * Funcion para iniciar sesion, activada por el boton en la vista del login, verifica
-     * que el usuario exista y las credenciales sean correctas.
-     * @param actionEvent evento del boton inicar sesion.
+     * Maneja el evento del botón de inicio de sesión.
+     * Verifica las credenciales del usuario, muestra el panel principal si son correctas,
+     * o incrementa el contador de intentos fallidos y bloquea los campos si se alcanza el límite.
+     * @param actionEvent El evento de acción generado por el botón de iniciar sesión.
      */
     @FXML
     public void iniciarSesionAction(ActionEvent actionEvent) {
@@ -87,8 +93,9 @@ public class LoginController {
     }
 
     /**
-     * Funcion para desplegar la vista de registro desde la ventana login
-     * @param actionEvent evento del boton registrarse
+     * Maneja el evento del botón de registrarse.
+     * Abre la ventana de registro de usuario y cierra la ventana actual de inicio de sesión.
+     * @param actionEvent El evento de acción generado por el botón de registrarse.
      */
     @FXML
     public void registrarseAction(ActionEvent actionEvent) {
@@ -115,7 +122,8 @@ public class LoginController {
     }
 
     /**
-     * Funcion para bloquear campos por limite de intentos
+     * Bloquea los campos de entrada y el botón de inicio de sesión tras alcanzar el límite de intentos fallidos.
+     * Inicia un temporizador de 60 segundos antes de permitir nuevos intentos.
      */
     private void bloqueoIntentos() {
         campoCorreo.setEditable(false);
@@ -143,8 +151,9 @@ public class LoginController {
     }
 
     /**
-     * Funcion para lanzar la ventana de recuperacion de contraseña
-     * @param actionEvent event del link
+     * Maneja el evento del enlace para recuperar contraseña.
+     * Abre una ventana modal para la recuperación de contraseña.
+     * @param actionEvent El evento de acción generado por el enlace.
      */
     public void recuperarContraAction(ActionEvent actionEvent) {
         try {

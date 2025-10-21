@@ -12,12 +12,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-
-
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Controlador para la vista de gestión de proveedores.
+ * Gestiona la visualización de proveedores en una lista, permite buscar proveedores por nombre,
+ * muestra detalles de proveedores seleccionados y sus productos asociados en una tabla,
+ * y configura acciones para agregar, editar y eliminar proveedores.
+ */
 public class ProveedoresController {
 
     @FXML
@@ -51,7 +55,10 @@ public class ProveedoresController {
     private TableColumn<Producto, Double> prodPrecio;
 
     /**
-     * Funcion para inicializar la vista
+     * Inicializa los componentes de la vista de proveedores.
+     * Configura la tabla de productos, carga la lista inicial de proveedores,
+     * establece un listener para mostrar detalles del proveedor seleccionado
+     * y selecciona el primer proveedor de la lista si está disponible.
      */
     @FXML
     public void initialize() {
@@ -75,8 +82,9 @@ public class ProveedoresController {
     }
 
     /**
-     * Control del evento del TextField para buscar proveedores por nombre
-     * @param actionEvent Evento del TextField
+     * Maneja el evento del campo de texto para buscar proveedores por nombre.
+     * Filtra y actualiza la lista de proveedores en el ListView según el texto ingresado.
+     * @param actionEvent El evento de acción generado por el campo de texto.
      */
     @FXML
     public void buscarProvAction(ActionEvent actionEvent) {
@@ -88,20 +96,34 @@ public class ProveedoresController {
 
     }
 
+    /**
+     * Maneja el evento del botón para editar un proveedor.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     @FXML
-    public void btnEditarAction(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void btnElimnarAction(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void btnAgregarAction(ActionEvent actionEvent) {
+    public void btnEditarAction(ActionEvent actionEvent){
     }
 
     /**
-     * Funcion para cargar los proveedores en el ListView
+     * Maneja el evento del botón para eliminar un proveedor.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
+    @FXML
+    public void btnElimnarAction(ActionEvent actionEvent){
+    }
+
+    /**
+     * Maneja el evento del botón para agregar un nuevo proveedor.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
+    @FXML
+    public void btnAgregarAction(ActionEvent actionEvent){
+
+    }
+
+    /**
+     * Carga la lista de proveedores desde la base de datos y la muestra en el ListView.
+     * Aplica una celda personalizada para la visualización de los proveedores.
      */
     private void cargarProveedores() {
 
@@ -119,8 +141,9 @@ public class ProveedoresController {
     }
 
     /**
-     * Funcion para mostrar los detalles del proveedor seleccionado en los tab pane
-     * @param proveedorSeleccionado provedor seleccionado del listView
+     * Muestra los detalles del proveedor seleccionado en los campos de la interfaz
+     * y carga los productos asociados en la tabla de productos.
+     * @param proveedorSeleccionado El proveedor seleccionado en el ListView.
      */
     private void mostrarDetalles(Proveedor proveedorSeleccionado) {
 
@@ -137,7 +160,9 @@ public class ProveedoresController {
     }
 
     /**
-     * Funcion que define caracteristicas de la tabla de productos en el tab pane
+     * Configura las columnas de la tabla de productos con celdas personalizadas.
+     * Define el formato de las columnas para nombre, descripción, precio (con formato de moneda)
+     * y cantidad, asegurando que el texto se ajuste al ancho de las columnas.
      */
     private void inicializarTablaProductos() {
     

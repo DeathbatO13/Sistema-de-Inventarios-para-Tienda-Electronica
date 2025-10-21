@@ -15,9 +15,8 @@ import java.util.List;
 public class ProductoDAO {
 
     /**
-     * Funcion para consultar todos los productos disponibles,
-     * mostrados en el panel de productos
-     * @return lista con todos los productos
+     * Consulta todos los productos disponibles en la base de datos.
+     * @return Una lista con todos los productos registrados.
      */
     public List<Producto> listaProductos(){
         List<Producto> lista = new ArrayList<>();
@@ -51,9 +50,9 @@ public class ProductoDAO {
     }
 
     /**
-     * Funcion para agregar un nuevo producto a la base de datos
-     * @param producto produco para agregar
-     * @return true si se agrega correctamente, false si ocurre un error
+     * Agrega un nuevo producto a la base de datos.
+     * @param producto El producto a agregar.
+     * @return true si el producto se agrega correctamente, false si ocurre un error.
      */
     public boolean agregarNuevoProducto(Producto producto){
         String sql = "INSERT INTO productos (codigo_sku, nombre, descripcion, precio_compra, precio_venta, " +
@@ -87,9 +86,9 @@ public class ProductoDAO {
     }
 
     /**
-     * Funcion para buscar los porductos por el nombre
-     * @param nombreBuscado nombre digitado en el campo
-     * @return lista de productos buscados
+     * Busca productos en la base de datos cuyo nombre coincida parcial o totalmente con el texto proporcionado.
+     * @param nombreBuscado El nombre o parte del nombre del producto a buscar.
+     * @return Una lista de productos que coinciden con el criterio de búsqueda.
      */
     public List<Producto> buscarPorNombre(String nombreBuscado) {
         List<Producto> productos = new ArrayList<>();
@@ -120,8 +119,8 @@ public class ProductoDAO {
     }
 
     /**
-     * Consulta entre los productos cuales tienen un stock bajo
-     * @return Lista de productos con bajo stock
+     * Consulta los productos cuyo stock actual es menor o igual al stock mínimo definido.
+     * @return Una lista de productos con bajo stock.
      */
     public List<Producto> stockBajo() {
         List<Producto> productosBajoStock = new ArrayList<>();
@@ -149,8 +148,8 @@ public class ProductoDAO {
     }
 
     /**
-     * Busca la cantidad de productos en la base de datos
-     * @return entero con la cantidad de productos
+     * Obtiene la cantidad total de productos registrados en la base de datos.
+     * @return Un entero que representa la cantidad de productos.
      */
     public int cantidadProductos(){
         String sql = "SELECT COUNT(*) AS total_productos FROM productos;";
@@ -168,9 +167,9 @@ public class ProductoDAO {
     }
 
     /**
-     * Funcion para buscar un producto a partir de su id
-     * @param id id del producto
-     * @return producto encontrado
+     * Busca un producto en la base de datos por su identificador único.
+     * @param id El ID del producto a buscar.
+     * @return El producto encontrado o un objeto Producto vacío si no se encuentra.
      */
     public Producto buscarPorId(int id){
         String sql = "SELECT * FROM productos WHERE id = ?";
@@ -204,9 +203,9 @@ public class ProductoDAO {
     }
 
     /**
-     * Query para actualizar un producto despues de editarlo
-     * @param producto producto a editar
-     * @return true si actualiza correctamente, false si no
+     * Actualiza los datos de un producto existente en la base de datos.
+     * @param producto El producto con los datos actualizados.
+     * @return true si la actualización es exitosa, false si ocurre un error.
      */
     public boolean actualizarProducto(Producto producto){
         String sql = "UPDATE productos SET codigo_sku = ?, nombre = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, " +
@@ -238,10 +237,10 @@ public class ProductoDAO {
     }
 
     /**
-     * Funcion para actualizar la cantidad de productos en caso de algun movimiento
-     * @param idProducto id del producto a actualizar
-     * @param cantidadNueva cantidad nueva despues del movimieto
-     * @return true si se realiza el update y false si no
+     * Actualiza el stock actual de un producto en la base de datos.
+     * @param idProducto El ID del producto a actualizar.
+     * @param cantidadNueva La nueva cantidad de stock.
+     * @return true si la actualización es exitosa, false si ocurre un error.
      */
     public boolean actualizarCantidadProducto(int idProducto, int cantidadNueva){
         String sql = "UPDATE productos SET stock_actual = ? WHERE id = ?";
@@ -261,9 +260,9 @@ public class ProductoDAO {
     }
 
     /**
-     * Funcion para buscar los productos con mismo proveedor
-     * @param idProveedor id del proveedor
-     * @return lista de productos
+     * Busca productos en la base de datos asociados a un proveedor específico.
+     * @param idProveedor El ID del proveedor.
+     * @return Una lista de productos asociados al proveedor.
      */
     public List<Producto> buscarPorProveedor(int idProveedor) {
         List<Producto> productos = new ArrayList<>();
@@ -294,9 +293,9 @@ public class ProductoDAO {
     }
 
     /**
-     * Funcion para eliminar producto
-     * @param id id del producto a eliminar
-     * @return true si elimina correctamente, y false si no
+     * Elimina un producto de la base de datos según su ID.
+     * @param id El ID del producto a eliminar.
+     * @return true si el producto se elimina correctamente, false si ocurre un error.
      */
     public boolean eliminarProducto(int id) {
         String sql = "DELETE FROM productos WHERE id = ?";
@@ -315,6 +314,11 @@ public class ProductoDAO {
         }
     }
 
+    /**
+     * Busca un único producto en la base de datos cuyo nombre coincida parcial o totalmente con el texto proporcionado.
+     * @param nombreBuscado El nombre o parte del nombre del producto a buscar.
+     * @return El primer producto encontrado que coincide con el criterio o null si no se encuentra.
+     */
     public Producto buscarUnicoPorNombre(String nombreBuscado) {
         Producto producto = null;
         String sql = "SELECT * FROM productos WHERE nombre LIKE ? LIMIT 1";

@@ -1,6 +1,5 @@
 package com.sistema.ui;
 
-
 import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.ProveedorDAO;
 import com.sistema.modelo.Producto;
@@ -18,6 +17,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controlador para el formulario de creación de nuevos productos.
+ * Gestiona la interfaz de usuario para ingresar datos de productos, validar información,
+ * cargar proveedores en un ComboBox y guardar el producto en la base de datos.
+ */
 public class FormularioProductController {
 
     @FXML
@@ -32,7 +36,8 @@ public class FormularioProductController {
     private Label errorLabel, infoLabel;
 
     /**
-     * Funcion para inicializar la vista del formuario
+     * Inicializa los componentes de la vista del formulario de producto.
+     * Configura el mensaje informativo sobre proveedores y carga la lista de proveedores en el ComboBox.
      */
     @FXML
     private void initialize(){
@@ -44,12 +49,19 @@ public class FormularioProductController {
 
     }
 
-
+    /**
+     * Maneja el evento del botón "Guardar" para registrar un nuevo producto.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     @FXML
     public void btnGuardarEvent(ActionEvent actionEvent) {
         guardarProducto();
     }
 
+    /**
+     * Maneja el evento del botón "Cancelar" para cerrar la ventana del formulario.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
     @FXML
     public void btnCancelarEvent(ActionEvent actionEvent){
         Stage stage = (Stage) nombreNuevo.getScene().getWindow();
@@ -57,7 +69,8 @@ public class FormularioProductController {
     }
 
     /**
-     * Funcion para buscar lista de proveedores y cargarlos al combobox
+     * Carga la lista de proveedores desde la base de datos y los muestra en el ComboBox.
+     * Convierte los objetos Proveedor en una lista de nombres para la visualización.
      */
     @FXML
     public void cargarProveedoresAccion(){
@@ -77,7 +90,9 @@ public class FormularioProductController {
     private boolean productoGuardado = false;
 
     /**
-     * Funcion encargada de hacer las validaciones necesarias para guardar un producto
+     * Valida los datos ingresados y guarda un nuevo producto en la base de datos.
+     * Realiza validaciones de campos obligatorios, crea el objeto Producto y lo registra.
+     * Muestra mensajes de éxito o error según el resultado de la operación.
      */
     public void guardarProducto() {
         // Validaciones básicas
@@ -117,6 +132,10 @@ public class FormularioProductController {
 
     }
 
+    /**
+     * Verifica si un producto fue guardado exitosamente en la sesión actual.
+     * @return true si el producto se guardó correctamente, false en caso contrario.
+     */
     public boolean isProductoGuardado() {
         return productoGuardado;
     }

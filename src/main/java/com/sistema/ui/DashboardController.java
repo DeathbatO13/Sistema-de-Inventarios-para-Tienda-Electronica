@@ -22,6 +22,12 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+
+/**
+ * Controlador para la vista del panel principal (dashboard) de la aplicación.
+ * Gestiona la tabla de productos con bajo stock, configura las columnas de la tabla,
+ * muestra estadísticas de productos, proveedores y ventas del mes, y permite reordenar productos.
+ */
 public class DashboardController {
 
     @FXML
@@ -43,7 +49,10 @@ public class DashboardController {
     private TableColumn<Producto, Void> accionColumn;
 
     /**
-     * Funcion para darle estilos a los cabezales de la tabla
+     * Inicializa los componentes de la vista del panel principal.
+     * Configura las columnas de la tabla de productos con bajo stock, carga los datos iniciales,
+     * agrega una columna de acción con botones de reorden, y actualiza las etiquetas con el total
+     * de productos, proveedores y ventas del mes en formato de moneda.
      */
     @FXML
     public void initialize() {
@@ -65,7 +74,7 @@ public class DashboardController {
     }
 
     /**
-     * Carga los productos con bajo stock y los muestra en la tabla.
+     * Carga los productos con bajo stock desde la base de datos y los muestra en la tabla.
      */
     private void cargarProductosBajoStock() {
         ProductoDAO dao = new ProductoDAO();
@@ -76,7 +85,8 @@ public class DashboardController {
     }
 
     /**
-     * Agrega botón "Reordenar" en cada fila.
+     * Agrega una columna de acción a la tabla con un botón "Reordenar" para cada producto.
+     * Al hacer clic, genera una alerta simulando el envío de un correo al proveedor para reordenar el producto.
      */
     private void agregarColumnaAccion() {
         accionColumn.setCellFactory(param -> new TableCell<Producto, Void>() {
