@@ -204,6 +204,40 @@ public class ProductoDAO {
     }
 
     /**
+     * Query para actualizar un producto despues de editarlo
+     * @param producto producto a editar
+     * @return true si actualiza correctamente, false si no
+     */
+    public boolean actualizarProducto(Producto producto){
+        String sql = "UPDATE productos SET codigo_sku = ?, nombre = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, " +
+                "stock_actual = ?, stock_minimo = ?, id_proveedor = ? WHERE id = ?";
+
+        try(Connection con = ConexionMySQL.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setString(1, producto.getCodigoSku());
+            ps.setString(2, producto.getNombre());
+            ps.setString(3, producto.getDescripcion());
+            ps.setDouble(4, producto.getPrecioCompra());
+            ps.setDouble(5, producto.getPrecioVenta());
+            ps.setInt(6, producto.getStockActual());
+            ps.setInt(7, producto.getStockMinimo());
+            ps.setInt(8, producto.getIdProveedor());
+            ps.setInt(9, producto.getId());
+
+            int filas = ps.executeUpdate();
+
+            System.out.println("filas: "+filas);
+            return filas > 0;
+
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    /**
      * Funcion para actualizar la cantidad de productos en caso de algun movimiento
      * @param idProducto id del producto a actualizar
      * @param cantidadNueva cantidad nueva despues del movimieto
@@ -279,5 +313,31 @@ public class ProductoDAO {
             System.err.println("Error al eliminar producto: " + e.getMessage());
             return false;
         }
+    }
+
+    public Producto buscarUnicoPorNombre(String nombreBuscado) {
+        Producto producto = null;
+        String sql = "SELECT * FROM productos WHERE nombre LIKE ? LIMIT 1";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombreBuscado + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    producto = new Producto();
+                    producto.setId(rs.getInt("id"));
+                    producto.setCodigoSku(rs.getString("codigo_sku"));
+                    producto.setNombre(rs.getString("nombre"));
+                    producto.setDescripcion(rs.getString("descripcion"));
+                    producto.setPrecioVenta(rs.getDouble("precio_venta"));
+                    producto.setStockActual(rs.getInt("stock_actual"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar producto por nombre: " + e.getMessage());
+        }
+        return producto;
     }
 }

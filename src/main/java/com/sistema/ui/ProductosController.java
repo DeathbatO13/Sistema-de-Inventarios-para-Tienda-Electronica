@@ -219,11 +219,6 @@ public class ProductosController {
 
                         stage.showAndWait();
 
-                        FormularioProductController controller = loader.getController();
-                        if (controller.isProductoGuardado()) {
-                            cargarListaProductos();
-                        }
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
