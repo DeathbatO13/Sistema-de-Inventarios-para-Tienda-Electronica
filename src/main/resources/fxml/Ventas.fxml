@@ -25,7 +25,7 @@
          </font>
       </TextField>
       <DatePicker layoutX="759.0" layoutY="46.0" prefHeight="31.0" prefWidth="168.0" promptText="Buscar por fecha" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
-      <TableView layoutX="17.0" layoutY="97.0" prefHeight="371.0" prefWidth="917.0">
+      <TableView layoutX="17.0" layoutY="97.0" prefHeight="371.0" prefWidth="917.0" style="-fx-background-color: white;">
         <columns>
           <TableColumn prefWidth="361.0" text="Producto" />
           <TableColumn prefWidth="96.0" text="Cantidad" />
@@ -36,9 +36,9 @@
       </TableView>
       <Pane layoutX="16.0" layoutY="515.0" prefHeight="173.0" prefWidth="910.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <ComboBox layoutX="14.0" layoutY="49.0" prefHeight="31.0" prefWidth="236.0" />
-            <Spinner layoutX="312.0" layoutY="49.0" prefHeight="31.0" prefWidth="104.0" />
-            <TextField layoutX="475.0" layoutY="49.0" prefHeight="31.0" prefWidth="180.0" />
+            <ComboBox layoutX="14.0" layoutY="49.0" prefHeight="31.0" prefWidth="236.0" style="-fx-background-radius: 15;" />
+            <Spinner layoutX="312.0" layoutY="49.0" prefHeight="31.0" prefWidth="104.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+            <TextField layoutX="475.0" layoutY="49.0" prefHeight="31.0" prefWidth="180.0" style="-fx-background-radius: 15;" />
             <DatePicker layoutX="686.0" layoutY="49.0" prefHeight="31.0" prefWidth="210.0" />
             <Label layoutX="14.0" layoutY="24.0" text="Producto">
                <font>

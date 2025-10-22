@@ -96,6 +96,7 @@ public class PanelPrincipalController {
      */
     public void btnReportesMenu(ActionEvent actionEvent) {
         actualizarEstiloBotones(btnMenuReportes);
+        cargarVista("Reportes.fxml");
     }
 
     /**

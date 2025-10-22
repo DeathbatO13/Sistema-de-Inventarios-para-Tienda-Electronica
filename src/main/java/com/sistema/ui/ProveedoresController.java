@@ -9,9 +9,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -97,6 +105,36 @@ public class ProveedoresController {
     }
 
     /**
+     * Maneja el evento del botón para agregar un nuevo proveedor.
+     * @param actionEvent El evento de acción generado por el botón.
+     */
+    @FXML
+    public void btnAgregarAction(ActionEvent actionEvent){
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FormularioProveedor.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+            stage.getIcons().add(icono);
+            stage.setTitle("Nuevo Producto");
+            stage.setScene(new Scene(root));
+
+            // --- Configurar como ventana modal ---
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(listaView.getScene().getWindow());
+
+            stage.showAndWait();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * Maneja el evento del botón para editar un proveedor.
      * @param actionEvent El evento de acción generado por el botón.
      */
@@ -110,14 +148,6 @@ public class ProveedoresController {
      */
     @FXML
     public void btnElimnarAction(ActionEvent actionEvent){
-    }
-
-    /**
-     * Maneja el evento del botón para agregar un nuevo proveedor.
-     * @param actionEvent El evento de acción generado por el botón.
-     */
-    @FXML
-    public void btnAgregarAction(ActionEvent actionEvent){
 
     }
 
