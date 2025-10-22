@@ -98,6 +98,69 @@ public class ProveedorDAO {
     }
 
     /**
+     * Elimina un proveedor y sus productos asociados de la base de datos.
+     * Utiliza una transacción para garantizar que se eliminen primero los productos relacionados
+     * y luego el proveedor. Si alguna operación falla, realiza un rollback.
+     * @param idProveedor El ID del proveedor a eliminar.
+     * @return true si el proveedor y sus productos se eliminan correctamente, false si ocurre un error o el proveedor no existe.
+     */
+    public boolean eliminarProveedor(int idProveedor) {
+        String sqlDeleteProductos = "DELETE FROM productos WHERE id_proveedor = ?";
+        String sqlDeleteProveedor = "DELETE FROM proveedores WHERE id = ?";
+
+
+        Connection con = null;
+
+        try {
+            con = ConexionMySQL.getConexion();
+
+            con.setAutoCommit(false); // Deshabilitamos el auto-commit
+
+
+            try (PreparedStatement psProd = con.prepareStatement(sqlDeleteProductos)) {
+                psProd.setInt(1, idProveedor);
+                psProd.executeUpdate();
+            }
+
+
+            try (PreparedStatement psProv = con.prepareStatement(sqlDeleteProveedor)) {
+                psProv.setInt(1, idProveedor);
+                int filasAfectadas = psProv.executeUpdate();
+
+                if (filasAfectadas > 0) {
+                    // Si el proveedor se eliminó, confimar los cambios.
+                    con.commit();
+                    return true;
+                } else {
+                    // Si el proveedor no se encontró/eliminó, deshacemos la eliminación de productos (si hubo).
+                    con.rollback();
+                    return false;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error en transacción de eliminación: " + e.getMessage());
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.err.println("Error al realizar rollback: " + ex.getMessage());
+                }
+            }
+            return false;
+        } finally {
+            if (con != null) {
+                try {
+                    con.setAutoCommit(true);
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("Error al cerrar conexión: " + e.getMessage());
+                }
+            }
+        }
+    }
+
+    /**
      * Busca un único proveedor por su nombre exacto en la base de datos.
      * @param nombreBus El nombre exacto del proveedor a buscar.
      * @return El objeto Proveedor encontrado o un objeto Proveedor vacío si no se encuentra.

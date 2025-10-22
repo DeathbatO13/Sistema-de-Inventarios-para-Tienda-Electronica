@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Controlador para la vista de gestión de proveedores.
@@ -183,6 +184,55 @@ public class ProveedoresController {
     @FXML
     public void btnElimnarAction(ActionEvent actionEvent){
 
+        Proveedor selec = listaView.getSelectionModel().getSelectedItem();
+
+        if (selec == null) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Sin selección");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Por favor selecciona un proveedor para eliminar.");
+            alerta.showAndWait();
+            return;
+        }
+
+
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar Eliminación");
+        confirmacion.setHeaderText("Eliminar Proveedor: " + selec.getNombre());
+        confirmacion.setContentText("¿Estás seguro de que quieres eliminar a este proveedor? Esta acción no se puede deshacer" +
+                ", e implica que los productos asociados al proveedor tambien seran eliminados.");
+        confirmacion.initOwner(listaView.getScene().getWindow());
+
+        Optional<ButtonType> resultado = confirmacion.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+
+            // 3. Ejecución de la Eliminación
+            ProveedorDAO dao = new ProveedorDAO();
+            boolean eliminado = dao.eliminarProveedor(selec.getId());
+
+            if (eliminado) {
+
+                // Éxito:
+                Alert exito = new Alert(Alert.AlertType.INFORMATION);
+                exito.setTitle("Éxito");
+                exito.setHeaderText(null);
+                exito.setContentText("El proveedor " + selec.getNombre() + " ha sido eliminado correctamente.");
+                exito.showAndWait();
+
+                // 4. Actualizar la vista después de la eliminación
+                cargarProveedores();
+
+            } else {
+
+                // Error: Puede ser un error de BD o de Clave Foránea
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Error de Eliminación");
+                error.setHeaderText("No se pudo eliminar al proveedor.");
+                error.setContentText("Ocurrió un error al intentar eliminar el proveedor.");
+                error.showAndWait();
+            }
+        }
     }
 
     /**
