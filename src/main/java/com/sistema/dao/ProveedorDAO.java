@@ -67,6 +67,35 @@ public class ProveedorDAO {
         }
     }
 
+    /**
+     * Actualiza los datos de un proveedor existente en la base de datos.
+     * @param proveedor objeto Proveedor con el ID y los nuevos datos a actualizar
+     * @return true si se actualizó correctamente (filasAfectadas > 0), false si ocurrió un error
+     */
+    public boolean editarProveedor(Proveedor proveedor) {
+        // Se requiere el ID del proveedor para identificar qué registro modificar.
+        String sql = "UPDATE proveedores SET nombre = ?, contacto = ?, telefono = ?, email = ? WHERE id = ?";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            // 1. Asignar los nuevos valores a las columnas
+            ps.setString(1, proveedor.getNombre());
+            ps.setString(2, proveedor.getContacto());
+            ps.setString(3, proveedor.getTelefono());
+            ps.setString(4, proveedor.getEmail());
+
+            // 2. Asignar el ID para la cláusula WHERE (¡CLAVE para la edición!)
+            ps.setInt(5, proveedor.getId());
+
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error al editar proveedor: " + e.getMessage());
+            return false;
+        }
+    }
 
     /**
      * Busca un único proveedor por su nombre exacto en la base de datos.
