@@ -35,7 +35,18 @@ public class RegistroController {
     private PasswordField passwordFieldRegistro;
 
     @FXML
-    private Button btnRegistrarse, btnVerificar, btnVolverInicio;
+    private Button btnVerificar;
+
+    /**
+     * Inicia el controlador, manejando los label de estado y estableciendolos
+     * invisibles hasta cuando se requiera
+     */
+    @FXML
+    public void initialize(){
+        errorRegistroLabel.setVisible(false);
+        registroLabel.setVisible(false);
+    }
+
 
     SistemaAutenticacion auth = new SistemaAutenticacion();
 

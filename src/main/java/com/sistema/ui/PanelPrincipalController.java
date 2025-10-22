@@ -3,11 +3,16 @@ package com.sistema.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -93,6 +98,34 @@ public class PanelPrincipalController {
         actualizarEstiloBotones(btnMenuReportes);
     }
 
+    /**
+     * Maneja el evento del botón para cerrar la sesión.
+     * Cierra la ventana actual del panel principal y abre la ventana de inicio de sesión.
+     * @param actionEvent El evento de acción generado por el botón de cerrar sesión.
+     */
+    public void btnCerrarSesionAction(ActionEvent actionEvent){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginVista.fxml"));
+            Parent root = loader.load();
+            // Crear una nueva ventana
+            Stage stage = new Stage();
+            Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+            stage.getIcons().add(icono);
+            stage.setTitle("ElectroStock - Inicio de Sesión");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+
+            // Cerrar la ventana actual
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            currentStage.close();
+        }
+        catch (IOException e) {
+            System.err.println("Error al lanzar pantalla de registro" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Actualiza el estilo visual de los botones del menú para resaltar el botón seleccionado.
@@ -128,5 +161,6 @@ public class PanelPrincipalController {
             e.printStackTrace();
         }
     }
+
 
 }

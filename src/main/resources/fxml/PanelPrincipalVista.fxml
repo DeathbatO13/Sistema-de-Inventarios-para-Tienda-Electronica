@@ -30,7 +30,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutY="75.0" maxWidth="250.0" minHeight="700.0" minWidth="250.0" prefHeight="700.0" prefWidth="250.0">
+                  <Pane layoutY="75.0" maxWidth="250.0" minHeight="625.0" minWidth="250.0" prefHeight="625.0" prefWidth="250.0">
                      <children>
                         <Button fx:id="btnMenuReportes" layoutX="8.0" layoutY="214.0" mnemonicParsing="false" onAction="#btnReportesMenu" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #34495E; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Reportes" textAlignment="CENTER" textOverrun="CLIP">
                            <font>
@@ -53,6 +53,11 @@
                            </font>
                         </Button>
                         <Button fx:id="btnMenuVentas" layoutX="8.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnVentasMenu" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #34495E; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Ventas" textAlignment="CENTER" textOverrun="CLIP">
+                           <font>
+                              <Font name="Corbel Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnCerrarSesion" layoutX="14.0" layoutY="563.0" mnemonicParsing="false" onAction="#btnCerrarSesionAction" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-text-fill: #f51717; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Cerrar Sesión" textAlignment="CENTER" textFill="#f51717" textOverrun="CLIP">
                            <font>
                               <Font name="Corbel Bold" size="14.0" />
                            </font>
