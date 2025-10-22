@@ -43,6 +43,32 @@ public class ProveedorDAO {
     }
 
     /**
+     * Inserta un nuevo proveedor en la base de datos
+     * @param proveedor objeto Proveedor con los datos a registrar
+     * @return true si se insertó correctamente, false si ocurrió un error
+     */
+    public boolean agregarProveedor(Proveedor proveedor) {
+        String sql = "INSERT INTO proveedores (nombre, contacto, telefono, email) VALUES (?, ?, ?, ?)";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, proveedor.getNombre());
+            ps.setString(2, proveedor.getContacto());
+            ps.setString(3, proveedor.getTelefono());
+            ps.setString(4, proveedor.getEmail());
+
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error al insertar proveedor: " + e.getMessage());
+            return false;
+        }
+    }
+
+
+    /**
      * Busca un único proveedor por su nombre exacto en la base de datos.
      * @param nombreBus El nombre exacto del proveedor a buscar.
      * @return El objeto Proveedor encontrado o un objeto Proveedor vacío si no se encuentra.

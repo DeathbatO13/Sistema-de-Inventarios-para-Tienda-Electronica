@@ -114,10 +114,25 @@ public class SistemaAutenticacion {
      * @return true si el correo tiene un formato válido, false si no.
      */
     public boolean correoCorrecto(String correo){
-        String patron = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@"+
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z]{2,7}$";
 
-        return correo.matches(patron);
+        return correo != null && correo.toLowerCase().matches(
+                "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"
+        );
+    }
+
+    /**
+     * Verifica si un número de teléfono móvil colombiano tiene un formato válido.
+     * Comprueba que el número tenga exactamente 10 dígitos y comience con el dígito 3.
+     * @param telefono El número de teléfono a validar, como cadena de texto.
+     * @return true si el número de teléfono es válido, false si no cumple con el formato.
+     */
+    public boolean telefonoCorrecto(String telefono) {
+
+        if (telefono == null || telefono.length() != 10) {
+            return false;
+        }
+
+        return telefono.matches("^3[0-9]{9}$");
     }
 
     /**

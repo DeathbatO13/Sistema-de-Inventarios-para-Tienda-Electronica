@@ -42,15 +42,6 @@ public class ProveedoresController {
     private Label nombreProvLabel,nombreContLabel,telefonoLabel, correoLabel;
 
     @FXML
-    private TabPane tabPane;
-
-    @FXML
-    private Tab resumenTab, productosTab;
-
-    @FXML
-    private Button btnAgregar, btnEditar, btnEliminar;
-
-    @FXML
     private TableView<Producto> tablaProd;
 
     @FXML
