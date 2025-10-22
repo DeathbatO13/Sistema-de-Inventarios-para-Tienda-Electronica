@@ -4,10 +4,12 @@ import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.ProveedorDAO;
 import com.sistema.modelo.Producto;
 import com.sistema.modelo.Proveedor;
+import com.sistema.servicios.GestorInventario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -86,8 +88,8 @@ public class FormularioProductController {
         comboProveedor.setItems(datos);
     }
 
-
-    private boolean productoGuardado = false;
+    boolean productoGuardado = false;
+    Producto aGuardar = new Producto();
 
     /**
      * Valida los datos ingresados y guarda un nuevo producto en la base de datos.
@@ -108,7 +110,6 @@ public class FormularioProductController {
         String proveedor = comboProveedor.getValue();
         Proveedor temp = new ProveedorDAO().buscarPorNombre(proveedor);
 
-        Producto aGuardar = new Producto();
 
         aGuardar.setCodigoSku(codigoNuevo.getText());
         aGuardar.setNombre(nombreNuevo.getText());
@@ -120,8 +121,9 @@ public class FormularioProductController {
         aGuardar.setIdProveedor(temp.getId());
 
         if(new ProductoDAO().agregarNuevoProducto(aGuardar)){
-            productoGuardado = true;
+
             errorLabel.setText("Producto Guardado !");
+            productoGuardado = true;
             errorLabel.setVisible(true);
             errorLabel.setTextFill(Color.rgb(88, 130, 232));
             codigoNuevo.setText("");  nombreNuevo.setText("");
@@ -130,14 +132,32 @@ public class FormularioProductController {
             stockActNuevo.setText("");  comboProveedor.setValue("");
         }
 
+        if(new GestorInventario().registroEntrada(aGuardar.getId(), aGuardar.getStockActual(),
+                "ENTRADA")){
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Éxito");
+            alert.setHeaderText(null);
+            alert.setContentText("Movimiento Registrado");
+            alert.initOwner(comboProveedor.getScene().getWindow());
+            alert.showAndWait();
+
+        }else{
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Error al registrar el movimiento");
+            alert.initOwner(comboProveedor.getScene().getWindow());
+            alert.showAndWait();
+        }
+
     }
 
-    /**
-     * Verifica si un producto fue guardado exitosamente en la sesión actual.
-     * @return true si el producto se guardó correctamente, false en caso contrario.
-     */
-    public boolean isProductoGuardado() {
+
+    public boolean isProductoGuardado(){
         return productoGuardado;
     }
+
 
 }
