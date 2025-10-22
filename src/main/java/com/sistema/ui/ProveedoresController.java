@@ -106,6 +106,9 @@ public class ProveedoresController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FormularioProveedor.fxml"));
             Parent root = loader.load();
 
+            AgregarProveedorController control = loader.getController();
+            control.initialize("Agregar");
+
             Stage stage = new Stage();
             Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
             stage.getIcons().add(icono);
@@ -131,6 +134,46 @@ public class ProveedoresController {
      */
     @FXML
     public void btnEditarAction(ActionEvent actionEvent){
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FormularioProveedor.fxml"));
+            Parent root = loader.load();
+
+            Proveedor selec = listaView.getSelectionModel().getSelectedItem();
+
+            if (selec == null) {
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Sin selección");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Por favor selecciona un proveedor para editar.");
+                alerta.showAndWait();
+                return;
+            }
+
+            AgregarProveedorController control = loader.getController();
+            control.initialize("Editar", selec);
+
+            Stage stage = new Stage();
+            Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+            stage.getIcons().add(icono);
+            stage.setTitle("Editar Producto");
+            stage.setScene(new Scene(root));
+
+            // --- Configurar como ventana modal ---
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(listaView.getScene().getWindow());
+
+            stage.showAndWait();
+
+            // Recarga la lista despues de editar
+            cargarProveedores();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

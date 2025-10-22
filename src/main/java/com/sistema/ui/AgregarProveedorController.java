@@ -1,6 +1,5 @@
 package com.sistema.ui;
 
-import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.ProveedorDAO;
 import com.sistema.modelo.Proveedor;
 import com.sistema.servicios.SistemaAutenticacion;
@@ -15,12 +14,27 @@ import javafx.stage.Stage;
 public class AgregarProveedorController {
 
     @FXML
-    private Label errorLabel;
+    private Label errorLabel, titleLabel;
 
     @FXML
     private TextField nombreTF, contactoTF, telefonoTF, correoTF;
 
     SistemaAutenticacion auth = new SistemaAutenticacion();
+
+    @FXML
+    public void initialize(String titulo){
+        titleLabel.setText(titulo + " Proveedor");
+    }
+
+    @FXML
+    public void initialize(String titulo, Proveedor proveedor){
+        titleLabel.setText(titulo + " Proveedor");
+        nombreTF.setText(proveedor.getNombre());
+        contactoTF.setText(proveedor.getContacto());
+        telefonoTF.setText(proveedor.getTelefono());
+        correoTF.setText(proveedor.getEmail());
+    }
+
 
     public void btnGuardarAction(ActionEvent actionEvent) {
         //Verificaciones de campos
