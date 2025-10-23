@@ -19,27 +19,27 @@
             <Font name="Corbel Bold" size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="470.0" layoutY="46.0" prefHeight="31.0" prefWidth="270.0" promptText="🔍 Buscar por producto" style="-fx-background-radius: 15;">
+      <TextField fx:id="buscarVentasTF" layoutX="470.0" layoutY="46.0" onAction="#buscarVentaAction" prefHeight="31.0" prefWidth="270.0" promptText="🔍 Buscar por producto" style="-fx-background-radius: 15;">
          <font>
             <Font name="Corbel Bold" size="14.0" />
          </font>
       </TextField>
-      <DatePicker layoutX="759.0" layoutY="46.0" prefHeight="31.0" prefWidth="168.0" promptText="Buscar por fecha" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
-      <TableView layoutX="17.0" layoutY="97.0" prefHeight="371.0" prefWidth="917.0" style="-fx-background-color: white;">
+      <DatePicker fx:id="buscarPorFecha" layoutX="759.0" layoutY="46.0" onAction="#buscarFechaAction" prefHeight="31.0" prefWidth="168.0" promptText="Buscar por fecha" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+      <TableView fx:id="tablaVentas" layoutX="17.0" layoutY="97.0" prefHeight="371.0" prefWidth="917.0" style="-fx-background-color: white;">
         <columns>
-          <TableColumn prefWidth="361.0" text="Producto" />
-          <TableColumn prefWidth="96.0" text="Cantidad" />
-            <TableColumn prefWidth="141.0" text="Precio" />
-            <TableColumn prefWidth="171.0" text="Fecha" />
-            <TableColumn prefWidth="146.0" text="Accion" />
+          <TableColumn fx:id="productoColumn" prefWidth="361.0" text="Producto" />
+          <TableColumn fx:id="cantidadProd" prefWidth="96.0" text="Cantidad" />
+            <TableColumn fx:id="precioV" prefWidth="141.0" text="Precio" />
+            <TableColumn fx:id="fechaV" prefWidth="171.0" text="Fecha" />
+            <TableColumn fx:id="accionC" prefWidth="146.0" text="Accion" />
         </columns>
       </TableView>
       <Pane layoutX="16.0" layoutY="515.0" prefHeight="173.0" prefWidth="910.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <ComboBox layoutX="14.0" layoutY="49.0" prefHeight="31.0" prefWidth="236.0" style="-fx-background-radius: 15;" />
-            <Spinner layoutX="312.0" layoutY="49.0" prefHeight="31.0" prefWidth="104.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
-            <TextField layoutX="475.0" layoutY="49.0" prefHeight="31.0" prefWidth="180.0" style="-fx-background-radius: 15;" />
-            <DatePicker layoutX="686.0" layoutY="49.0" prefHeight="31.0" prefWidth="210.0" />
+            <ComboBox fx:id="productosVenta" layoutX="14.0" layoutY="49.0" prefHeight="31.0" prefWidth="236.0" style="-fx-background-radius: 15;" />
+            <Spinner fx:id="cantidadPrVenta" layoutX="312.0" layoutY="49.0" prefHeight="31.0" prefWidth="104.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+            <TextField fx:id="precioVenta" layoutX="475.0" layoutY="49.0" prefHeight="31.0" prefWidth="180.0" style="-fx-background-radius: 15;" />
+            <DatePicker fx:id="fecharRegistro" layoutX="686.0" layoutY="49.0" prefHeight="31.0" prefWidth="210.0" />
             <Label layoutX="14.0" layoutY="24.0" text="Producto">
                <font>
                   <Font name="Corbel Bold" size="16.0" />
@@ -60,16 +60,31 @@
                   <Font name="Corbel Bold" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="734.0" layoutY="116.0" mnemonicParsing="false" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Registrar Venta" textFill="WHITE">
+            <Button layoutX="765.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnRegistrarVentaAction" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Registrar Venta" textFill="WHITE">
                <font>
                   <Font name="Corbel Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="588.0" layoutY="116.0" mnemonicParsing="false" style="-fx-background-color: #DDDDDD; -fx-background-radius: 15;" text="Limpiar Campos">
+            <Button layoutX="503.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnCancelarAction" style="-fx-background-color: #DDDDDD; -fx-background-radius: 15;" text="Cancelar">
                <font>
                   <Font name="Corbel Bold" size="16.0" />
                </font>
             </Button>
+            <Button layoutX="591.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnAgregarProdAction" prefHeight="29.0" prefWidth="168.0" style="-fx-background-color: #87A2DE; -fx-background-radius: 15;" text="Agregar Pruducto">
+               <font>
+                  <Font name="Corbel Bold" size="16.0" />
+               </font>
+            </Button>
+            <Label layoutX="14.0" layoutY="119.0" text="Productos Agregados:">
+               <font>
+                  <Font name="Corbel Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="contadorProductos" layoutX="174.0" layoutY="119.0" text="Counter">
+               <font>
+                  <Font name="Corbel Bold" size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Label layoutX="16.0" layoutY="479.0" text="Agregar nueva venta">

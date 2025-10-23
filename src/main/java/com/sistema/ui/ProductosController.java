@@ -16,12 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 public class ProductosController {
 
@@ -234,27 +233,38 @@ public class ProductosController {
                 btnEliminar.setOnAction(event -> {
                     Producto producto = getTableView().getItems().get(getIndex());
 
-                    System.out.println("Id tomado: " + producto.getId());
+                    Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                    confirm.setTitle("Confirmar Eliminacion");
+                    confirm.setHeaderText("Eliminar producto: " + producto.getNombre());
+                    confirm.setContentText("¿Estás seguro de que quieres eliminar a este producto?");
+                    confirm.initOwner(tablaProductos.getScene().getWindow());
 
-                    if(new ProductoDAO().eliminarProducto(producto.getId())){
+                    Optional<ButtonType> res = confirm.showAndWait();
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Eliminación");
-                        alert.setHeaderText(null);
-                        alert.setContentText(producto.getNombre() + " Eliminado");
-                        alert.initOwner(contenedorBotones.getScene().getWindow());
-                        alert.showAndWait();
+                    if(res.isPresent() && res.get() == ButtonType.OK) {
 
-                    }else{
+                        boolean eliminado;
+                        eliminado = new ProductoDAO().eliminarProducto(producto.getId());
 
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("No se pudo eliminar");
-                        alert.setHeaderText(null);
-                        alert.setContentText(producto.getNombre() + " no eliminado");
+                        Alert alert;
+
+                        if(eliminado) {
+
+                            alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Eliminación");
+                            alert.setHeaderText(null);
+                            alert.setContentText(producto.getNombre() + " Eliminado");
+
+                        } else {
+
+                            alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("No se pudo eliminar");
+                            alert.setHeaderText(null);
+                            alert.setContentText(producto.getNombre() + " no eliminado");
+                        }
                         alert.initOwner(contenedorBotones.getScene().getWindow());
                         alert.showAndWait();
                     }
-
                 });
             }
 

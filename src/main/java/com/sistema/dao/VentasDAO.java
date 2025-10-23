@@ -3,11 +3,13 @@ package com.sistema.dao;
 import com.sistema.modelo.DetalleVenta;
 import com.sistema.modelo.Venta;
 import com.sistema.util.ConexionMySQL;
+import com.sistema.util.VentaRow;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VentasDAO {
@@ -44,4 +46,40 @@ public class VentasDAO {
         }
         return 0;
     }
+
+    /**
+     * Consulta y devuelve una lista de todas las ventas registradas en la base de datos.
+     * @return Una lista de objetos Venta.
+     */
+    public List<VentaRow> listaVentas() {
+        List<VentaRow> lista = new ArrayList<>();
+        String sql = "SELECT " +
+                "    p.nombre AS Producto_vendido, " +
+                "    dv.cantidad AS Cantidad, " +
+                "    dv.subtotal AS Precio_total, " +
+                "    v.fecha AS Fecha " +
+                "FROM ventas v " +
+                "JOIN detalle_ventas dv ON v.id = dv.id_venta " +
+                "JOIN productos p ON dv.id_producto = p.id;";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                VentaRow ventaRow = new VentaRow(
+                        rs.getString("Producto_vendido"),
+                        rs.getInt("Cantidad"),
+                        rs.getDouble("Precio_total"),
+                        rs.getTimestamp("Fecha").toLocalDateTime()
+                );
+                lista.add(ventaRow);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al consultar la lista de ventas: " + e.getMessage());
+        }
+        return lista;
+    }
+
+
 }
