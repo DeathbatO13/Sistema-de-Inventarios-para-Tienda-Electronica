@@ -8,7 +8,11 @@ public class VentaRow {
     private Double precioTotal;
     private LocalDateTime fecha;
 
-
+    /**
+     * Representa una fila de datos de ventas para su visualización en una tabla.
+     * Esta clase encapsula información sobre un producto vendido, incluyendo su nombre,
+     * cantidad, precio total y fecha de venta.
+     */
     public VentaRow(String productoVendido, Integer cantidad, Double precioTotal, LocalDateTime fecha) {
         this.productoVendido = productoVendido;
         this.cantidad = cantidad;

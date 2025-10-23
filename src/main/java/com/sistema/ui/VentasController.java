@@ -3,7 +3,6 @@ package com.sistema.ui;
 import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.VentasDAO;
 import com.sistema.modelo.Producto;
-import com.sistema.modelo.Venta;
 import com.sistema.util.VentaRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,9 +15,16 @@ import javafx.scene.layout.HBox;
 
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Controlador para gestionar la interfaz de ventas en la aplicación.
+ * Este controlador maneja la inicialización de la tabla de ventas, la carga de datos,
+ * la búsqueda de ventas por fecha o texto, el registro de nuevas ventas y las acciones
+ * asociadas a los productos y botones.
+ */
 public class VentasController {
 
     @FXML
@@ -49,12 +55,16 @@ public class VentasController {
     private Spinner<Integer> cantidadPrVenta;
 
     @FXML
-    private ComboBox<Producto> productosVenta;
+    private ComboBox<String> productosVenta;
 
     @FXML
     private Label contadorProductos;
 
-
+    /**
+     * Inicializa el controlador después de cargar el archivo FXML.
+     * Configura las fábricas de valores de las celdas de la tabla, aplica formato de moneda
+     * a la columna de precio y carga los datos iniciales.
+     */
     @FXML
     public void initialize(){
 
@@ -78,22 +88,39 @@ public class VentasController {
 
         cargarListaVentas();
         agregarColumna();
+        cargarProductosAvender();
     }
 
-
+    /**
+     * Maneja la acción de buscar ventas basada en el texto ingresado.
+     *
+     * @param actionEvent el evento de acción desencadenado por el botón o campo
+     */
     public void buscarVentaAction(ActionEvent actionEvent){
         
     }
-    
-    
+
+    /**
+     * Maneja la acción de buscar ventas por fecha seleccionada.
+     *
+     * @param actionEvent el evento de acción desencadenado por el selector de fecha
+     */
     public void buscarFechaAction(ActionEvent actionEvent) {
     }
 
-    
+    /**
+     * Maneja la acción de registrar una nueva venta.
+     *
+     * @param actionEvent el evento de acción desencadenado por el botón de registro
+     */
     public void btnRegistrarVentaAction(ActionEvent actionEvent) {
     }
 
-
+    /**
+     * Maneja la acción de cancelar una operación de venta.
+     *
+     * @param actionEvent el evento de acción desencadenado por el botón de cancelar
+     */
     public void btnCancelarAction(ActionEvent actionEvent) {
     }
 
@@ -101,7 +128,10 @@ public class VentasController {
     public void btnAgregarProdAction(ActionEvent actionEvent) {
     }
 
-
+    /**
+     * Agrega una columna de acciones (botón "Editar") a la tabla de ventas.
+     * El botón permite realizar una acción de edición en la fila seleccionada.
+     */
     private void agregarColumna() {
         accionC.setCellFactory(param -> new TableCell<VentaRow, Void>() {
 
@@ -140,7 +170,10 @@ public class VentasController {
     }
 
 
-
+    /**
+     * Carga la lista de ventas desde la base de datos y la muestra en la tabla.
+     * Utiliza un DAO para obtener los datos y los convierte en una lista observable.
+     */
     private void cargarListaVentas(){
         VentasDAO dao = new VentasDAO();
         List<VentaRow> lista = dao.listaVentas();
@@ -149,5 +182,21 @@ public class VentasController {
         tablaVentas.setItems(datos);
     }
 
+    /**
+     * Carga la lista de productos disponibles para vender desde la base de datos.
+     * Extrae los nombres de los productos y los asigna al ComboBox.
+     */
+    private void cargarProductosAvender(){
+        ProductoDAO p = new ProductoDAO();
+        List<Producto> list = p.listaProductos();
+        List<String> nombres = new ArrayList<>();
 
+        for(Producto pro : list){
+            String nombre = pro.getNombre();
+            nombres.add(nombre);
+        }
+
+        ObservableList<String> datos = FXCollections.observableArrayList(nombres);
+        productosVenta.setItems(datos);
+    }
 }
