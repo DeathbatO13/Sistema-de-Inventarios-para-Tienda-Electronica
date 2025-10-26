@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Controlador para gestionar la interfaz de ventas en la aplicación.
@@ -60,6 +61,10 @@ public class VentasController {
     @FXML
     private Label contadorProductos;
 
+
+    VentasDAO dao = new VentasDAO();
+    List<VentaRow> lista = dao.listaVentas();
+
     /**
      * Inicializa el controlador después de cargar el archivo FXML.
      * Configura las fábricas de valores de las celdas de la tabla, aplica formato de moneda
@@ -97,7 +102,16 @@ public class VentasController {
      * @param actionEvent el evento de acción desencadenado por el botón o campo
      */
     public void buscarVentaAction(ActionEvent actionEvent){
-        
+
+        String nombreProd = buscarVentasTF.getText().toLowerCase().trim();
+
+        List<VentaRow> filtrada = lista.stream()
+                .filter(v -> v.getProductoVendido().toLowerCase().contains(nombreProd))
+                .collect(Collectors.toList());
+
+        ObservableList<VentaRow> datos = FXCollections.observableArrayList(filtrada);
+        tablaVentas.setItems(datos);
+
     }
 
     /**
@@ -124,7 +138,11 @@ public class VentasController {
     public void btnCancelarAction(ActionEvent actionEvent) {
     }
 
-
+    /**
+     * Maneja la acción de agregar producto a la operación de venta.
+     *
+     * @param actionEvent el evento de acción desencadenado por el botón de agregar producto
+     */
     public void btnAgregarProdAction(ActionEvent actionEvent) {
     }
 
@@ -175,8 +193,6 @@ public class VentasController {
      * Utiliza un DAO para obtener los datos y los convierte en una lista observable.
      */
     private void cargarListaVentas(){
-        VentasDAO dao = new VentasDAO();
-        List<VentaRow> lista = dao.listaVentas();
 
         ObservableList<VentaRow> datos = FXCollections.observableArrayList(lista);
         tablaVentas.setItems(datos);
