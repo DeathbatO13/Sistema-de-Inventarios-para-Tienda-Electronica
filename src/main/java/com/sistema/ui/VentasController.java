@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +121,21 @@ public class VentasController {
      * @param actionEvent el evento de acción desencadenado por el selector de fecha
      */
     public void buscarFechaAction(ActionEvent actionEvent) {
+
+        LocalDate fechaSeleccionada = buscarPorFecha.getValue();
+
+        if (fechaSeleccionada == null) {
+            tablaVentas.setItems(FXCollections.observableArrayList(lista));
+            return;
+        }
+
+        // Filtrar por fecha ignorando la hora
+        List<VentaRow> filtradas = lista.stream()
+                .filter(v -> v.getFecha().toLocalDate().equals(fechaSeleccionada))
+                .collect(Collectors.toList());
+
+        tablaVentas.setItems(FXCollections.observableArrayList(filtradas));
+
     }
 
     /**

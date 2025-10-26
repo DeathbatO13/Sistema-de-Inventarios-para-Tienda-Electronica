@@ -60,7 +60,8 @@ public class VentasDAO {
                 "    v.fecha AS Fecha " +
                 "FROM ventas v " +
                 "JOIN detalle_ventas dv ON v.id = dv.id_venta " +
-                "JOIN productos p ON dv.id_producto = p.id;";
+                "JOIN productos p ON dv.id_producto = p.id " +
+                "ORDER BY v.fecha DESC;";
 
         try (Connection con = ConexionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql);
