@@ -337,6 +337,7 @@ public class ProductoDAO {
                     producto.setDescripcion(rs.getString("descripcion"));
                     producto.setPrecioVenta(rs.getDouble("precio_venta"));
                     producto.setStockActual(rs.getInt("stock_actual"));
+                    producto.setStockMinimo(rs.getInt("stock_minimo"));
                 }
             }
         } catch (SQLException e) {

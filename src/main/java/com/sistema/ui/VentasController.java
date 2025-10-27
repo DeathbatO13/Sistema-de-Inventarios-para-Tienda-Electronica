@@ -92,6 +92,21 @@ public class VentasController {
             }
         });
 
+        //Inicializa spinner con rango provicional
+        SpinnerValueFactory<Integer> valueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1, 1);
+        cantidadPrVenta.setValueFactory(valueFactory);
+
+        productosVenta.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldProducto, newProducto) ->
+                        actualizarSpinner(new ProductoDAO().buscarUnicoPorNombre(newProducto))
+        );
+
+        productosVenta.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldProducto, newProducto) ->
+                        actualizarPrecioUnitario(new ProductoDAO().buscarUnicoPorNombre(newProducto))
+        );
+
         cargarListaVentas();
         agregarColumna();
         cargarProductosAvender();
@@ -130,7 +145,6 @@ public class VentasController {
             return;
         }
 
-        // Filtrar por fecha ignorando la hora
         List<VentaRow> filtradas = lista.stream()
                 .filter(v -> v.getFecha().toLocalDate().equals(fechaSeleccionada))
                 .collect(Collectors.toList());
@@ -231,5 +245,34 @@ public class VentasController {
 
         ObservableList<String> datos = FXCollections.observableArrayList(nombres);
         productosVenta.setItems(datos);
+    }
+
+
+    private void actualizarPrecioUnitario(Producto prodSelec){
+        if(prodSelec != null){
+
+            double precio = prodSelec.getPrecioVenta();
+            NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+            String precioFormateado = formatoMoneda.format(precio);
+            precioVenta.setText(precioFormateado);
+
+        }
+    }
+
+    private void actualizarSpinner(Producto prodSelect) {
+        if (prodSelect != null) {
+            int stockActual = prodSelect.getStockActual();
+            int stockMinimo = prodSelect.getStockMinimo();
+
+            int maximoPermitido = stockActual - stockMinimo;
+            if (maximoPermitido < 1) {
+                maximoPermitido = 1;
+            }
+
+            SpinnerValueFactory<Integer> valueFactory =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maximoPermitido, 1);
+
+            cantidadPrVenta.setValueFactory(valueFactory);
+        }
     }
 }
