@@ -43,22 +43,12 @@
             </Label>
             <ComboBox layoutX="16.0" layoutY="65.0" prefHeight="35.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #DDDDDD; -fx-border-radius: 15;" />
             <ComboBox layoutX="16.0" layoutY="139.0" prefHeight="35.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #DDDDDD; -fx-border-radius: 15;" />
-            <Button layoutX="16.0" layoutY="187.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte TXT" textFill="WHITE">
+            <Button layoutX="16.0" layoutY="209.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte TXT" textFill="WHITE">
                <font>
                   <Font name="Corbel Bold" size="15.0" />
                </font>
             </Button>
-            <Label layoutX="14.0" layoutY="293.0" text="Otras opciones">
-               <font>
-                  <Font name="Corbel Bold" size="18.0" />
-               </font>
-            </Label>
-            <Button layoutX="16.0" layoutY="238.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte CSV" textFill="WHITE">
-               <font>
-                  <Font name="Corbel Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button layoutX="16.0" layoutY="335.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #2A3CD1; -fx-background-radius: 15;" text="Agregar Existencias Producto" textFill="WHITE">
+            <Button layoutX="16.0" layoutY="268.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte CSV" textFill="WHITE">
                <font>
                   <Font name="Corbel Bold" size="15.0" />
                </font>

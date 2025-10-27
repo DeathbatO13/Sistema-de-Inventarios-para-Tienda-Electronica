@@ -33,7 +33,7 @@ public class VentasController {
     private TextField buscarVentasTF, precioVenta;
 
     @FXML
-    private DatePicker buscarPorFecha, fecharRegistro;
+    private DatePicker buscarPorFecha;
 
     @FXML
     private TableView<VentaRow> tablaVentas;
@@ -95,6 +95,7 @@ public class VentasController {
         cargarListaVentas();
         agregarColumna();
         cargarProductosAvender();
+        contadorProductos.setText(String.valueOf(0));
     }
 
     /**

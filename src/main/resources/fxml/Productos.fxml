@@ -15,12 +15,12 @@
             <Font name="Corbel Bold" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnAgregarProducto" layoutX="806.0" layoutY="123.0" mnemonicParsing="false" onAction="#agregarProductoEvent" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20; -fx-background-radius: 20;" text="+ Agregar" textFill="WHITE">
+      <Button fx:id="btnAgregarProducto" layoutX="406.0" layoutY="123.0" mnemonicParsing="false" onAction="#agregarProductoEvent" prefHeight="36.0" prefWidth="206.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20; -fx-background-radius: 20;" text="+ Agregar Producto" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Corbel Bold" size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="buscarProducto" layoutX="489.0" layoutY="123.0" onAction="#buscarNombreProducto" prefHeight="36.0" prefWidth="307.0" promptText="🔍 Buscar Productos" style="-fx-background-radius: 15; -fx-border-radius: 15;">
+      <TextField fx:id="buscarProducto" layoutX="45.0" layoutY="123.0" onAction="#buscarNombreProducto" prefHeight="36.0" prefWidth="351.0" promptText="🔍 Buscar Productos" style="-fx-background-radius: 15; -fx-border-radius: 15;">
          <font>
             <Font name="Corbel Bold" size="18.0" />
          </font>
@@ -34,5 +34,10 @@
             <TableColumn fx:id="accionesProducto" editable="false" prefWidth="214.0" sortable="false" text="Acciones" />
         </columns>
       </TableView>
+      <Button fx:id="btnAExistenciasProducto" layoutX="627.0" layoutY="123.0" mnemonicParsing="false" onAction="#agregarExistenciasAction" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-border-radius: 20; -fx-background-radius: 20;" text="+ Agregar Existencias Producto" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Corbel Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

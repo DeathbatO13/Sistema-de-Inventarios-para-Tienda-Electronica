@@ -166,6 +166,9 @@ public class ProductosController {
         agregarColumnaAccion();
     }
 
+    public void agregarExistenciasAction(ActionEvent actionEvent) {
+    }
+
     /**
      * Carga la lista de productos desde la base de datos y la muestra en la tabla.
      * Obtiene todos los productos disponibles y los asigna como datos de la tabla.
