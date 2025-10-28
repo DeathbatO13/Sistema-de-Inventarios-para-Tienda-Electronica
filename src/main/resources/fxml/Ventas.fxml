@@ -87,7 +87,7 @@
                   <Font name="Corbel Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="574.0" layoutY="55.0" text="\$132321">
+            <Label fx:id="totalVenta" layoutX="574.0" layoutY="55.0" text="\$132321">
                <font>
                   <Font name="Corbel Bold" size="16.0" />
                </font>

@@ -2,6 +2,7 @@ package com.sistema.ui;
 
 import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.VentasDAO;
+import com.sistema.modelo.DetalleVenta;
 import com.sistema.modelo.Producto;
 import com.sistema.util.VentaRow;
 import javafx.collections.FXCollections;
@@ -60,11 +61,14 @@ public class VentasController {
     private ComboBox<String> productosVenta;
 
     @FXML
-    private Label contadorProductos;
+    private Label contadorProductos, totalVenta;
 
 
     VentasDAO dao = new VentasDAO();
     List<VentaRow> lista = dao.listaVentas();
+    private double totalAcumuladoVenta = 0;
+    private final List<DetalleVenta> detallesVenta = new ArrayList<>();
+    NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
 
     /**
      * Inicializa el controlador después de cargar el archivo FXML.
@@ -79,7 +83,6 @@ public class VentasController {
         precioV.setCellValueFactory(new PropertyValueFactory<>("precioTotal"));
         fechaV.setCellValueFactory(new PropertyValueFactory<>("fecha"));
 
-        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
         precioV.setCellFactory(column -> new TableCell<VentaRow, Double>() { // Changed to VentaRow
             @Override
             protected void updateItem(Double valor, boolean empty) {
@@ -111,6 +114,9 @@ public class VentasController {
         agregarColumna();
         cargarProductosAvender();
         contadorProductos.setText(String.valueOf(0));
+        String formatoTotalV = formatoMoneda.format(0);
+        totalVenta.setText(formatoTotalV);
+
     }
 
     /**
@@ -162,20 +168,80 @@ public class VentasController {
     }
 
     /**
+     * Maneja la acción de agregar producto a la operación de venta.
+     *
+     * @param actionEvent el evento de acción desencadenado por el botón de agregar producto
+     */
+    public void btnAgregarProdAction(ActionEvent actionEvent){
+
+        Producto productoSeleccionado = new ProductoDAO().buscarUnicoPorNombre(productosVenta
+                .getSelectionModel().getSelectedItem());
+        if (productoSeleccionado == null) {
+            mostrarAlerta("Debe seleccionar un producto.");
+            return;
+        }
+
+        String raw = precioVenta.getText();
+        if (raw == null || raw.trim().isEmpty()) {
+            mostrarAlerta("El precio unitario no está disponible.");
+            return;
+        }
+
+        // Limpieza
+        String textoPrecio;
+        if (raw.contains(",")) {
+
+            textoPrecio = raw.replaceAll("[^\\d,]", "") // elimina $ u otros símbolos y puntos de miles
+                    .replace(",", ".");         // coma decimal -> punto
+        } else {
+
+            textoPrecio = raw.replaceAll("[^\\d.]", "");
+        }
+
+        double precioUnitario = Double.parseDouble(textoPrecio);
+        int cantidad = cantidadPrVenta.getValue();
+        double subtotal = cantidad * precioUnitario;
+
+        // Evita agregar más de 10 productos
+        if (detallesVenta.size() >= 10) {
+            mostrarAlerta("Solo se pueden agregar hasta 10 productos por venta.");
+            return;
+        }
+
+        DetalleVenta detalle = new DetalleVenta(
+                0,              // id (aún no asignado)
+                0,              // idVenta (se asignará al registrar)
+                productoSeleccionado.getId(),
+                cantidad,
+                precioUnitario,
+                subtotal
+        );
+
+        detallesVenta.add(detalle);
+
+        totalAcumuladoVenta += subtotal;
+        String formatoTotalV = formatoMoneda.format(totalAcumuladoVenta);
+        totalVenta.setText(formatoTotalV);
+
+        contadorProductos.setText(String.valueOf(detallesVenta.size()));
+
+        productosVenta.getSelectionModel().clearSelection();
+
+    }
+
+    /**
      * Maneja la acción de cancelar una operación de venta.
      *
      * @param actionEvent el evento de acción desencadenado por el botón de cancelar
      */
     public void btnCancelarAction(ActionEvent actionEvent) {
+        productosVenta.getSelectionModel().clearSelection();
+        totalAcumuladoVenta = 0.0;
+        contadorProductos.setText(String.valueOf(0));
+        precioVenta.setText("");
     }
 
-    /**
-     * Maneja la acción de agregar producto a la operación de venta.
-     *
-     * @param actionEvent el evento de acción desencadenado por el botón de agregar producto
-     */
-    public void btnAgregarProdAction(ActionEvent actionEvent) {
-    }
+
 
     /**
      * Agrega una columna de acciones (botón "Editar") a la tabla de ventas.
@@ -274,5 +340,13 @@ public class VentasController {
 
             cantidadPrVenta.setValueFactory(valueFactory);
         }
+    }
+
+    private void mostrarAlerta(String mens){
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Eliminación");
+        alert.setHeaderText(null);
+        alert.setContentText(mens);
     }
 }
