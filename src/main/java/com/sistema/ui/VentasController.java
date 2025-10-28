@@ -235,10 +235,19 @@ public class VentasController {
      * @param actionEvent el evento de acción desencadenado por el botón de cancelar
      */
     public void btnCancelarAction(ActionEvent actionEvent) {
+
         productosVenta.getSelectionModel().clearSelection();
+
+        cantidadPrVenta.getValueFactory().setValue(1);
+
         totalAcumuladoVenta = 0.0;
-        contadorProductos.setText(String.valueOf(0));
+        totalVenta.setText(String.valueOf(totalAcumuladoVenta));
+        contadorProductos.setText("0");
         precioVenta.setText("");
+
+        if (detallesVenta != null) {
+            detallesVenta.clear();
+        }
     }
 
 
