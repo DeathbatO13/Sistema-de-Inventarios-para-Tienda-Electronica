@@ -39,7 +39,6 @@ public class LoginController {
     private Hyperlink linkRecContra;
 
     private int contadorInicio = 0;
-
     /**
      * Maneja el evento del botón de inicio de sesión.
      * Verifica las credenciales del usuario, muestra el panel principal si son correctas,

@@ -2,6 +2,7 @@ package com.sistema.servicios;
 
 import com.sistema.dao.UsuarioDAO;
 import com.sistema.modelo.Usuario;
+import com.sistema.util.UsuarioSesion;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.security.SecureRandom;
@@ -85,6 +86,7 @@ public class SistemaAutenticacion {
         // Comparar contraseña ingresada con el hash y que este verificado
         if (BCrypt.checkpw(contrasena, usuario.getContrasenaHash()) && usuario.isVerificado()) {
             System.out.println("Inicio de sesión exitoso. Bienvenido " + usuario.getNombreUsuario());
+            UsuarioSesion.setUsuarioActual(usuario);
             return true;
         } else {
             System.out.println("Contraseña incorrecta.");

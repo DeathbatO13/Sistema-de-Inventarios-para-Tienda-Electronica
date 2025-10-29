@@ -10,29 +10,15 @@ public class Venta {
     private int idUsuario;
 
     /**
-     * Constructor vacio
-     */
-    public Venta(){}
-
-    /**
      * Constructor completo
      */
-    public Venta(int id, LocalDateTime fecha, double totalVenta, int idUsuario) {
-        this.id = id;
+    public Venta(LocalDateTime fecha, double totalVenta, int idUsuario) {
         this.fecha = fecha;
         this.totalVenta = totalVenta;
         this.idUsuario = idUsuario;
     }
 
     //Getters y Setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public LocalDateTime getFecha() {
         return fecha;

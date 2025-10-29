@@ -37,6 +37,7 @@ public class Usuario {
         this.verificado = verificado;
     }
 
+
     //Setters y Getters
 
     public int getId() {

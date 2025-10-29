@@ -4,6 +4,9 @@ import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.VentasDAO;
 import com.sistema.modelo.DetalleVenta;
 import com.sistema.modelo.Producto;
+import com.sistema.modelo.Usuario;
+import com.sistema.modelo.Venta;
+import com.sistema.util.UsuarioSesion;
 import com.sistema.util.VentaRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -164,7 +167,36 @@ public class VentasController {
      *
      * @param actionEvent el evento de acción desencadenado por el botón de registro
      */
-    public void btnRegistrarVentaAction(ActionEvent actionEvent) {
+    public void btnRegistrarVentaAction(ActionEvent actionEvent){
+
+        if (detallesVenta == null || detallesVenta.isEmpty()) {
+            mostrarAlerta("Debe agregar al menos un producto antes de registrar la venta.");
+            return;
+        }
+
+        int idUser = UsuarioSesion.getIdUsuarioActual();
+        Venta v = new Venta(LocalDateTime.now(), totalAcumuladoVenta, idUser);
+
+        VentasDAO ventasDAO = new VentasDAO();
+        boolean exito = ventasDAO.registrarVenta(v, detallesVenta);
+
+        // 5️⃣ Resultado
+        if (exito) {
+
+            mostrarAlerta("✅ Venta registrada con éxito.");
+
+            // 🔄 Limpiar interfaz y lista
+            detallesVenta.clear();
+            totalAcumuladoVenta = 0.0;
+            totalVenta.setText(formatoMoneda.format(totalAcumuladoVenta));
+            contadorProductos.setText("0");
+            precioVenta.clear();
+            productosVenta.getSelectionModel().clearSelection();
+            cantidadPrVenta.getValueFactory().setValue(1);
+
+        } else {
+            mostrarAlerta("❌ Ocurrió un error al registrar la venta. Intente nuevamente.");
+        }
     }
 
     /**
@@ -209,8 +241,8 @@ public class VentasController {
         }
 
         DetalleVenta detalle = new DetalleVenta(
-                0,              // id (aún no asignado)
-                0,              // idVenta (se asignará al registrar)
+                0,
+                0,
                 productoSeleccionado.getId(),
                 cantidad,
                 precioUnitario,
@@ -353,8 +385,8 @@ public class VentasController {
 
     private void mostrarAlerta(String mens){
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Eliminación");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
         alert.setHeaderText(null);
         alert.setContentText(mens);
     }
