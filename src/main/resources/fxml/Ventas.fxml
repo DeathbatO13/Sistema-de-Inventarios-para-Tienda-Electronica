@@ -36,7 +36,7 @@
       </TableView>
       <Pane layoutX="16.0" layoutY="515.0" prefHeight="173.0" prefWidth="910.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <ComboBox fx:id="productosVenta" layoutX="14.0" layoutY="49.0" prefHeight="31.0" prefWidth="270.0" style="-fx-background-radius: 15;" />
+            <ComboBox fx:id="productosVenta" layoutX="14.0" layoutY="49.0" prefHeight="31.0" prefWidth="270.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
             <Spinner fx:id="cantidadPrVenta" layoutX="295.0" layoutY="49.0" prefHeight="31.0" prefWidth="82.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
             <TextField fx:id="precioVenta" layoutX="398.0" layoutY="49.0" prefHeight="31.0" prefWidth="153.0" style="-fx-background-radius: 15;">
                <font>

@@ -1,11 +1,9 @@
 package com.sistema.ui;
 
+import com.sistema.dao.MovimientoDAO;
 import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.VentasDAO;
-import com.sistema.modelo.DetalleVenta;
-import com.sistema.modelo.Producto;
-import com.sistema.modelo.Usuario;
-import com.sistema.modelo.Venta;
+import com.sistema.modelo.*;
 import com.sistema.util.UsuarioSesion;
 import com.sistema.util.VentaRow;
 import javafx.collections.FXCollections;
@@ -178,12 +176,28 @@ public class VentasController {
         Venta v = new Venta(LocalDateTime.now(), totalAcumuladoVenta, idUser);
 
         VentasDAO ventasDAO = new VentasDAO();
-        boolean exito = ventasDAO.registrarVenta(v, detallesVenta);
+        boolean ventReg = ventasDAO.registrarVenta(v, detallesVenta);
 
         // 5️⃣ Resultado
-        if (exito) {
+        if (ventReg) {
 
-            mostrarAlerta("✅ Venta registrada con éxito.");
+            MovimientoDAO movimientoDAO = new MovimientoDAO();
+
+            for (DetalleVenta det : detallesVenta) {
+                Movimiento mv = new Movimiento();
+                mv.setIdProducto(det.getIdProducto());
+                mv.setFecha(LocalDateTime.now());
+                mv.setTipoMovimiento(Movimiento.TipoMovimiento.VENTA);
+                mv.setCantidad(det.getCantidad());
+                mv.setDescripcion("Venta registrada (ID producto: " + det.getIdProducto() + ")");
+
+                boolean movReg = movimientoDAO.registrarMovimiento(mv);
+                if (!movReg) {
+                    System.err.println("No se pudo registrar movimiento para producto " + det.getIdProducto());
+                }
+            }
+
+            mostrarAlerta("Venta registrada con éxito.");
 
             // 🔄 Limpiar interfaz y lista
             detallesVenta.clear();
@@ -195,7 +209,7 @@ public class VentasController {
             cantidadPrVenta.getValueFactory().setValue(1);
 
         } else {
-            mostrarAlerta("❌ Ocurrió un error al registrar la venta. Intente nuevamente.");
+            mostrarAlerta("Ocurrió un error al registrar la venta. Intente nuevamente.");
         }
     }
 
@@ -389,5 +403,8 @@ public class VentasController {
         alert.setTitle("Info");
         alert.setHeaderText(null);
         alert.setContentText(mens);
+        alert.initOwner(totalVenta.getScene().getWindow());
+        alert.showAndWait();
+
     }
 }
