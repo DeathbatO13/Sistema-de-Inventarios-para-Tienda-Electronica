@@ -73,23 +73,21 @@ public class GestorInventario {
      * @return true si el ajuste y el movimiento se registran correctamente, false si ocurre un error.
      */
     public boolean ajustarStock(int idProdu, int nuevoStock, String descripcion) {
+
         ProductoDAO productoDAO = new ProductoDAO();
         int stockAct = productoDAO.buscarPorId(idProdu).getStockActual();
-        int diferencia = nuevoStock - stockAct;
-
-        // Si no hay diferencia, no hay nada que ajustar
-        if (diferencia == 0) return false;
+        int stockReal = nuevoStock + stockAct;
 
         // Actualiza el stock del producto
-        boolean actualizado = productoDAO.actualizarCantidadProducto(idProdu, nuevoStock);
+        boolean actualizado = productoDAO.actualizarCantidadProducto(idProdu, stockReal);
         if (!actualizado) return false;
 
         // Registrar movimiento
         Movimiento mv = new Movimiento();
         mv.setIdProducto(idProdu);
         mv.setTipoMovimiento(Movimiento.TipoMovimiento.AJUSTE);
-        mv.setCantidad(Math.abs(diferencia));
-        mv.setDescripcion(descripcion + " (" + (diferencia > 0 ? "+" : "-") + Math.abs(diferencia) + ")");
+        mv.setCantidad(stockReal);
+        mv.setDescripcion("AJUSTE");
 
         return new MovimientoDAO().registrarMovimiento(mv);
     }

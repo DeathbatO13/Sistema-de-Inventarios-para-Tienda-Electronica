@@ -23,8 +23,8 @@ public class MovimientoDAO {
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 
             ps.setInt(1, mv.getIdProducto());
-            Timestamp timestamp = Timestamp.valueOf(mv.getFecha());
-            ps.setTimestamp(2, timestamp);
+            LocalDateTime fecha = mv.getFecha() != null ? mv.getFecha() : LocalDateTime.now();
+            ps.setTimestamp(2, Timestamp.valueOf(fecha));
             ps.setString(3, mv.getTipoMovimiento().toString()); // Asumiendo que ahora usas un Enum
             ps.setInt(4, mv.getCantidad());
             ps.setString(5, mv.getDescripcion());

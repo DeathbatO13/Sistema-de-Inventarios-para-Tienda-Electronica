@@ -178,8 +178,6 @@ public class ProductosController {
     public void agregarExistenciasAction(ActionEvent actionEvent) {
 
         Producto producto = tablaProductos.getSelectionModel().getSelectedItem();
-        String nom = producto.getNombre();
-
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AgregarExistencias.fxml"));
@@ -189,7 +187,7 @@ public class ProductosController {
             Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
 
             ExistenciasController control = loader.getController();
-            control.initialize(nom);
+            control.setProducto(producto);
 
             stage.getIcons().add(icono);
             stage.setTitle("Nuevo Producto");
