@@ -10,6 +10,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de acceso a datos (DAO) para la gestión de ventas en la base de datos.
+ * Proporciona métodos para registrar ventas completas con sus detalles, consultar
+ * el total de ventas del mes actual y obtener una lista formateada de todas las ventas.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Calcular el total de ventas del mes actual usando funciones SQL de agregación.</li>
+ *   <li>Listar todas las ventas con detalles (producto, cantidad, subtotal, fecha) mediante JOINs.</li>
+ *   <li>Registrar una venta y sus detalles en una transacción atómica con rollback en caso de error.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link ConexionMySQL} para conexiones, sentencias preparadas y transacciones.
+ * Los errores se manejan con rollback automático y se registran en consola mediante {@code System.err}.
+ * Los recursos (conexiones, statements) se cierran correctamente en el bloque {@code finally}.</p>
+ */
 public class VentasDAO {
 
     /**

@@ -27,9 +27,22 @@ import java.util.Optional;
 
 /**
  * Controlador para la vista de gestión de proveedores.
- * Gestiona la visualización de proveedores en una lista, permite buscar proveedores por nombre,
- * muestra detalles de proveedores seleccionados y sus productos asociados en una tabla,
- * y configura acciones para agregar, editar y eliminar proveedores.
+ * Muestra una lista de proveedores en un {@link ListView}, permite buscar, agregar,
+ * editar y eliminar proveedores, y muestra detalles y productos asociados al proveedor seleccionado.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Búsqueda en tiempo real de proveedores por nombre usando {@link ProveedorDAO}.</li>
+ *   <li>Visualización de detalles (nombre, contacto, teléfono, correo) del proveedor seleccionado.</li>
+ *   <li>Tabla de productos asociados con formato de moneda y ajuste automático de texto (wrapping).</li>
+ *   <li>Operaciones CRUD mediante ventanas modales (agregar/editar con {@link AgregarProveedorController}).</li>
+ *   <li>Eliminación en cascada con confirmación y manejo de errores.</li>
+ *   <li>Celdas personalizadas con {@link ProveedorCellFactory} y {@link TableCell} para mejor UX.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link PropertyValueFactory} para vincular datos del modelo y
+ * {@link ObservableList} para actualización dinámica de la interfaz.</p>
  */
 public class ProveedoresController {
 

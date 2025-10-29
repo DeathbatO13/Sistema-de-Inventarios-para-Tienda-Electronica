@@ -9,8 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DAO para operaciones CRUD sobre la tabla 'productos'.
+ * Clase de acceso a datos (DAO) para la gestión de productos en la base de datos.
+ * Proporciona métodos completos para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * sobre la entidad {@link Producto}, así como consultas avanzadas por nombre, proveedor,
+ * stock bajo, ID único y conteo total.
  *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Listar todos los productos o filtrarlos por nombre, proveedor o stock bajo.</li>
+ *   <li>Agregar, actualizar y eliminar productos con manejo de ID generado.</li>
+ *   <li>Actualizar únicamente el stock de un producto.</li>
+ *   <li>Buscar un producto por ID o nombre (único resultado).</li>
+ *   <li>Contar el total de productos registrados.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link ConexionMySQL} para obtener conexiones y sentencias preparadas
+ * para prevenir inyecciones SQL. Los errores se registran en consola mediante {@code System.err}.</p>
  */
 public class ProductoDAO {
 

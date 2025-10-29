@@ -14,9 +14,22 @@ import javafx.scene.paint.Color;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * Controlador para la vista de recuperación de contraseña.
- * Gestiona el proceso de recuperación de contraseña, incluyendo el envío de códigos de verificación
- * por correo, la validación del código ingresado y el cambio de contraseña en la base de datos.
+ * Controlador para la ventana de recuperación de contraseña.
+ * Implementa un flujo de tres pasos: envío de código por correo, verificación del código
+ * y cambio seguro de contraseña con validación de seguridad.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Envío de código de 6 dígitos a través de {@link ServicioEmail} si el correo está registrado.</li>
+ *   <li>Verificación del código ingresado y habilitación progresiva de campos.</li>
+ *   <li>Validación de nueva contraseña: coincidencia, no vacía y cumplimiento de política de seguridad.</li>
+ *   <li>Encriptación con BCrypt antes de actualizar en la base de datos mediante {@link UsuarioDAO}.</li>
+ *   <li>Retroalimentación visual con colores y mensajes claros en cada etapa.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link SistemaAutenticacion} para generación de códigos y validación de contraseñas.
+ * El flujo es secuencial y seguro, evitando exposición innecesaria de campos.</p>
  */
 public class RecuperacionController {
 

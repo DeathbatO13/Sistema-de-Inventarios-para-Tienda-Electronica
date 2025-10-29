@@ -8,6 +8,25 @@ import com.sistema.modelo.Producto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Clase de gestión del inventario que coordina operaciones de entrada, salida y ajuste
+ * de stock, registrando cada movimiento en la base de datos mediante {@link MovimientoDAO}
+ * y actualizando el stock del producto con {@link ProductoDAO}.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Registrar entradas de inventario (compra o recepción).</li>
+ *   <li>Registrar salidas por venta.</li>
+ *   <li>Realizar ajustes manuales de stock.</li>
+ *   <li>Consultar el historial de movimientos por producto.</li>
+ *   <li>Obtener el stock actual de un producto.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Actúa como capa de servicio entre la interfaz de usuario y los DAOs,
+ * garantizando consistencia entre el stock del producto y los registros de movimientos.
+ * Los errores en la actualización del stock impiden el registro del movimiento.</p>
+ */
 public class GestorInventario {
 
     /**

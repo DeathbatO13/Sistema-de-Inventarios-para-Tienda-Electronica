@@ -20,9 +20,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controlador para el formulario de creación de nuevos productos.
- * Gestiona la interfaz de usuario para ingresar datos de productos, validar información,
- * cargar proveedores en un ComboBox y guardar el producto en la base de datos.
+ * Controlador para el formulario de registro de nuevos productos.
+ * Permite al usuario ingresar los datos de un producto (código, nombre, descripción,
+ * precios, stock y proveedor) y guardarlo en la base de datos mediante {@link ProductoDAO}.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Validación de campos obligatorios y conversión de tipos (String a int/double).</li>
+ *   <li>Carga dinámica de proveedores en un {@link ComboBox} usando {@link ProveedorDAO}.</li>
+ *   <li>Registro del producto y, si tiene stock inicial, registro automático de movimiento
+ *       de entrada mediante {@link GestorInventario}.</li>
+ *   <li>Retroalimentación visual con {@link Label} de error/exito y alertas modales.</li>
+ *   <li>Limpieza del formulario tras guardado exitoso.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>El método {@link #isProductoGuardado()} permite a la ventana padre saber si se debe
+ * recargar la lista de productos. Se inicializa con información sobre cómo agregar proveedores.</p>
  */
 public class FormularioProductController {
 

@@ -1,5 +1,6 @@
 package com.sistema.ui;
 
+import com.sistema.servicios.ServicioEmail;
 import com.sistema.servicios.SistemaAutenticacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,15 +14,30 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
 import java.io.IOException;
 
 /**
- * Controlador para la vista de registro de usuarios.
- * Gestiona el proceso de registro de nuevos usuarios, incluyendo la validación de datos,
- * el envío de códigos de verificación por correo y la verificación de dichos códigos.
- * También permite volver a la ventana de inicio de sesión.
+ * Controlador para la ventana de registro de nuevos usuarios.
+ * Gestiona el flujo de registro, validación de datos, envío de código de verificación
+ * y verificación de cuenta mediante correo electrónico.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Validación de campos obligatorios, formato de correo y seguridad de contraseña.</li>
+ *   <li>Registro del usuario mediante {@link SistemaAutenticacion#registrarUsuario}.</li>
+ *   <li>Envío automático de código de verificación por correo vía {@link ServicioEmail}.</li>
+ *   <li>Verificación del token ingresado con {@link SistemaAutenticacion#verificarCuenta}.</li>
+ *   <li>Retroalimentación visual progresiva: campos ocultos hasta que se necesiten.</li>
+ *   <li>Navegación de regreso al login con cierre seguro de ventana actual.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link BCrypt} para encriptar contraseñas y políticas de validación
+ * definidas en {@link SistemaAutenticacion}. El flujo es secuencial y seguro,
+ * habilitando campos solo cuando se cumplen las condiciones previas.</p>
  */
 public class RegistroController {
 

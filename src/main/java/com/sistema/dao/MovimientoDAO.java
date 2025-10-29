@@ -8,6 +8,23 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de acceso a datos (DAO) para la gestión de movimientos de inventario en la base de datos.
+ * Proporciona métodos para registrar, consultar y filtrar movimientos utilizando sentencias SQL
+ * preparadas y conexión a través de {@link ConexionMySQL}.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Registrar nuevos movimientos con generación automática de ID.</li>
+ *   <li>Listar todos los movimientos o filtrarlos por producto, rango de fechas, tipo o límite.</li>
+ *   <li>Contar el total de movimientos registrados.</li>
+ *   <li>Manejo seguro de recursos con try-with-resources.</li>
+ * </ul>
+ * </p>
+ *
+ * <p><strong>Nota:</strong> Los errores SQL se registran en consola mediante {@code System.err}.
+ * Se asume el uso de un {@code enum} {@link Movimiento.TipoMovimiento} para el campo tipo_movimiento.</p>
+ */
 public class MovimientoDAO {
 
     /**

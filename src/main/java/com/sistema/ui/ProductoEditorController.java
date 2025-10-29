@@ -18,8 +18,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controlador para la ventana de edición de productos en la aplicación.
- * Gestiona la interfaz de usuario para modificar los datos de un producto y actualizarlos en la base de datos.
+ * Controlador para la ventana de edición de productos existentes.
+ * Permite modificar todos los campos de un producto previamente registrado,
+ * incluyendo su proveedor, y persiste los cambios en la base de datos.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Carga los datos del producto por ID usando {@link ProductoDAO#buscarPorId(int)}.</li>
+ *   <li>Actualización completa del producto mediante {@link ProductoDAO#actualizarProducto(Producto)}.</li>
+ *   <li>Carga dinámica de proveedores en un {@link ComboBox} usando {@link ProveedorDAO}.</li>
+ *   <li>Conversión segura de campos numéricos (String a double/int).</li>
+ *   <li>Retroalimentación visual con alertas de éxito o error.</li>
+ *   <li>Cierre seguro de ventana al cancelar.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>El método {@link #setProductoData(int)} es clave para inicializar el formulario
+ * con los datos actuales del producto. Utiliza búsqueda por nombre para obtener el ID
+ * en la actualización, asumiendo unicidad de nombres.</p>
  */
 public class ProductoEditorController {
 

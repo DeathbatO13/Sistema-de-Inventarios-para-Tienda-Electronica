@@ -24,9 +24,21 @@ import java.util.Locale;
 
 
 /**
- * Controlador para la vista del panel principal (dashboard) de la aplicación.
- * Gestiona la tabla de productos con bajo stock, configura las columnas de la tabla,
- * muestra estadísticas de productos, proveedores y ventas del mes, y permite reordenar productos.
+ * Controlador para el panel principal (Dashboard) de la aplicación.
+ * Muestra un resumen general del estado del inventario: total de productos, proveedores,
+ * ventas del mes y una tabla con productos de bajo stock.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Carga dinámica de datos desde DAOs: {@link ProductoDAO}, {@link ProveedorDAO}, {@link VentasDAO}.</li>
+ *   <li>Formato de moneda colombiana para el total de ventas.</li>
+ *   <li>Tabla de productos con bajo stock, incluyendo columna de acción con botón "Reordenar".</li>
+ *   <li>Simulación de envío de correo al proveedor al reordenar (código comentado por seguridad).</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link PropertyValueFactory} para vincular propiedades del modelo {@link Producto}
+ * a las columnas de la {@link TableView}. La interfaz se inicializa automáticamente con {@code @FXML}.</p>
  */
 public class DashboardController {
 

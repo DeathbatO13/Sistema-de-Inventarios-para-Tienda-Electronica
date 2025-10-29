@@ -10,6 +10,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de acceso a datos (DAO) para la gestión de proveedores en la base de datos.
+ * Proporciona métodos completos para operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * sobre la entidad {@link Proveedor}, incluyendo búsquedas por nombre (exacta o parcial),
+ * por ID, conteo total y eliminación transaccional con productos asociados.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Listar todos los proveedores.</li>
+ *   <li>Agregar, editar y eliminar proveedores (con eliminación en cascada de productos).</li>
+ *   <li>Buscar proveedor único por nombre exacto o ID.</li>
+ *   <li>Buscar lista de proveedores por coincidencia parcial de nombre.</li>
+ *   <li>Contar el total de proveedores registrados.</li>
+ *   <li>Eliminación segura mediante transacciones con rollback en caso de error.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link ConexionMySQL} para conexiones y sentencias preparadas.
+ * Los errores se registran en consola mediante {@code System.err}.</p>
+ */
 public class ProveedorDAO {
 
     /**

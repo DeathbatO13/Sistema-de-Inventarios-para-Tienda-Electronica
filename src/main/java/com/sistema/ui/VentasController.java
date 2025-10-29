@@ -25,10 +25,25 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
- * Controlador para gestionar la interfaz de ventas en la aplicación.
- * Este controlador maneja la inicialización de la tabla de ventas, la carga de datos,
- * la búsqueda de ventas por fecha o texto, el registro de nuevas ventas y las acciones
- * asociadas a los productos y botones.
+ * Controlador para la gestión de ventas en la interfaz gráfica.
+ * Permite registrar ventas, agregar productos al carrito, buscar ventas por nombre o fecha,
+ * y visualizar el historial de ventas con formato de moneda colombiana.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Registro de ventas con múltiples productos (hasta 10) mediante transacción atómica.</li>
+ *   <li>Actualización automática de stock y registro de movimientos de salida con {@link GestorInventario}.</li>
+ *   <li>Búsqueda de ventas por nombre de producto o fecha usando {@link DatePicker}.</li>
+ *   <li>Selección dinámica de productos con actualización de precio unitario y límite de cantidad (stock - stock mínimo).</li>
+ *   <li>Formato de moneda colombiana en precios y totales.</li>
+ *   <li>Columna de acción "Editar" en la tabla de ventas (funcionalidad pendiente).</li>
+ *   <li>Acumulación de subtotales, contador de productos y limpieza de formulario.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link VentasDAO} para persistencia, {@link ProductoDAO} para productos disponibles,
+ * y {@link UsuarioSesion} para obtener el ID del usuario actual. Implementa validaciones de stock,
+ * formato de precios y límites de venta.</p>
  */
 public class VentasController {
 

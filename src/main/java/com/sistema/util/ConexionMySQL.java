@@ -5,10 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Clase encargada de gestionar la conexión a la base de datos MySQL.
- * Proporciona métodos para abrir y cerrar conexiones de forma centralizada,
- * reutilizando una conexión existente si está activa.
+ * Clase de utilidad para la gestión de conexiones a la base de datos MySQL.
+ * Implementa el patrón Singleton básico para reutilizar una única conexión activa
+ * durante la ejecución de la aplicación.
  *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Establece conexión con MySQL usando JDBC y credenciales fijas.</li>
+ *   <li>Reutiliza la conexión si ya está abierta y válida.</li>
+ *   <li>Cierra la conexión de forma segura cuando ya no es necesaria.</li>
+ *   <li>Registra eventos de conexión y errores en consola.</li>
+ * </ul>
+ * </p>
+ *
+ * <p><strong>Advertencia:</strong> Las credenciales están hardcoded.
+ * En producción, se recomienda usar variables de entorno, archivos de configuración
+ * o un sistema de gestión de secretos.</p>
  */
 public class ConexionMySQL {
 

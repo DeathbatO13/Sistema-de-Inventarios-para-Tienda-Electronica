@@ -11,9 +11,21 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Controlador para la vista de agregar o editar proveedores.
- * Gestiona el formulario para ingresar o modificar datos de proveedores, valida los campos
- * y realiza las operaciones de guardado o edición en la base de datos.
+ * Controlador para la ventana de agregar o editar proveedores.
+ * Gestiona un formulario modal que permite crear nuevos proveedores o modificar existentes,
+ * con validación en tiempo real de campos (obligatorios, formato de correo y teléfono colombiano).
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Modo dual: agregar (nuevo) o editar (existente) según la presencia de un {@link Proveedor}.</li>
+ *   <li>Validación de entrada usando {@link SistemaAutenticacion} (correo y teléfono).</li>
+ *   <li>Persistencia mediante {@link ProveedorDAO} con retroalimentación visual (alertas).</li>
+ *   <li>Cierre seguro de ventana al cancelar.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>El formulario se inicializa con título dinámico y, en modo edición, precarga los datos del proveedor.
+ * Utiliza {@code @FXML} para inyección de componentes de la interfaz.</p>
  */
 public class AgregarProveedorController {
 

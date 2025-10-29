@@ -16,11 +16,24 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
 
-
 /**
- * Controlador para la vista de inicio de sesión.
- * Gestiona la autenticación de usuarios, el acceso al formulario de registro, la recuperación de contraseñas
- * y el bloqueo temporal de intentos fallidos de inicio de sesión.
+ * Controlador para la ventana de inicio de sesión (Login).
+ * Gestiona la autenticación de usuarios mediante {@link SistemaAutenticacion},
+ * navegación a registro o panel principal, y protección contra ataques de fuerza bruta
+ * con bloqueo temporal tras 5 intentos fallidos.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Validación de credenciales con retroalimentación visual.</li>
+ *   <li>Contador de intentos fallidos con bloqueo de 60 segundos.</li>
+ *   <li>Navegación segura a registro o panel principal usando {@link FXMLLoader}.</li>
+ *   <li>Ventana modal para recuperación de contraseña.</li>
+ *   <li>Deshabilitación temporal de campos durante bloqueo con {@link Timeline}.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@code @FXML} para inyección de componentes.
+ * Cierra la ventana actual al abrir una nueva para evitar múltiples instancias.</p>
  */
 public class LoginController {
     @FXML

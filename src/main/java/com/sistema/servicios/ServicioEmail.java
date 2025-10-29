@@ -7,8 +7,20 @@ import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
- * Clase para gestionar la conexión y el envío de correos electrónicos desde una cuenta remitente.
- * Configura el servicio de correo utilizando SMTP de Gmail para enviar mensajes, como correos de verificación.
+ * Clase de utilidad para el envío de correos electrónicos mediante el protocolo SMTP.
+ * Utiliza las credenciales de una cuenta de Gmail configurada con App Password
+ * para enviar mensajes de verificación, recuperación de contraseña u otros avisos.
+ *
+ * <p>Funcionalidades:
+ * <ul>
+ *   <li>Envío de correos con asunto y cuerpo personalizados a un destinatario.</li>
+ *   <li>Configuración segura mediante TLS y autenticación SMTP.</li>
+ *   <li>Manejo de excepciones con registro de errores en consola.</li>
+ * </ul>
+ * </p>
+ *
+ * <p><strong>Advertencia:</strong> Las credenciales están hardcoded.
+ * En entornos de producción, se recomienda usar variables de entorno o un archivo de configuración seguro.</p>
  */
 public class ServicioEmail {
 

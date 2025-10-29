@@ -8,8 +8,23 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.security.SecureRandom;
 
 /**
- * Clase encargada de gestionar el registro, autenticación y verificación de usuarios.
- * Utiliza BCrypt para el hashing de contraseñas y maneja el envío de códigos de verificación por correo.
+ * Clase de servicio para la gestión del proceso de autenticación y registro de usuarios.
+ * Maneja el registro con verificación por correo, inicio de sesión, validación de datos
+ * y generación de códigos de seguridad. Utiliza {@link UsuarioDAO} para persistencia
+ * y {@link ServicioEmail} para notificaciones.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Registro de usuarios con encriptación BCrypt y envío de código de verificación.</li>
+ *   <li>Verificación de cuentas mediante tokens únicos.</li>
+ *   <li>Autenticación segura con verificación de estado de cuenta.</li>
+ *   <li>Validación de formatos: email, teléfono colombiano, contraseñas seguras.</li>
+ *   <li>Generación de códigos alfanuméricos (verificación) y numéricos (recuperación).</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Implementa políticas de seguridad para contraseñas y validación de datos de entrada.
+ * Integra con {@link UsuarioSesion} para mantener el estado del usuario autenticado.</p>
  */
 public class SistemaAutenticacion {
 

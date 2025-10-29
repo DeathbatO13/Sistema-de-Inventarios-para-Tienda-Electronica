@@ -22,6 +22,25 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+/**
+ * Controlador principal para la gestión de productos en la interfaz gráfica.
+ * Administra la {@link TableView} de productos, permite buscar, agregar, editar, eliminar
+ * y ajustar existencias. Configura columnas con formatos personalizados (moneda, tooltips),
+ * y maneja ventanas modales para operaciones específicas.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Cargar y mostrar lista de productos desde la base de datos.</li>
+ *   <li>Buscar productos por nombre.</li>
+ *   <li>Abrir formularios modales para agregar, editar o ajustar existencias.</li>
+ *   <li>Columna de acciones con botones "Editar" y "Eliminar" por fila.</li>
+ *   <li>Formato de moneda colombiana y tooltips con descripción del producto.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link ProductoDAO} para operaciones con la base de datos y
+ * {@link FXMLLoader} para cargar vistas FXML secundarias como ventanas modales.</p>
+ */
 public class ProductosController {
 
     @FXML

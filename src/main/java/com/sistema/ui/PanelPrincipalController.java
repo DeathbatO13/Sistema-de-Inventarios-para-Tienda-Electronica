@@ -17,10 +17,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Controlador para la vista principal del panel de la aplicación.
- * Gestiona la navegación entre diferentes vistas (Dashboard, Productos, Proveedores, Ventas, Reportes)
- * mediante un menú, actualiza los estilos de los botones de navegación y carga dinámicamente las vistas
- * en un panel.
+ * Controlador principal del panel de navegación de la aplicación.
+ * Gestiona un menú lateral con botones que cambian dinámicamente el contenido del
+ * {@link AnchorPane} central mediante carga de vistas FXML.
+ *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Indicador visual de botón activo mediante estilos CSS.</li>
+ *   <li>Carga dinámica de vistas (Dashboard, Productos, Proveedores, Ventas, Reportes).</li>
+ *   <li>Cierre de sesión con redirección segura a la pantalla de login.</li>
+ *   <li>Prevención de interacción con el divisor del {@link SplitPane}.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Utiliza {@link FXMLLoader} para cargar vistas FXML y reemplazar el contenido del
+ * panel dinámico. Mantiene referencia al botón activo para gestión de estilos.</p>
  */
 public class PanelPrincipalController {
 

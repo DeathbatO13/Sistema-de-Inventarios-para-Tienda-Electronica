@@ -6,8 +6,23 @@ import com.sistema.util.ConexionMySQL;
 import java.sql.*;
 
 /**
- * DAO para operaciones CRUD sobre la tabla 'usuarios'.
+ * Clase de acceso a datos (DAO) para la gestión de usuarios en la base de datos.
+ * Proporciona métodos para registro, autenticación, verificación de cuenta,
+ * recuperación de contraseña y búsquedas por email o token.
  *
+ * <p>Funcionalidades principales:
+ * <ul>
+ *   <li>Registrar nuevos usuarios con hash de contraseña y token de verificación.</li>
+ *   <li>Buscar usuarios por email o token de verificación.</li>
+ *   <li>Actualizar estado de verificación (marcar como verificado y limpiar token).</li>
+ *   <li>Verificar si un email ya está registrado.</li>
+ *   <li>Cambiar la contraseña de un usuario mediante su email.</li>
+ * </ul>
+ * </p>
+ *
+ * <p>Maneja excepciones específicas como {@link SQLIntegrityConstraintViolationException}
+ * para duplicados de email. Utiliza {@link ConexionMySQL} y sentencias preparadas
+ * para seguridad. Los errores se registran en consola mediante {@code System.err}.</p>
  */
 public class UsuarioDAO {
 
