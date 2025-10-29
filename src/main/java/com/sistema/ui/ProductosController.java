@@ -28,6 +28,9 @@ public class ProductosController {
     private TextField buscarProducto;
 
     @FXML
+    private Button btnAExistenciasProducto;
+
+    @FXML
     private TableView<Producto> tablaProductos;
 
     @FXML
@@ -112,6 +115,9 @@ public class ProductosController {
         cargarListaProductos();
         // Agregar columnas a la tabla
         agregarColumnaAccion();
+
+        Producto prodSelec = tablaProductos.getSelectionModel().getSelectedItem();
+        btnAExistenciasProducto.setDisable(prodSelec == null);
     }
 
 

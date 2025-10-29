@@ -45,7 +45,7 @@ public class GestorInventario {
      * @param descripcion La descripción del movimiento.
      * @return true si el movimiento se registra correctamente, false si ocurre un error.
      */
-    public boolean registroSalida(int idProdu, int cant, String descripcion){
+    public static boolean registroSalida(int idProdu, int cant, String descripcion){
         ProductoDAO productoDAO = new ProductoDAO();
         int stockAct = productoDAO.buscarPorId(idProdu).getStockActual();
         int stockNuevo = stockAct - cant;

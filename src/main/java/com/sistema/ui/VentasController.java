@@ -4,6 +4,7 @@ import com.sistema.dao.MovimientoDAO;
 import com.sistema.dao.ProductoDAO;
 import com.sistema.dao.VentasDAO;
 import com.sistema.modelo.*;
+import com.sistema.servicios.GestorInventario;
 import com.sistema.util.UsuarioSesion;
 import com.sistema.util.VentaRow;
 import javafx.collections.FXCollections;
@@ -184,16 +185,16 @@ public class VentasController {
             MovimientoDAO movimientoDAO = new MovimientoDAO();
 
             for (DetalleVenta det : detallesVenta) {
-                Movimiento mv = new Movimiento();
-                mv.setIdProducto(det.getIdProducto());
-                mv.setFecha(LocalDateTime.now());
-                mv.setTipoMovimiento(Movimiento.TipoMovimiento.VENTA);
-                mv.setCantidad(det.getCantidad());
-                mv.setDescripcion("Venta registrada (ID producto: " + det.getIdProducto() + ")");
 
-                boolean movReg = movimientoDAO.registrarMovimiento(mv);
-                if (!movReg) {
-                    System.err.println("No se pudo registrar movimiento para producto " + det.getIdProducto());
+
+                boolean regEx = GestorInventario.registroSalida(
+                        det.getIdProducto(),
+                        det.getCantidad(),
+                        "Venta registrada (ID producto: " + det.getIdProducto() + ")"
+                );
+
+                if (!regEx) {
+                    System.err.println("No se pudo registrar el movimiento ni actualizar stock para producto ID: " + det.getIdProducto());
                 }
             }
 

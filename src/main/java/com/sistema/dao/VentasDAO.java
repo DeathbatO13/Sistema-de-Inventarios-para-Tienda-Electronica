@@ -79,14 +79,10 @@ public class VentasDAO {
     public boolean registrarVenta(Venta venta, List<DetalleVenta> detalles) {
         String sqlVenta = "INSERT INTO ventas (fecha, total_venta, id_usuario) VALUES (?, ?, ?)";
         String sqlDetalle = "INSERT INTO detalle_ventas (id_venta, id_producto, cantidad, precio_unitario_venta, subtotal) VALUES (?, ?, ?, ?, ?)";
-        String sqlUpdateStock = "UPDATE productos SET stock_actual = stock_actual - ? WHERE id = ?";
-        String sqlMovimiento = "INSERT INTO movimientos_inventario (id_producto, tipo_movimiento, cantidad, descripcion) VALUES (?, 'VENTA', ?, ?)";
 
         Connection con = null;
         PreparedStatement psVenta = null;
         PreparedStatement psDetalle = null;
-        PreparedStatement psStock = null;
-        PreparedStatement psMovimiento = null;
 
         try {
             con = ConexionMySQL.getConexion();
@@ -108,8 +104,6 @@ public class VentasDAO {
 
             // 2️⃣ Insertar los detalles
             psDetalle = con.prepareStatement(sqlDetalle);
-            psStock = con.prepareStatement(sqlUpdateStock);
-            psMovimiento = con.prepareStatement(sqlMovimiento);
 
             for (DetalleVenta d : detalles) {
                 // Insertar en detalle_ventas
@@ -120,22 +114,10 @@ public class VentasDAO {
                 psDetalle.setDouble(5, d.getSubtotal());
                 psDetalle.addBatch();
 
-                // Actualizar stock
-                psStock.setInt(1, d.getCantidad());
-                psStock.setInt(2, d.getIdProducto());
-                psStock.addBatch();
-
-                // Registrar movimiento de inventario
-                psMovimiento.setInt(1, d.getIdProducto());
-                psMovimiento.setInt(2, d.getCantidad());
-                psMovimiento.setString(3, "Venta registrada (ID Venta: " + idVenta + ")");
-                psMovimiento.addBatch();
             }
 
             // Ejecutar
             psDetalle.executeBatch();
-            psStock.executeBatch();
-            psMovimiento.executeBatch();
 
             con.commit();
 
@@ -155,8 +137,6 @@ public class VentasDAO {
             try {
                 if (psVenta != null) psVenta.close();
                 if (psDetalle != null) psDetalle.close();
-                if (psStock != null) psStock.close();
-                if (psMovimiento != null) psMovimiento.close();
                 if (con != null) con.setAutoCommit(true);
                 if (con != null) con.close();
             } catch (SQLException e) {
