@@ -116,8 +116,11 @@ public class ProductosController {
         // Agregar columnas a la tabla
         agregarColumnaAccion();
 
-        Producto prodSelec = tablaProductos.getSelectionModel().getSelectedItem();
-        btnAExistenciasProducto.setDisable(prodSelec == null);
+        tablaProductos.getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldSel, newSel) -> {
+            btnAExistenciasProducto.setDisable(newSel == null);
+        });
+
     }
 
 
@@ -173,6 +176,37 @@ public class ProductosController {
     }
 
     public void agregarExistenciasAction(ActionEvent actionEvent) {
+
+        Producto producto = tablaProductos.getSelectionModel().getSelectedItem();
+        String nom = producto.getNombre();
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AgregarExistencias.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+
+            ExistenciasController control = loader.getController();
+            control.initialize(nom);
+
+            stage.getIcons().add(icono);
+            stage.setTitle("Nuevo Producto");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(tablaProductos.getScene().getWindow());
+
+            stage.showAndWait();
+
+            FormularioProductController controller = loader.getController();
+            if (controller.isProductoGuardado()) {
+                cargarListaProductos();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

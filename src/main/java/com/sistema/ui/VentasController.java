@@ -168,7 +168,7 @@ public class VentasController {
      */
     public void btnRegistrarVentaAction(ActionEvent actionEvent){
 
-        if (detallesVenta == null || detallesVenta.isEmpty()) {
+        if (detallesVenta.isEmpty()) {
             mostrarAlerta("Debe agregar al menos un producto antes de registrar la venta.");
             return;
         }
@@ -292,9 +292,7 @@ public class VentasController {
         contadorProductos.setText("0");
         precioVenta.setText("");
 
-        if (detallesVenta != null) {
-            detallesVenta.clear();
-        }
+        detallesVenta.clear();
     }
 
 

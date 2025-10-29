@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #DDDDDD;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.ExistenciasController">
+   <children>
+      <Pane layoutX="10.0" layoutY="52.0" prefHeight="134.0" prefWidth="477.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <Label fx:id="productoLabel" layoutX="14.0" layoutY="15.0" prefHeight="53.0" prefWidth="273.0" text="Nombre Producto" wrapText="true">
+               <font>
+                  <Font name="Corbel Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="82.0" prefHeight="23.0" prefWidth="196.0" text="Unidades a agregar: ">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="cantidadSpinner" layoutX="178.0" layoutY="82.0" prefHeight="23.0" prefWidth="91.0" />
+            <Button layoutX="364.0" layoutY="77.0" mnemonicParsing="false" onAction="#btnCancelarAction" style="-fx-background-color: #DDDDDD; -fx-background-radius: 15;" text="Cancelar">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="364.0" layoutY="33.0" mnemonicParsing="false" onAction="#btnGuardarAction" prefHeight="34.0" prefWidth="91.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Guardar" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="14.0" text="Agregar Existencias">
+         <font>
+            <Font name="Corbel Bold" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
