@@ -198,6 +198,18 @@ public class ProductosController {
 
         Producto producto = tablaProductos.getSelectionModel().getSelectedItem();
 
+        if(producto == null){
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Debes seleccionar un producto de la Tabla");
+            alert.initOwner(tablaProductos.getScene().getWindow());
+            alert.showAndWait();
+
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AgregarExistencias.fxml"));
             Parent root = loader.load();
@@ -209,7 +221,7 @@ public class ProductosController {
             control.setProducto(producto);
 
             stage.getIcons().add(icono);
-            stage.setTitle("Nuevo Producto");
+            stage.setTitle("Nuevas existencias");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(tablaProductos.getScene().getWindow());

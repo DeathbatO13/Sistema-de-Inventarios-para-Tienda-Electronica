@@ -335,6 +335,7 @@ public class VentasController {
 
                 // Evento del botón
                 btnEditar.setOnAction(event -> {
+
                     VentaRow venta = getTableView().getItems().get(getIndex());
                     System.out.println("Editar Venta: " + venta.getProductoVendido());
                 });
@@ -383,6 +384,14 @@ public class VentasController {
     }
 
 
+    /**
+     * Actualiza el precio unitario mostrado en el campo de texto cuando se selecciona
+     * un producto en el ComboBox. Formatea el precio de venta del producto seleccionado
+     * con el formato de moneda colombiana (COP).
+     *
+     * @param prodSelec El producto seleccionado del ComboBox, obtenido mediante búsqueda por nombre.
+     *                  Puede ser {@code null} si no hay selección o no se encuentra.
+     */
     private void actualizarPrecioUnitario(Producto prodSelec){
         if(prodSelec != null){
 
@@ -394,7 +403,15 @@ public class VentasController {
         }
     }
 
-    private void actualizarSpinner(Producto prodSelect) {
+    /**
+     * Configura el rango permitido del {@link Spinner} de cantidad según el stock disponible
+     * del producto seleccionado. El máximo permitido es {@code stockActual - stockMinimo},
+     * con un mínimo de 1 para evitar valores inválidos.
+     *
+     * @param prodSelect El producto seleccionado del ComboBox.
+     *                   Si es {@code null}, el spinner mantiene su valor por defecto.
+     */
+    private void actualizarSpinner(Producto prodSelect){
         if (prodSelect != null) {
             int stockActual = prodSelect.getStockActual();
             int stockMinimo = prodSelect.getStockMinimo();
@@ -411,6 +428,13 @@ public class VentasController {
         }
     }
 
+    /**
+     * Muestra una alerta informativa modal con el mensaje proporcionado.
+     * Se utiliza para notificar al usuario sobre resultados de operaciones,
+     * validaciones o errores no críticos.
+     *
+     * @param mens El mensaje a mostrar en el cuerpo de la alerta.
+     */
     private void mostrarAlerta(String mens){
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
