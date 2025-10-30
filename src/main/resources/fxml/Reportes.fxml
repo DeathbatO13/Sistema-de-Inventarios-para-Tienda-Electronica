@@ -82,14 +82,14 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <Label layoutX="409.0" layoutY="17.0" text="Ventas los ultimos 3 meses " textFill="#979797">
+            <Label layoutX="412.0" layoutY="17.0" text="Ventas los ultimos 2 meses" textFill="#979797">
                <font>
                   <Font name="Corbel Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="gagnaciasLabel" layoutX="417.0" layoutY="30.0" text="\$14.356.000.00">
+            <Label layoutX="404.0" layoutY="33.0" prefHeight="22.0" prefWidth="169.0" text="total">
                <font>
-                  <Font name="Corbel Bold" size="24.0" />
+                  <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
          </children>

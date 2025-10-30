@@ -205,3 +205,47 @@
     -fx-background-color: white;
     -fx-padding: 10px;
 }
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+}
+
+/* Ocultar puntos */
+.default-color0.chart-area-symbol {
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+/* Línea principal */
+.default-color0.chart-series-area-line {
+    -fx-stroke: #5882E8;
+    -fx-stroke-width: 3px;
+    -fx-effect: dropshadow(gaussian, #5882E8, 10, 0.6, 0, 0);
+}
+
+/* Área con degradado */
+.default-color0.chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, rgba(88,130,232,0.3), rgba(88,130,232,0.05));
+}
+
+/* Ejes */
+.axis {
+    -fx-tick-label-fill: transparent; /* Oculta etiquetas del eje X */
+    -fx-font-size: 0;
+}
+
+.axis:bottom {
+    -fx-border-color: transparent;
+}
+
+.axis:left {
+    -fx-tick-label-fill: #777;
+    -fx-tick-length: 0;
+    -fx-minor-tick-length: 0;
+}

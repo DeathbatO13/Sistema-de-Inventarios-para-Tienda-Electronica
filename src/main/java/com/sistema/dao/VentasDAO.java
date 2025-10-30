@@ -4,6 +4,7 @@ import com.sistema.modelo.DetalleVenta;
 import com.sistema.modelo.Usuario;
 import com.sistema.modelo.Venta;
 import com.sistema.util.ConexionMySQL;
+import com.sistema.util.VentaGraficaRow;
 import com.sistema.util.VentaRow;
 
 import java.sql.*;
@@ -162,6 +163,7 @@ public class VentasDAO {
         }
     }
 
+
     public List<VentaRow> productosMasVendidosUltimos3Meses() {
         List<VentaRow> lista = new ArrayList<>();
 
@@ -198,6 +200,41 @@ public class VentasDAO {
         return lista;
     }
 
+
+    public List<VentaGraficaRow> obtenerVentasUltimosTresMeses() {
+        List<VentaGraficaRow> lista = new ArrayList<>();
+        String sql = """
+        WITH RECURSIVE dias AS (
+                        SELECT CURDATE() - INTERVAL 60 DAY AS fecha
+                        UNION ALL
+                        SELECT fecha + INTERVAL 1 DAY
+                        FROM dias
+                        WHERE fecha + INTERVAL 1 DAY <= CURDATE()
+                    )
+                    SELECT\s
+                        d.fecha AS Fecha,
+                        IFNULL(SUM(v.total_venta), 0) AS Total_Ventas
+                    FROM dias d
+                    LEFT JOIN ventas v ON DATE(v.fecha) = d.fecha
+                    GROUP BY d.fecha
+                    ORDER BY d.fecha;
+    """;
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new VentaGraficaRow(
+                        rs.getDate("Fecha").toLocalDate(),
+                        rs.getDouble("Total_Ventas")
+                ));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener ventas para gráfica: " + e.getMessage());
+        }
+        return lista;
+    }
 
 
 }

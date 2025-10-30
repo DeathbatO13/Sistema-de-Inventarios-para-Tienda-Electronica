@@ -1,12 +1,16 @@
 package com.sistema.ui;
 
 import com.sistema.dao.VentasDAO;
+import com.sistema.util.VentaGraficaRow;
 import com.sistema.util.VentaRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -14,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -32,7 +37,7 @@ public class ReportesController {
     private TableColumn<VentaRow, Double> profitRepo;
 
     @FXML
-    private AreaChart<LocalDateTime, Double> grafico;
+    private AreaChart<String, Number> grafico;
 
     @FXML
     private ComboBox<String> tipoRepoCB, periodoRepoCB;
@@ -41,7 +46,39 @@ public class ReportesController {
     private Label gagnaciasLabel;
 
 
+
+    @FXML
     public void initialize(){
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        List<VentaGraficaRow> ventas = new VentasDAO().obtenerVentasUltimosTresMeses();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (VentaGraficaRow v : ventas) {
+            series.getData().add(new XYChart.Data<>(v.getFecha().format(formatter), v.getTotalVentas()));
+        }
+
+        grafico.getData().clear();
+        grafico.getData().add(series);
+
+        // 🎨 Estilo limpio
+        grafico.setCreateSymbols(false); // Ocultar los puntos
+        grafico.setLegendVisible(false); // Ocultar la leyenda
+
+        // 🔹 Configuración de ejes
+        CategoryAxis xAxis = (CategoryAxis) grafico.getXAxis();
+        xAxis.setTickLabelsVisible(false);
+        xAxis.setTickMarkVisible(false);
+        xAxis.setOpacity(0);
+
+        NumberAxis yAxis = (NumberAxis) grafico.getYAxis();
+        yAxis.setTickLabelsVisible(true);
+        yAxis.setTickMarkVisible(true);
+        grafico.setHorizontalGridLinesVisible(true);
+        grafico.setVerticalGridLinesVisible(false);
+
         cargarProductosMasVendidos();
     }
 
