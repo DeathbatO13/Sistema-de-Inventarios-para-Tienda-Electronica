@@ -163,7 +163,17 @@ public class VentasDAO {
         }
     }
 
-
+    /**
+     * Obtiene una lista de los 20 productos más vendidos en los últimos 3 meses,
+     * ordenados por cantidad descendente. Cada entrada incluye el nombre del producto,
+     * la cantidad total vendida y el ingreso bruto generado.
+     *
+     * <p>Utiliza una consulta SQL con agregación ({@code SUM}) y agrupación por producto.
+     * La fecha de inicio se calcula dinámicamente con {@code DATE_SUB(CURDATE(), INTERVAL 3 MONTH)}.</p>
+     *
+     * @return Lista de {@link VentaRow} con los productos más vendidos.
+     *         La fecha se establece como {@code null} ya que no es relevante para este reporte.
+     */
     public List<VentaRow> productosMasVendidosUltimos3Meses() {
         List<VentaRow> lista = new ArrayList<>();
 
@@ -200,7 +210,15 @@ public class VentasDAO {
         return lista;
     }
 
-
+    /**
+     * Obtiene las ventas diarias totales de los últimos 60 días (aproximadamente 2 meses),
+     * incluyendo días sin ventas (valor 0). Utiliza una tabla recursiva ({@code WITH RECURSIVE})
+     * para generar todas las fechas del rango y un {@code LEFT JOIN} para incluir días sin registro.
+     *
+     * <p>Los resultados están ordenados cronológicamente y son ideales para gráficos de línea o área.</p>
+     *
+     * @return Lista de {@link VentaGraficaRow} con fecha y total de ventas por día.
+     */
     public List<VentaGraficaRow> obtenerVentasUltimosTresMeses() {
         List<VentaGraficaRow> lista = new ArrayList<>();
         String sql = """
