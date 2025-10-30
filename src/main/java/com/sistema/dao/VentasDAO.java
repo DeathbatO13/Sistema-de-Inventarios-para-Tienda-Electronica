@@ -162,6 +162,42 @@ public class VentasDAO {
         }
     }
 
+    public List<VentaRow> productosMasVendidosUltimos3Meses() {
+        List<VentaRow> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT 
+            p.nombre AS Producto_vendido,
+            SUM(dv.cantidad) AS Cantidad,
+            SUM(dv.subtotal) AS Precio_total
+        FROM ventas v
+        JOIN detalle_ventas dv ON v.id = dv.id_venta
+        JOIN productos p ON dv.id_producto = p.id
+        WHERE v.fecha >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+        GROUP BY p.nombre
+        ORDER BY Cantidad DESC
+        LIMIT 20;
+    """;
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                VentaRow ventaRow = new VentaRow(
+                        rs.getString("Producto_vendido"),
+                        rs.getInt("Cantidad"),
+                        rs.getDouble("Precio_total"),
+                        null // no necesitamos la fecha en este caso
+                );
+                lista.add(ventaRow);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al consultar productos más vendidos: " + e.getMessage());
+        }
+        return lista;
+    }
+
 
 
 }

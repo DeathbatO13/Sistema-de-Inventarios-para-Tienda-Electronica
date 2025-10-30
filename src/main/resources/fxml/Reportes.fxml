@@ -41,14 +41,14 @@
                   <Font name="Corbel Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox layoutX="16.0" layoutY="65.0" prefHeight="35.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #DDDDDD; -fx-border-radius: 15;" />
-            <ComboBox layoutX="16.0" layoutY="139.0" prefHeight="35.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #DDDDDD; -fx-border-radius: 15;" />
-            <Button layoutX="16.0" layoutY="209.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte TXT" textFill="WHITE">
+            <ComboBox fx:id="tipoRepoCB" layoutX="16.0" layoutY="65.0" prefHeight="35.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #DDDDDD; -fx-border-radius: 15;" />
+            <ComboBox fx:id="periodoRepoCB" layoutX="16.0" layoutY="139.0" prefHeight="35.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #DDDDDD; -fx-border-radius: 15;" />
+            <Button fx:id="btnReporteTXT" layoutX="16.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnReporteTXTAction" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte TXT" textFill="WHITE">
                <font>
                   <Font name="Corbel Bold" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="16.0" layoutY="268.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte CSV" textFill="WHITE">
+            <Button layoutX="16.0" layoutY="268.0" mnemonicParsing="false" onAction="#btnReporteCSVAction" prefHeight="36.0" prefWidth="279.0" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Generar Reporte CSV" textFill="WHITE">
                <font>
                   <Font name="Corbel Bold" size="15.0" />
                </font>
@@ -67,14 +67,14 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <TableView layoutX="14.0" layoutY="307.0" prefHeight="261.0" prefWidth="572.0">
+            <TableView fx:id="tablaReporte" layoutX="14.0" layoutY="307.0" prefHeight="261.0" prefWidth="572.0">
               <columns>
-                <TableColumn prefWidth="319.0" text="Producto" />
-                <TableColumn minWidth="6.0" prefWidth="143.0" text="Unidades" />
-                  <TableColumn prefWidth="114.0" text="Ganancia" />
+                <TableColumn fx:id="productoRepo" prefWidth="345.0" text="Producto" />
+                <TableColumn fx:id="cantidadRepo" minWidth="6.0" prefWidth="86.0" text="Unidades" />
+                  <TableColumn fx:id="profitRepo" prefWidth="145.0" text="Total Vendido" />
               </columns>
             </TableView>
-            <AreaChart layoutX="2.0" layoutY="44.0" prefHeight="207.0" prefWidth="572.0">
+            <AreaChart fx:id="grafico" layoutX="2.0" layoutY="44.0" prefHeight="207.0" prefWidth="572.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -87,7 +87,7 @@
                   <Font name="Corbel Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="417.0" layoutY="30.0" text="\$14.356.000.00">
+            <Label fx:id="gagnaciasLabel" layoutX="417.0" layoutY="30.0" text="\$14.356.000.00">
                <font>
                   <Font name="Corbel Bold" size="24.0" />
                </font>
