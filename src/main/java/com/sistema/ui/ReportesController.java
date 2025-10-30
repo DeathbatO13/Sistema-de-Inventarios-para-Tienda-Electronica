@@ -17,9 +17,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 
 public class ReportesController {
@@ -43,9 +45,9 @@ public class ReportesController {
     private ComboBox<String> tipoRepoCB, periodoRepoCB;
 
     @FXML
-    private Label gagnaciasLabel;
+    private Label totalLabel;
 
-
+    private double totalVendido = 0;
 
     @FXML
     public void initialize(){
@@ -58,6 +60,7 @@ public class ReportesController {
 
         for (VentaGraficaRow v : ventas) {
             series.getData().add(new XYChart.Data<>(v.getFecha().format(formatter), v.getTotalVentas()));
+            totalVendido += v.getTotalVentas();
         }
 
         grafico.getData().clear();
@@ -78,6 +81,10 @@ public class ReportesController {
         yAxis.setTickMarkVisible(true);
         grafico.setHorizontalGridLinesVisible(true);
         grafico.setVerticalGridLinesVisible(false);
+
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+
+        totalLabel.setText(String.valueOf(formatoMoneda.format(totalVendido)));
 
         cargarProductosMasVendidos();
     }

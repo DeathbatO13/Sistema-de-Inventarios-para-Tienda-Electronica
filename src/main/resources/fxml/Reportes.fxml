@@ -87,9 +87,9 @@
                   <Font name="Corbel Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="404.0" layoutY="33.0" prefHeight="22.0" prefWidth="169.0" text="total">
+            <Label fx:id="totalLabel" layoutX="411.0" layoutY="33.0" prefHeight="27.0" prefWidth="162.0" text="total">
                <font>
-                  <Font name="Corbel Bold" size="18.0" />
+                  <Font name="Corbel Bold" size="22.0" />
                </font>
             </Label>
          </children>
