@@ -12,10 +12,7 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.text.NumberFormat;
@@ -100,7 +97,24 @@ public class ReportesController {
      */
     public void btnReporteTXTAction(ActionEvent actionEvent) {
 
-        //Invocar a gestor reportes y generar el reporte txt
+        if(tipoRepoCB.getValue() == null || periodoRepoCB.getValue() == null){
+
+            mostrarAlerta("Debe seleccionar tipo y periodo del reporte","Error");
+
+        }
+
+        String tipo = tipoRepoCB.getValue();
+        String periodo = periodoRepoCB.getValue();
+
+        if(new GestorReportes().generarReporteTXT(tipo, periodo)){
+
+            mostrarAlerta("Reporte Generado con exito", "Estado reporte");
+
+        }else{
+
+            mostrarAlerta("No se pudo generar el reporte", "Error");
+        }
+
     }
 
     /**
@@ -112,7 +126,6 @@ public class ReportesController {
      */
     public void btnReporteCSVAction(ActionEvent actionEvent) {
 
-        //Invocar a gestor reportes y generar el reporte csv
     }
 
     /**
@@ -173,5 +186,17 @@ public class ReportesController {
         yAxis.setTickMarkVisible(true);
         grafico.setHorizontalGridLinesVisible(true);
         grafico.setVerticalGridLinesVisible(false);
+    }
+
+
+    public void mostrarAlerta(String mens, String title){
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(mens);
+        alert.initOwner(totalLabel.getScene().getWindow());
+        alert.showAndWait();
+
     }
 }

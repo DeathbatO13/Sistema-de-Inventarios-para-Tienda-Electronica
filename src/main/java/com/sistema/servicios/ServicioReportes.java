@@ -34,7 +34,7 @@ public class ServicioReportes {
      * @param hasta Fecha de fin del periodo (inclusive).
      * @return Cadena de texto con el reporte completo, lista para escritura en archivo o visualización.
      */
-    public String obtenerContenidoReporte(String tipo, LocalDate desde, LocalDate hasta) {
+    public String obtenerContenidoReporteTXT(String tipo, LocalDate desde, LocalDate hasta) {
         StringBuilder sb = new StringBuilder();
         sb.append("REPORTE: ").append(tipo).append("\n")
                 .append("Periodo: ").append(desde).append(" a ").append(hasta).append("\n\n");
@@ -85,4 +85,60 @@ public class ServicioReportes {
         return sb.toString();
     }
 
+    /**
+     * Genera el contenido completo de un reporte en formato csv según el tipo
+     * y periodo especificados. Incluye encabezado, datos formateados y manejo de errores.
+     *
+     * @param tipo Tipo de reporte (ej. "Total de ventas", "Productos más vendidos").
+     * @param desde Fecha de inicio del periodo (inclusive).
+     * @param hasta Fecha de fin del periodo (inclusive).
+     * @return Cadena de texto con el reporte completo, lista para escritura en archivo o visualización.
+     */
+    public String obtenerContenidoReporteCSV(String tipo, LocalDate desde, LocalDate hasta) {
+        StringBuilder sb = new StringBuilder();
+
+        switch (tipo.toLowerCase()) {
+            case "total de ventas" -> {
+                sb.append("Tipo,Desde,Hasta,TotalVentas\n");
+                double total = dao.obtenerTotalVentas(desde, hasta);
+                sb.append("Total de Ventas,").append(desde).append(",").append(hasta).append(",")
+                        .append(String.format("%.2f", total)).append("\n");
+            }
+            case "total de compras" -> {
+                sb.append("Tipo,Desde,Hasta,TotalCompras\n");
+                double total = dao.obtenerTotalCompras(desde, hasta);
+                sb.append("Total de Compras,").append(desde).append(",").append(hasta).append(",")
+                        .append(String.format("%.2f", total)).append("\n");
+            }
+            case "ventas por empleado" -> {
+                sb.append("Empleado,TotalVentas\n");
+                var lista = dao.obtenerVentasPorEmpleado(desde, hasta);
+                for (var fila : lista) {
+                    sb.append(fila.getNombreEmpleado()).append(",")
+                            .append(String.format("%.2f", fila.getTotalVendido())).append("\n");
+                }
+            }
+            case "productos más vendidos" -> {
+                sb.append("Producto,Cantidad,Total\n");
+                var lista = dao.obtenerVentasPorProducto(desde, hasta);
+                for (var fila : lista) {
+                    sb.append(fila.getNombreProducto()).append(",")
+                            .append(fila.getCantidadVendida()).append(",")
+                            .append(String.format("%.2f", fila.getTotalIngresos())).append("\n");
+                }
+            }
+            case "productos sin movimiento" -> {
+                sb.append("Producto,Stock,PrecioVenta\n");
+                var lista = dao.obtenerProductosSinMovimiento(desde, hasta);
+                for (var p : lista) {
+                    sb.append(p.getNombre()).append(",")
+                            .append(p.getStockActual()).append(",")
+                            .append(String.format("%.2f", p.getPrecioVenta())).append("\n");
+                }
+            }
+            default -> sb.append("Tipo de reporte no implementado para CSV.\n");
+        }
+
+        return sb.toString();
+    }
 }

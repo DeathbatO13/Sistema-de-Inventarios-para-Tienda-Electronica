@@ -85,19 +85,24 @@ public class GestorReportes {
      * @param tipo El tipo de reporte seleccionado (ej. "Productos más vendidos").
      * @param periodo El periodo seleccionado (ej. "Últimos 3 meses").
      */
-    public void generarReporteTXT(String tipo, String periodo) {
+    public boolean generarReporteTXT(String tipo, String periodo) {
 
         LocalDate desde = obtenerFechaInicio(periodo);
         LocalDate hasta = LocalDate.now();
 
         ServicioReportes servicio = new ServicioReportes();
-        String contenido = servicio.obtenerContenidoReporte(tipo, desde, hasta);
+        String contenido = servicio.obtenerContenidoReporteTXT(tipo, desde, hasta);
 
         try (FileWriter writer = new FileWriter("Reporte_" + tipo.replace(" ", "_") + ".txt")) {
+
             writer.write(contenido);
             System.out.println("Reporte TXT generado correctamente: " + tipo);
+            return true;
+
         } catch (IOException e) {
+
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -109,20 +114,26 @@ public class GestorReportes {
      * @param tipo El tipo de reporte seleccionado.
      * @param periodo El periodo seleccionado.
      */
-    public void generarReporteCSV(String tipo, String periodo) {
+    public boolean generarReporteCSV(String tipo, String periodo) {
+
         LocalDate desde = obtenerFechaInicio(periodo);
         LocalDate hasta = LocalDate.now();
 
-        // Simulación
-        String contenido = "Tipo,Periodo,FechaInicio,FechaFin\n" +
-                tipo + "," + periodo + "," + desde + "," + hasta + "\n";
+        ServicioReportes servicio = new ServicioReportes();
+        String contenido = servicio.obtenerContenidoReporteCSV(tipo, desde, hasta);
 
         try (FileWriter writer = new FileWriter("Reporte_" + tipo.replace(" ", "_") + ".csv")) {
+
             writer.write(contenido);
-            System.out.println("Reporte CSV generado correctamente.");
+            System.out.println("Reporte CSV generado correctamente: " + tipo);
+            return true;
+
         } catch (IOException e) {
+
             e.printStackTrace();
+            return false;
         }
+
     }
 
 }
