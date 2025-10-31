@@ -126,6 +126,23 @@ public class ReportesController {
      */
     public void btnReporteCSVAction(ActionEvent actionEvent) {
 
+        if(tipoRepoCB.getValue() == null || periodoRepoCB.getValue() == null){
+
+            mostrarAlerta("Debe seleccionar tipo y periodo del reporte","Error");
+
+        }
+
+        String tipo = tipoRepoCB.getValue();
+        String periodo = periodoRepoCB.getValue();
+
+        if(new GestorReportes().generarReporteCSV(tipo, periodo)){
+
+            mostrarAlerta("Reporte Generado con exito", "Estado reporte");
+
+        }else{
+
+            mostrarAlerta("No se pudo generar el reporte", "Error");
+        }
     }
 
     /**
