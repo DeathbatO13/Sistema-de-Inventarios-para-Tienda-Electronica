@@ -37,11 +37,8 @@ public class GestorReportes {
             "Total de compras",
             "Total de ganancias",
             "Promedio diario de ventas",
-            "Ventas por producto",
-            "Ventas por categoría",
             "Ventas por empleado",
             "Productos más vendidos",
-            "Productos con bajo stock",
             "Productos sin movimiento"
     );
 
