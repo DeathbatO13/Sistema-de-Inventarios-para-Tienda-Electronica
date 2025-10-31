@@ -86,18 +86,16 @@ public class GestorReportes {
      * @param periodo El periodo seleccionado (ej. "Últimos 3 meses").
      */
     public void generarReporteTXT(String tipo, String periodo) {
+
         LocalDate desde = obtenerFechaInicio(periodo);
         LocalDate hasta = LocalDate.now();
 
-        // Aquí iría la lógica para obtener los datos desde la BD según el tipo de reporte.
-        // versión simulada.
-        String contenido = "REPORTE: " + tipo + "\n" +
-                "Periodo: " + periodo + " (" + desde + " a " + hasta + ")\n\n" +
-                "Contenido de ejemplo...\n";
+        ServicioReportes servicio = new ServicioReportes();
+        String contenido = servicio.obtenerContenidoReporte(tipo, desde, hasta);
 
         try (FileWriter writer = new FileWriter("Reporte_" + tipo.replace(" ", "_") + ".txt")) {
             writer.write(contenido);
-            System.out.println("Reporte TXT generado correctamente.");
+            System.out.println("Reporte TXT generado correctamente: " + tipo);
         } catch (IOException e) {
             e.printStackTrace();
         }
