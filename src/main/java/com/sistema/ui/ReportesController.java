@@ -205,7 +205,14 @@ public class ReportesController {
         grafico.setVerticalGridLinesVisible(false);
     }
 
-
+    /**
+     * Muestra una alerta informativa modal con el mensaje proporcionado.
+     * Se utiliza para notificar al usuario sobre resultados de operaciones,
+     * validaciones o errores no críticos.
+     *
+     * @param mens El mensaje a mostrar en el cuerpo de la alerta.
+     * @param title titulo de la alerta
+     */
     public void mostrarAlerta(String mens, String title){
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
