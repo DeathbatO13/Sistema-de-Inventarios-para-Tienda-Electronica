@@ -104,9 +104,9 @@ public class VentasDAO {
 
         try {
             con = ConexionMySQL.getConexion();
-            con.setAutoCommit(false); // 🔒 Iniciar transacción
+            con.setAutoCommit(false); // Iniciar transacción
 
-            // 1️⃣ Insertar la venta principal
+            //  Insertar la venta principal
             psVenta = con.prepareStatement(sqlVenta, Statement.RETURN_GENERATED_KEYS);
             psVenta.setTimestamp(1, Timestamp.valueOf(venta.getFecha()));
             psVenta.setDouble(2, venta.getTotalVenta());
@@ -120,7 +120,7 @@ public class VentasDAO {
                 idVenta = rs.getInt(1);
             }
 
-            // 2️⃣ Insertar los detalles
+            //  Insertar los detalles
             psDetalle = con.prepareStatement(sqlDetalle);
 
             for (DetalleVenta d : detalles) {
@@ -154,6 +154,78 @@ public class VentasDAO {
         } finally {
             try {
                 if (psVenta != null) psVenta.close();
+                if (psDetalle != null) psDetalle.close();
+                if (con != null) con.setAutoCommit(true);
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Edita una venta existente y reemplaza sus detalles asociados en la base de datos.
+     * @param venta El objeto Venta con los datos actualizados.
+     * @param detalles La lista de objetos DetalleVenta con los nuevos detalles de los productos vendidos.
+     * @return true si la venta se actualiza correctamente, false si ocurre un error.
+     */
+    public boolean editarVenta(Venta venta, List<DetalleVenta> detalles) {
+        String sqlActualizarVenta = "UPDATE ventas SET fecha = ?, total_venta = ?, id_usuario = ? WHERE id = ?";
+        String sqlEliminarDetalles = "DELETE FROM detalle_ventas WHERE id_venta = ?";
+        String sqlInsertarDetalle = "INSERT INTO detalle_ventas (id_venta, id_producto, cantidad, precio_unitario_venta, subtotal) VALUES (?, ?, ?, ?, ?)";
+
+        Connection con = null;
+        PreparedStatement psVenta = null;
+        PreparedStatement psEliminar = null;
+        PreparedStatement psDetalle = null;
+
+        try {
+            con = ConexionMySQL.getConexion();
+            con.setAutoCommit(false); // 🔒 Iniciar transacción
+
+            //  Actualizar la venta principal
+            psVenta = con.prepareStatement(sqlActualizarVenta);
+            psVenta.setTimestamp(1, Timestamp.valueOf(venta.getFecha()));
+            psVenta.setDouble(2, venta.getTotalVenta());
+            psVenta.setInt(3, venta.getIdUsuario());
+            psVenta.setInt(4, venta.getIdUsuario());
+            psVenta.executeUpdate();
+
+            //  Eliminar los detalles anteriores
+            psEliminar = con.prepareStatement(sqlEliminarDetalles);
+            psEliminar.setInt(1, venta.getIdUsuario());
+            psEliminar.executeUpdate();
+
+            // Insertar los nuevos detalles
+            psDetalle = con.prepareStatement(sqlInsertarDetalle);
+            for (DetalleVenta d : detalles) {
+                psDetalle.setInt(1, venta.getIdUsuario());
+                psDetalle.setInt(2, d.getIdProducto());
+                psDetalle.setInt(3, d.getCantidad());
+                psDetalle.setDouble(4, d.getPrecioUnitarioVenta());
+                psDetalle.setDouble(5, d.getSubtotal());
+                psDetalle.addBatch();
+            }
+            psDetalle.executeBatch();
+
+            //  Confirmar cambios
+            con.commit();
+            return true;
+
+        } catch (SQLException e) {
+            System.err.println("Error al editar la venta: " + e.getMessage());
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.err.println("Error al hacer rollback: " + ex.getMessage());
+                }
+            }
+            return false;
+        } finally {
+            try {
+                if (psVenta != null) psVenta.close();
+                if (psEliminar != null) psEliminar.close();
                 if (psDetalle != null) psDetalle.close();
                 if (con != null) con.setAutoCommit(true);
                 if (con != null) con.close();

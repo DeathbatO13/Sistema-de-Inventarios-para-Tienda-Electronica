@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: #DDDDDD;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.EditarVentaController">
+   <children>
+      <Pane layoutX="14.0" layoutY="64.0" prefHeight="174.0" prefWidth="571.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="14.0" layoutY="24.0" prefHeight="31.0" prefWidth="158.0" text="Cantidad Vendida">
+               <font>
+                  <Font name="Corbel Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="207.0" layoutY="24.0" prefHeight="31.0" prefWidth="158.0" text="Precio Unitario">
+               <font>
+                  <Font name="Corbel Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="399.0" layoutY="24.0" prefHeight="31.0" prefWidth="158.0" text="Vendedor">
+               <font>
+                  <Font name="Corbel Bold" size="20.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="cantidad" layoutX="14.0" layoutY="61.0" prefHeight="31.0" prefWidth="158.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+            <TextField fx:id="precioTF" layoutX="192.0" layoutY="58.0" prefHeight="31.0" prefWidth="175.0" style="-fx-background-radius: 15;" />
+            <ComboBox fx:id="vendedor" layoutX="382.0" layoutY="55.0" prefHeight="31.0" prefWidth="175.0" style="-fx-background-radius: 15;" />
+            <Button layoutX="399.0" layoutY="119.0" mnemonicParsing="false" onAction="#btnGuardarAction" style="-fx-background-color: #5882E8; -fx-background-radius: 15;" text="Guardar Cambios" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="299.0" layoutY="119.0" mnemonicParsing="false" onAction="#btnCancelarAction" style="-fx-background-color: #DDDDDD; -fx-background-radius: 15;" text="Cancelar">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="22.0" text="Editar venta:">
+         <font>
+            <Font name="Corbel Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="productoLabel" layoutX="185.0" layoutY="25.0" prefHeight="31.0" prefWidth="394.0" text="Product Name">
+         <font>
+            <Font name="Corbel Bold" size="26.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,39 +1,36 @@
 REPORTE: Productos más vendidos
-Periodo: 2025-07-31 a 2025-10-31
+Periodo: 2025-09-04 a 2025-11-04
 
 PRODUCTOS MÁS VENDIDOS:
 
-Sensor de color TCS3200        | Cantidad: 6     | Total: $228,000.00
 Regulador de voltaje LM2596    | Cantidad: 6     | Total: $108,000.00
-ESP8266 Wemos D1 Mini          | Cantidad: 5     | Total: $140,000.00
 Fuente de alimentación 5V 2A para Raspberry Pi | Cantidad: 5     | Total: $300,000.00
-Sensor ultrasónico HC-SR04     | Cantidad: 5     | Total: $50,000.00
 Cargador de batería Li-Po TP4056 | Cantidad: 5     | Total: $60,000.00
+Filamento PLA 1.75mm (1Kg)     | Cantidad: 5     | Total: $600,000.00
 Gafas de realidad virtual VR Box | Cantidad: 5     | Total: $600,000.00
-Arduino Nano RP2040 Connect    | Cantidad: 4     | Total: $440,000.00
-Sensor de flujo YF-S201        | Cantidad: 4     | Total: $140,000.00
 Módulo LoRa SX1278 433MHz      | Cantidad: 4     | Total: $312,000.00
 Batería Li-Po 3.7V 2000mAh     | Cantidad: 4     | Total: $280,000.00
 Kit de componentes electrónicos para principiantes | Cantidad: 4     | Total: $360,000.00
-Sensor de presión BMP280       | Cantidad: 3     | Total: $105,000.00
-Sensor de gas MQ-135           | Cantidad: 3     | Total: $90,000.00
-Módulo Relé de 4 canales       | Cantidad: 3     | Total: $96,000.00
+Sensor de flujo YF-S201        | Cantidad: 4     | Total: $140,000.00
 Módulo GSM SIM800L             | Cantidad: 3     | Total: $165,000.00
 Pantalla TFT 3.5" táctil       | Cantidad: 3     | Total: $285,000.00
+Módulo Relé de 4 canales       | Cantidad: 3     | Total: $96,000.00
 Láser de diodo 5mW 650nm       | Cantidad: 3     | Total: $45,000.00
-Filamento PLA 1.75mm (1Kg)     | Cantidad: 3     | Total: $360,000.00
 Pantalla OLED 0.96” I2C        | Cantidad: 3     | Total: $75,000.00
 Sensor de llama IR             | Cantidad: 3     | Total: $48,000.00
-Soldador de estaño 60W         | Cantidad: 2     | Total: $100,000.00
+Controlador Servo PCA9685      | Cantidad: 3     | Total: $135,000.00
 Pantalla OLED 1.3”             | Cantidad: 2     | Total: $76,000.00
 Kit de herramientas para robótica | Cantidad: 2     | Total: $280,000.00
 Impresora 3D Ender-3 V2        | Cantidad: 2     | Total: $2,700,000.00
 Módulo RFID RC522              | Cantidad: 2     | Total: $56,000.00
 Hub USB 3.0 con alimentación   | Cantidad: 2     | Total: $160,000.00
 Driver Motor Paso A4988        | Cantidad: 2     | Total: $32,000.00
+Sensor de ritmo cardíaco MAX30102 | Cantidad: 2     | Total: $150,000.00
 Caja de proyectos plástica (15x10x5 cm) | Cantidad: 1     | Total: $25,000.00
-Sensor de corriente ACS758     | Cantidad: 1     | Total: $48,000.00
-Raspberry Pi 4 Model B (4GB)   | Cantidad: 1     | Total: $420,000.00
 Cámara USB Full HD 1080p       | Cantidad: 1     | Total: $110,000.00
-Módulo GPS NEO-6M              | Cantidad: 1     | Total: $48,000.00
+Sensor de color TCS3200        | Cantidad: 1     | Total: $38,000.00
+Raspberry Pi 4 Model B (4GB)   | Cantidad: 1     | Total: $420,000.00
+Sensor de gas MQ-135           | Cantidad: 1     | Total: $30,000.00
+Sensor ultrasónico HC-SR04     | Cantidad: 1     | Total: $10,000.00
 Pantalla E-Paper (Tinta Electrónica) 2.9" | Cantidad: 1     | Total: $140,000.00
+ESP32-CAM                      | Cantidad: 1     | Total: $60,000.00
