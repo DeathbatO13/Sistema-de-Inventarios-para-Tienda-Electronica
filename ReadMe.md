@@ -69,16 +69,16 @@ Su objetivo es optimizar el control de existencias, agilizar los procesos de ven
 ## 📊 Capturas de Pantalla
 
 ### Inicio de Sesión con Verificación
-<img src="./images/Login.png" alt="Login" width="550">
+<img src="src/main/images/Login.png" alt="Login" width="550">
 
 ### Reportes Analíticos con Exportación
-<img src="./images/reportes.png" alt="Reportes" width="550">
+<img src="src/main/images/Reportes.png" alt="Reportes" width="550">
 
 ---
 
 ## 🧾 Soporte y Documentación
 
-- Manual de Usuario: [`MANUAL.md`](./MANUAL.md)
+- Manual de Usuario: [`MANUAL.md`](src/main/ReadMe.md)
 - Registros de ejecución: `logs/electrostock.log`
 - Contacto: 📧 soporte.electrostock@gmail.com
 
