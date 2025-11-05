@@ -1,5 +1,6 @@
 package com.sistema;
 
+import com.sistema.util.DatabaseInitializer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -37,6 +38,7 @@ public class MainApp extends Application {
      * @param args Argumentos de la línea de comandos.
      */
     public static void main(String[] args) {
+        DatabaseInitializer.inicializar();
         launch(args);
     }
 }
