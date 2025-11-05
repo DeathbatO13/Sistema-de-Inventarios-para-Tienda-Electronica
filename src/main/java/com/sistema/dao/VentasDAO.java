@@ -1,7 +1,6 @@
 package com.sistema.dao;
 
 import com.sistema.modelo.DetalleVenta;
-import com.sistema.modelo.Usuario;
 import com.sistema.modelo.Venta;
 import com.sistema.util.ConexionMySQL;
 import com.sistema.util.VentaGraficaRow;
@@ -59,15 +58,20 @@ public class VentasDAO {
      */
     public List<VentaRow> listaVentas() {
         List<VentaRow> lista = new ArrayList<>();
-        String sql = "SELECT " +
-                "    p.nombre AS Producto_vendido, " +
-                "    dv.cantidad AS Cantidad, " +
-                "    dv.subtotal AS Precio_total, " +
-                "    v.fecha AS Fecha " +
-                "FROM ventas v " +
-                "JOIN detalle_ventas dv ON v.id = dv.id_venta " +
-                "JOIN productos p ON dv.id_producto = p.id " +
-                "ORDER BY v.fecha DESC;";
+        String sql = """
+            SELECT
+                v.id AS id_venta,
+                p.nombre AS producto_vendido,
+                dv.cantidad AS cantidad,
+                dv.subtotal AS precio_total,
+                u.nombre_usuario AS vendedor,
+                v.fecha AS fecha
+            FROM ventas v
+            JOIN detalle_ventas dv ON v.id = dv.id_venta
+            JOIN productos p ON dv.id_producto = p.id
+            LEFT JOIN usuarios u ON v.id_usuario = u.id
+            ORDER BY v.fecha DESC;
+            """;
 
         try (Connection con = ConexionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql);
@@ -75,18 +79,22 @@ public class VentasDAO {
 
             while (rs.next()) {
                 VentaRow ventaRow = new VentaRow(
-                        rs.getString("Producto_vendido"),
-                        rs.getInt("Cantidad"),
-                        rs.getDouble("Precio_total"),
-                        rs.getTimestamp("Fecha").toLocalDateTime()
+                        rs.getInt("id_venta"),
+                        rs.getString("producto_vendido"),
+                        rs.getInt("cantidad"),
+                        rs.getDouble("precio_total"),
+                        rs.getString("vendedor"),
+                        rs.getTimestamp("fecha").toLocalDateTime()
                 );
                 lista.add(ventaRow);
             }
         } catch (SQLException e) {
             System.err.println("Error al consultar la lista de ventas: " + e.getMessage());
         }
+
         return lista;
     }
+
 
     /**
      * Registra una nueva venta y sus detalles asociados en la base de datos.
@@ -166,72 +174,33 @@ public class VentasDAO {
     /**
      * Edita una venta existente y reemplaza sus detalles asociados en la base de datos.
      * @param venta El objeto Venta con los datos actualizados.
-     * @param detalles La lista de objetos DetalleVenta con los nuevos detalles de los productos vendidos.
      * @return true si la venta se actualiza correctamente, false si ocurre un error.
      */
-    public boolean editarVenta(Venta venta, List<DetalleVenta> detalles) {
-        String sqlActualizarVenta = "UPDATE ventas SET fecha = ?, total_venta = ?, id_usuario = ? WHERE id = ?";
-        String sqlEliminarDetalles = "DELETE FROM detalle_ventas WHERE id_venta = ?";
-        String sqlInsertarDetalle = "INSERT INTO detalle_ventas (id_venta, id_producto, cantidad, precio_unitario_venta, subtotal) VALUES (?, ?, ?, ?, ?)";
+    public boolean actualizarVenta(VentaRow venta) {
+        String sql = """
+        UPDATE detalle_ventas dv
+        JOIN ventas v ON dv.id_venta = v.id
+        JOIN productos p ON dv.id_producto = p.id
+        SET 
+            dv.cantidad = ?,
+            dv.subtotal = ?
+        WHERE v.id = ? AND p.nombre = ?;
+        """;
 
-        Connection con = null;
-        PreparedStatement psVenta = null;
-        PreparedStatement psEliminar = null;
-        PreparedStatement psDetalle = null;
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try {
-            con = ConexionMySQL.getConexion();
-            con.setAutoCommit(false); // 🔒 Iniciar transacción
+            ps.setInt(1, venta.getCantidad());
+            ps.setDouble(2, venta.getPrecioTotal());
+            ps.setInt(3, venta.getIdVenta());
+            ps.setString(4, venta.getProductoVendido());
 
-            //  Actualizar la venta principal
-            psVenta = con.prepareStatement(sqlActualizarVenta);
-            psVenta.setTimestamp(1, Timestamp.valueOf(venta.getFecha()));
-            psVenta.setDouble(2, venta.getTotalVenta());
-            psVenta.setInt(3, venta.getIdUsuario());
-            psVenta.setInt(4, venta.getIdUsuario());
-            psVenta.executeUpdate();
-
-            //  Eliminar los detalles anteriores
-            psEliminar = con.prepareStatement(sqlEliminarDetalles);
-            psEliminar.setInt(1, venta.getIdUsuario());
-            psEliminar.executeUpdate();
-
-            // Insertar los nuevos detalles
-            psDetalle = con.prepareStatement(sqlInsertarDetalle);
-            for (DetalleVenta d : detalles) {
-                psDetalle.setInt(1, venta.getIdUsuario());
-                psDetalle.setInt(2, d.getIdProducto());
-                psDetalle.setInt(3, d.getCantidad());
-                psDetalle.setDouble(4, d.getPrecioUnitarioVenta());
-                psDetalle.setDouble(5, d.getSubtotal());
-                psDetalle.addBatch();
-            }
-            psDetalle.executeBatch();
-
-            //  Confirmar cambios
-            con.commit();
-            return true;
+            int filas = ps.executeUpdate();
+            return filas > 0;
 
         } catch (SQLException e) {
-            System.err.println("Error al editar la venta: " + e.getMessage());
-            if (con != null) {
-                try {
-                    con.rollback();
-                } catch (SQLException ex) {
-                    System.err.println("Error al hacer rollback: " + ex.getMessage());
-                }
-            }
+            System.err.println("Error al actualizar venta: " + e.getMessage());
             return false;
-        } finally {
-            try {
-                if (psVenta != null) psVenta.close();
-                if (psEliminar != null) psEliminar.close();
-                if (psDetalle != null) psDetalle.close();
-                if (con != null) con.setAutoCommit(true);
-                if (con != null) con.close();
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar recursos: " + e.getMessage());
-            }
         }
     }
 

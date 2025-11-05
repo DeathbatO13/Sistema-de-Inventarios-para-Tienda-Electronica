@@ -22,9 +22,13 @@ import java.time.LocalDateTime;
  * el historial de ventas de forma clara y estructurada en la interfaz gráfica.</p>
  */
 public class VentaRow {
+    private int idVenta;
+    private int idProducto;
     private String productoVendido;
     private Integer cantidad;
+    private Double precioUnitario;
     private Double precioTotal;
+    private String vendedor;
     private LocalDateTime fecha;
 
     /**
@@ -39,15 +43,34 @@ public class VentaRow {
         this.fecha = fecha;
     }
 
+    public VentaRow(int idVenta, String productoVendido, int cantidad, double precioTotal, String vendedor, LocalDateTime fecha) {
+        this.idVenta = idVenta;
+        this.productoVendido = productoVendido;
+        this.cantidad = cantidad;
+        this.precioTotal = precioTotal;
+        this.vendedor = vendedor;
+        this.fecha = fecha;
+    }
+
     // Getters
+    public int getIdVenta() { return idVenta; }
+    public int getIdProducto() { return idProducto; }
     public String getProductoVendido() { return productoVendido; }
     public Integer getCantidad() { return cantidad; }
+    public Double getPrecioUnitario() { return precioUnitario; }
     public Double getPrecioTotal() { return precioTotal; }
+    public String getVendedor() { return vendedor; }
     public LocalDateTime getFecha() { return fecha; }
 
     // Setters
+    public void setIdVenta(int idVenta) { this.idVenta = idVenta; }
+    public void setIdProducto(int idProducto) { this.idProducto = idProducto; }
     public void setProductoVendido(String productoVendido) { this.productoVendido = productoVendido; }
     public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
+    public void setPrecioUnitario(Double precioUnitario) { this.precioUnitario = precioUnitario; }
     public void setPrecioTotal(Double precioTotal) { this.precioTotal = precioTotal; }
+    public void setVendedor(String vendedor) { this.vendedor = vendedor; }
     public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+
+
 }

@@ -11,11 +11,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -227,6 +235,8 @@ public class VentasController {
         } else {
             mostrarAlerta("Ocurrió un error al registrar la venta. Intente nuevamente.");
         }
+
+        tablaVentas.refresh();
     }
 
     /**
@@ -337,8 +347,30 @@ public class VentasController {
                 btnEditar.setOnAction(event -> {
 
                     VentaRow venta = getTableView().getItems().get(getIndex());
-                    System.out.println("Editar Venta: " + venta.getProductoVendido());
+
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EditarVenta.fxml"));
+                        Parent root = loader.load();
+
+                        EditarVentaController edCont = loader.getController();
+
+                        edCont.setVentaEditor(venta);
+
+                        Stage stage = new Stage();
+                        Image icono = new Image(getClass().getResource("/img/Icon.png").toExternalForm());
+                        stage.getIcons().add(icono);
+                        stage.setTitle("Editar Venta");
+                        stage.setScene(new Scene(root));
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.initOwner(tablaVentas.getScene().getWindow());
+                        stage.showAndWait();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    tablaVentas.refresh();
                 });
+
             }
 
             @Override

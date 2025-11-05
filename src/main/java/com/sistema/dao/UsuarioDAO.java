@@ -4,6 +4,8 @@ import com.sistema.modelo.Usuario;
 import com.sistema.util.ConexionMySQL;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase de acceso a datos (DAO) para la gestión de usuarios en la base de datos.
@@ -179,5 +181,33 @@ public class UsuarioDAO {
         }
     }
 
+    /**
+     * Obtiene una lista ordenada alfabéticamente de los nombres de usuario registrados en el sistema.
+     * Se utiliza para mostrar opciones en interfaces como ComboBox o para auditorías.
+     *
+     * <p>La consulta selecciona únicamente el campo {@code nombre_usuario} desde la tabla {@code usuarios}
+     * y ordena los resultados en orden ascendente.</p>
+     *
+     * @return Lista de {@link String} con los nombres de usuario.
+     *         Devuelve una lista vacía si no hay usuarios o si ocurre un error de base de datos.
+     */
+    public List<String> listarUsuarios() {
+        List<String> usuarios = new ArrayList<>();
+        String sql = "SELECT nombre_usuario FROM usuarios ORDER BY nombre_usuario ASC";
+
+        try (Connection con = ConexionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                usuarios.add(rs.getString("nombre_usuario"));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener la lista de usuarios: " + e.getMessage());
+        }
+
+        return usuarios;
+    }
 
 }
