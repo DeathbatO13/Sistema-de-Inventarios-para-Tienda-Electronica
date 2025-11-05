@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: #DDDDDD;" stylesheets="@../styles/tableStyles.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ui.DashboardController">
+   <children>
+      <Pane layoutX="39.0" layoutY="105.0" prefHeight="109.0" prefWidth="264.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="20.0" layoutY="14.0" text="Productos Totales" textFill="#9a9a9a">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="productosTotalesLabel" layoutX="20.0" layoutY="47.0" text="120">
+               <font>
+                  <Font name="Corbel Bold" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="343.0" layoutY="105.0" prefHeight="109.0" prefWidth="264.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Proveedores Totales" textFill="#9a9a9a">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="proveedoresTotalesLabel" layoutX="14.0" layoutY="47.0" text="15">
+               <font>
+                  <Font name="Corbel Bold" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="650.0" layoutY="105.0" prefHeight="109.0" prefWidth="264.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="24.0" layoutY="17.0" text="Total de Ventas (Mes)" textFill="#9a9a9a">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalVentasLabel" layoutX="14.0" layoutY="47.0" text="\$50.000">
+               <font>
+                  <Font name="Corbel Bold" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="40.0" layoutY="45.0" text="Dashboard">
+         <font>
+            <Font name="Corbel Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="242.0" text="Productos con pocas existencias">
+         <font>
+            <Font name="Corbel Bold" size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaExistencias" layoutX="41.0" layoutY="287.0" prefHeight="370.0" prefWidth="874.0">
+        <columns>
+          <TableColumn fx:id="codigoColumn" editable="false" prefWidth="138.0" resizable="false" text="Codigo" />
+          <TableColumn fx:id="nombreColumn" editable="false" prefWidth="393.0" resizable="false" text="Nombre" />
+            <TableColumn fx:id="unidadesColumn" editable="false" prefWidth="169.0" resizable="false" text="Unidades Disponibles" />
+            <TableColumn fx:id="accionColumn" editable="false" prefWidth="167.0" resizable="false" sortable="false" text="Acción" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

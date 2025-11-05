@@ -1,0 +1,251 @@
+/* DEFINICIÓN DE VARIABLES (Necesario para el TabPane y otros componentes) */
+.root {
+    -primary-blue: #5882E8;
+    -background-grey: #DDDDDD;
+}
+
+/* Aplicar la fuente base a todos los elementos */
+* {
+    -fx-font-family: "Corbel", "Segoe UI", sans-serif;
+}
+
+/* ---------------------------------------------------- */
+/* ESTILOS PARA TABLEVIEW */
+/* ---------------------------------------------------- */
+
+.table-view {
+    -fx-background-color: -background-grey;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #c9c9c9;
+    -fx-border-width: 1px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #e0e4e9;
+    -fx-background-radius: 12px 12px 0 0;
+    -fx-padding: 0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #c9c9c9;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4c5a6d;
+    -fx-alignment: CENTER;
+    -fx-padding: 12px 15px;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-background-insets: 0, 0 0 1px 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #e8e8e8;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 0;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #fcfcfc;
+    -fx-cursor: hand;
+}
+
+.table-view .table-row-cell:selected {
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 75%);
+    -fx-background-insets: 0, 0 0 1px 0;
+    -fx-border-color: #e8e8e8;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .table-cell {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: #5a667b;
+    -fx-alignment: TOP_LEFT; /* Para celdas multilínea */
+    -fx-padding: 5px 15px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.table-view .table-row-cell:selected .table-cell {
+    /* CORRECCIÓN: Se define el color del texto para que sea visible */
+    -fx-text-fill: #333333;
+}
+
+.table-view:focused .table-row-cell:filled:focused,
+.table-view:focused .table-row-cell:filled:focused:selected {
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 70%);
+    -fx-border-color: transparent;
+    -fx-background-insets: 0, 0 0 1px 0;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected .table-cell {
+    /* CORRECCIÓN: Se define el color del texto para que contraste */
+    -fx-text-fill: white;
+}
+
+/* ---------------------------------------------------- */
+/* ESTILOS PARA LISTVIEW */
+/* ---------------------------------------------------- */
+
+.list-view {
+    -fx-background-color: -background-grey;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #c9c9c9;
+    -fx-border-width: 1px;
+    -fx-padding: 0;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-padding: 0;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e8e8e8;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #5a667b;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.list-view .list-cell:last-visible-cell {
+    -fx-border-width: 0;
+}
+
+.list-view .list-cell:hover:filled {
+    -fx-background-color: #fcfcfc;
+    -fx-cursor: hand;
+}
+
+.list-view .list-cell:selected {
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 75%);
+    -fx-border-color: #e8e8e8;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.list-view .list-cell:selected {
+    /* CORRECCIÓN: Se define el color del texto para que sea visible */
+    -fx-text-fill: #333333;
+}
+
+.list-view:focused .list-cell:filled:selected {
+    /* CORRECCIÓN: Se usa derive() directamente con el color */
+    -fx-background-color: derive(#5882E8, 70%);
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.list-view:focused .list-cell:filled:selected {
+    /* CORRECCIÓN: Se define el color del texto para que contraste */
+    -fx-text-fill: white;
+}
+
+/* Estilos de nodos internos (CellFactory) */
+.list-cell .supplier-name {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.list-cell .supplier-category {
+    -fx-font-size: 12px;
+    -fx-text-fill: #999999;
+}
+
+.list-cell:selected .supplier-name,
+.list-cell:selected .supplier-category {
+    -fx-text-fill: #333333;
+}
+.list-cell:focused:selected .supplier-name,
+.list-cell:focused:selected .supplier-category {
+    -fx-text-fill: white;
+}
+.tab-pane {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}
+
+/* Tab styling */
+.tab-pane .tab-header-area {
+    -fx-background-color: white;
+}
+
+.tab-pane .tab {
+    -fx-background-color: white;
+    -fx-text-fill: #1DA1F2; /* Blue for active tab text */
+    -fx-font-size: 16px;
+    -fx-font-family: "Corbel Bold";
+    -fx-padding: 5px 15px;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: #1DA1F2;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.tab-pane .tab:disabled {
+    -fx-opacity: 1.0;
+}
+
+.tab-pane .tab-header-area .headers-region {
+    -fx-background-color: white;
+    -fx-padding: 0 0 0 10px;
+}
+
+/* Content area styling */
+.tab-pane .tab-content-area {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+}
+
+/* Ocultar puntos */
+.default-color0.chart-area-symbol {
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+/* Línea principal */
+.default-color0.chart-series-area-line {
+    -fx-stroke: #5882E8;
+    -fx-stroke-width: 3px;
+    -fx-effect: dropshadow(gaussian, #5882E8, 10, 0.6, 0, 0);
+}
+
+/* Área con degradado */
+.default-color0.chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, rgba(88,130,232,0.3), rgba(88,130,232,0.05));
+}
+
+/* Ejes */
+.axis {
+    -fx-tick-label-fill: transparent; /* Oculta etiquetas del eje X */
+    -fx-font-size: 0;
+}
+
+.axis:bottom {
+    -fx-border-color: transparent;
+}
+
+.axis:left {
+    -fx-tick-label-fill: #777;
+    -fx-tick-length: 0;
+    -fx-minor-tick-length: 0;
+}
