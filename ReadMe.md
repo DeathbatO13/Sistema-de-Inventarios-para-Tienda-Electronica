@@ -28,21 +28,46 @@ Su objetivo es optimizar el control de existencias, agilizar los procesos de ven
 - 200 MB de espacio libre en disco
 ```
 
-## ⚡ Instalación Rápida
+## 🚀 Ejecución del Proyecto
 
-1. **Instalar MySQL** y crear un usuario con privilegios de lectura y escritura.
-2. **Ejecutar** el archivo `ElectroStock.jar` o `ElectroStock.exe`.
-3. En el primer inicio, el sistema **crea automáticamente** la base de datos `inventariotiendadb` si no existe.
+### 📦 Ejecutar el JAR (versión portable)
 
-**Conexión por defecto:**
+1. Asegúrate de tener **Java 21 o superior** instalado y configurado en el `PATH`.
+2. Abre una terminal o PowerShell en la carpeta del proyecto.
+3. Ejecuta el siguiente comando:
 
-    jdbc:mysql://localhost:3306/inventariotiendadb  
-    Usuario: root  
-    Contraseña: (configurada localmente)
+   ```bash
+   java --module-path "C:\javafx-sdk-21.0.8\lib" --add-modules javafx.controls,javafx.fxml -jar target/sistemainventario-1.0.0-jar-with-dependencies.jar
+    ```
+⚠️ Ajusta la ruta del SDK de JavaFX según tu instalación local.
+
+## 💻 Ejecutar el instalador (.exe)
+
+El instalador se genera con jpackage y se encuentra en:
+
+    target/SistemaInventario-1.0.0.exe
 
 
+1. Haz doble clic en el archivo `.exe.`
 
----
+2. Sigue el asistente de instalación.
+
+3. El programa se instalará con acceso directo en el menú inicio (si se generó
+con `--win-menu`) o en el escritorio (si se usó `--win-shortcut`).
+
+4. Una vez instalado, puedes ejecutar SistemaInventario directamente desde el menú Inicio de Windows.
+
+## 📂 Ubicación de archivos importantes
+
+| Archivo                                                    | Descripción                                                             |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `target/sistemainventario-1.0.0-jar-with-dependencies.jar` | Aplicación ejecutable JAR con todas las dependencias.                   |
+| `target/SistemaInventario-1.0.0.exe`                       | Instalador para Windows creado con `jpackage`.                          |
+| `pom.xml`                                                  | Configuración del proyecto Maven (dependencias, plugins y empaquetado). |
+| `src/main/java/com/sistema/MainApp.java`                   | Clase principal de la aplicación JavaFX.                                |
+
+🧰 Nota: Si modificas el código, recuerda reconstruir el 
+proyecto con Maven para actualizar los artefactos (.jar y .exe).
 
 ## 🧭 Estructura de la Base de Datos (Tablas Principales)
 

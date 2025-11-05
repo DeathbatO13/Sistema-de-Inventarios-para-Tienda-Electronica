@@ -1611,15 +1611,18 @@
       <option name="ignoredModules">
         <list>
           <option value="SistemaInventarioTienda" />
+          <option value="SistemaInventarioTienda" />
         </list>
       </option>
       <option name="ignoredPackages">
         <list>
           <option value="com.google.protobuf:protobuf-java:3.25.1" />
+          <option value="org.apache.commons:commons-lang3:3.13.0" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
         </list>
       </option>
