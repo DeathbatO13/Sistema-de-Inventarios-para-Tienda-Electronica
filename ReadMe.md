@@ -80,7 +80,6 @@ Su objetivo es optimizar el control de existencias, agilizar los procesos de ven
 
 - Manual de Usuario: [`MANUAL.md`](src/main/ReadMe.md)
 - Registros de ejecución: `logs/electrostock.log`
-- Contacto: 📧 soporte.electrostock@gmail.com
 
 ---
 
